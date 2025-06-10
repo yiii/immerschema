@@ -1,8 +1,23 @@
 {
   "name": "fulldome-schema-suite",
   "version": "1.0.2",
-  "description": "Comprehensive JSON Schema suite for fulldome immersive experiences",
-  "main": "index.js",
+  "description": "Comprehensive JSON Schema suite for  CG pipeline",
+  "type": "module",
+  "main": "./index.cjs",
+  "exports": {
+    "require": "./index.cjs",
+    "import": "./index.js",
+    "./schemas/*": "./schemas/*.json",
+    "./taxonomy/*": "./taxonomy/*.json"
+  },
+  "files": [
+    "schemas/",
+    "taxonomy/",
+    "docs/",
+    "index.js",
+    "index.cjs",
+    "README.md"
+  ],
   "scripts": {
     "test": "node scripts/test_runner.js",
     "validate-examples": "npm run test",
@@ -13,7 +28,7 @@
   "keywords": [
     "json-schema",
     "schema-validation",
-    "json-validation",
+    "json-validation"
   ],
   "author": "Fulldome Schema Consortium",
   "license": "MIT",
