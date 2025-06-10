@@ -1,6 +1,6 @@
 {
   "name": "fulldome-schema-suite",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Comprehensive JSON Schema suite for  CG pipeline",
   "type": "module",
   "main": "./index.cjs",
