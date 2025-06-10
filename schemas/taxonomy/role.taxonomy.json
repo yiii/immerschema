@@ -1,0 +1,88 @@
+{
+  "$id": "https://example.com/schemas/taxonomy/role.taxonomy.json",
+  "title": "Role taxonomy (UI helper)",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "Direction & Production": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/role.enum.json"
+      },
+      "minItems": 1,
+      "enum": ["Director", "Producer", "ProjectManager"]
+    },
+    "Story & Art": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/role.enum.json"
+      },
+      "minItems": 1,
+      "enum": ["Writer", "StoryboardArtist", "ConceptArtist"]
+    },
+    "Supervision": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/role.enum.json"
+      },
+      "minItems": 1,
+      "enum": ["VFXSupervisor", "CGSupervisor", "PipelineTD"]
+    },
+    "Asset Creation": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/role.enum.json"
+      },
+      "minItems": 1,
+      "enum": ["Modeler", "TextureArtist", "Rigger", "LookDev"]
+    },
+    "Shot Creation": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/role.enum.json"
+      },
+      "minItems": 1,
+      "enum": ["Animator", "FXTD", "LightingTD", "Compositor"]
+    },
+    "Realtime": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/role.enum.json"
+      },
+      "minItems": 1,
+      "enum": ["UnrealEngineer", "TechnicalArtist"]
+    },
+    "Audio": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/role.enum.json"
+      },
+      "minItems": 1,
+      "enum": ["Composer", "SoundDesigner", "AudioEngineer", "VOActor"]
+    },
+    "Editorial": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/role.enum.json"
+      },
+      "minItems": 1,
+      "enum": ["Editor", "Colorist"]
+    },
+    "Misc": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/role.enum.json"
+      },
+      "minItems": 1,
+      "enum": ["QA", "Researcher"]
+    },
+    "Other": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/role.enum.json"
+      },
+      "minItems": 1,
+      "enum": ["other"]
+    }
+  }
+} 

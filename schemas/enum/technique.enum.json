@@ -1,0 +1,43 @@
+{
+  "$id": "https://example.com/schemas/enum/technique.enum.json",
+  "title": "Technique enum",
+  "type": "string",
+  "enum": [
+    "cgi_3d_pre_render",
+    "cgi_3d_realtime",
+    "volumetric_capture",
+    "photogrammetry",
+
+    "hand_drawn_2d",
+    "vector_2d",
+    "cutout_animation",
+    "motion_graphics",
+    "info_graphics",
+
+    "procedural_geometry",
+    "particle_system",
+    "fractal_render",
+    "data_driven_visual",
+
+    "fluid_sim",
+    "smoke_fire_sim",
+    "cloth_softbody_sim",
+
+    "ai_image",
+    "ai_video",
+    "style_transfer",
+
+    "live_action_plate",
+    "macro_photography",
+    "timelapse",
+    "stereo_3d_capture",
+    "mixed_media_collage",
+
+    "cel_shaded",
+    "toon_shader",
+    "stop_motion",
+
+    "audio_reactive",
+    "music_visualizer"
+  ]
+} 

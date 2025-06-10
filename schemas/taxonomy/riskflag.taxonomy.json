@@ -1,0 +1,83 @@
+{
+  "$id": "https://example.com/schemas/taxonomy/riskflag.taxonomy.json",
+  "title": "Risk flag taxonomy (UI helper)",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "Viewer Health": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/riskflag.enum.json"
+      },
+      "minItems": 1,
+      "enum": [
+        "photosensitive_seizure", "motion_sickness", "vertigo_trigger",
+        "claustrophobia_trigger", "fear_of_heights_trigger"
+      ]
+    },
+    "Audio SPL": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/riskflag.enum.json"
+      },
+      "minItems": 1,
+      "enum": ["loud_volume", "low_frequency_rumble"]
+    },
+    "Environmental FX": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/riskflag.enum.json"
+      },
+      "minItems": 1,
+      "enum": ["laser_hazard", "strobe_light", "heavy_fog", "scent_allergy"]
+    },
+    "Content Sensitivity": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/riskflag.enum.json"
+      },
+      "minItems": 1,
+      "enum": [
+        "graphic_medical_content", "body_horror",
+        "religious_sensitivity", "political_sensitivity", "mature_themes"
+      ]
+    },
+    "IP / Legal": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/riskflag.enum.json"
+      },
+      "minItems": 1,
+      "enum": [
+        "copyright_unverified", "ai_copyright_unclear", "talent_release_missing"
+      ]
+    },
+    "Technical": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/riskflag.enum.json"
+      },
+      "minItems": 1,
+      "enum": [
+        "render_time_overrun", "hardware_overheat", "projector_alignment_risk",
+        "sync_drift", "frame_drop_risk"
+      ]
+    },
+    "Narrative / UX": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/riskflag.enum.json"
+      },
+      "minItems": 1,
+      "enum": ["narrative_confusion", "translation_required"]
+    },
+    "Other": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/riskflag.enum.json"
+      },
+      "minItems": 1,
+      "enum": []
+    }
+  }
+} 

@@ -1,0 +1,109 @@
+{
+  "$id": "https://example.com/schemas/taxonomy/technique.taxonomy.json",
+  "title": "Technique taxonomy (UI helper)",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "3D CGI": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/technique.enum.json"
+      },
+      "minItems": 1,
+      "enum": [
+        "cgi_3d_pre_render",
+        "cgi_3d_realtime",
+        "volumetric_capture",
+        "photogrammetry"
+      ]
+    },
+    "2D & Motion-Graphics": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/technique.enum.json"
+      },
+      "minItems": 1,
+      "enum": [
+        "hand_drawn_2d",
+        "vector_2d",
+        "cutout_animation",
+        "motion_graphics",
+        "info_graphics"
+      ]
+    },
+    "Procedural / Generative": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/technique.enum.json"
+      },
+      "minItems": 1,
+      "enum": [
+        "procedural_geometry",
+        "particle_system",
+        "fractal_render",
+        "data_driven_visual"
+      ]
+    },
+    "Simulation": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/technique.enum.json"
+      },
+      "minItems": 1,
+      "enum": [
+        "fluid_sim",
+        "smoke_fire_sim",
+        "cloth_softbody_sim"
+      ]
+    },
+    "AI / ML": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/technique.enum.json"
+      },
+      "minItems": 1,
+      "enum": [
+        "ai_image",
+        "ai_video",
+        "style_transfer"
+      ]
+    },
+    "Live-action & Hybrid": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/technique.enum.json"
+      },
+      "minItems": 1,
+      "enum": [
+        "live_action_plate",
+        "macro_photography",
+        "timelapse",
+        "stereo_3d_capture",
+        "mixed_media_collage"
+      ]
+    },
+    "Stylised": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/technique.enum.json"
+      },
+      "minItems": 1,
+      "enum": [
+        "cel_shaded",
+        "toon_shader",
+        "stop_motion"
+      ]
+    },
+    "Audio-Reactive": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/technique.enum.json"
+      },
+      "minItems": 1,
+      "enum": [
+        "audio_reactive",
+        "music_visualizer"
+      ]
+    }
+  }
+} 

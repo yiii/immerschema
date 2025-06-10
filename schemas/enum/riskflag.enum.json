@@ -1,0 +1,17 @@
+{
+  "$id"  : "https://example.com/schemas/enum/riskflag.enum.json",
+  "title": "Risk flag enum",
+  "type" : "string",
+  "enum" : [
+    "photosensitive_seizure", "motion_sickness", "vertigo_trigger",
+    "claustrophobia_trigger", "fear_of_heights_trigger",
+    "loud_volume", "low_frequency_rumble",
+    "laser_hazard", "strobe_light", "heavy_fog", "scent_allergy",
+    "graphic_medical_content", "body_horror",
+    "religious_sensitivity", "political_sensitivity", "mature_themes",
+    "copyright_unverified", "ai_copyright_unclear", "talent_release_missing",
+    "render_time_overrun", "hardware_overheat", "projector_alignment_risk",
+    "sync_drift", "frame_drop_risk",
+    "narrative_confusion", "translation_required"
+  ]
+} 

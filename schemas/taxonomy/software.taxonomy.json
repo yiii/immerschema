@@ -1,0 +1,72 @@
+{
+  "$id": "https://example.com/schemas/taxonomy/software.taxonomy.json",
+  "title": "Software taxonomy (UI helper)",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "3-D DCC": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/software.enum.json"
+      },
+      "minItems": 1,
+      "enum": ["Houdini", "Blender", "Maya", "Cinema4D"]
+    },
+    "Engines / Realtime": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/software.enum.json"
+      },
+      "minItems": 1,
+      "enum": ["Unreal", "Unity", "Notch", "TouchDesigner"]
+    },
+    "Compositing": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/software.enum.json"
+      },
+      "minItems": 1,
+      "enum": ["AfterEffects", "Nuke", "DaVinciResolve"]
+    },
+    "Renderers": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/software.enum.json"
+      },
+      "minItems": 1,
+      "enum": ["Redshift", "Octane", "Arnold", "VRay"]
+    },
+    "AI / Gen": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/software.enum.json"
+      },
+      "minItems": 1,
+      "enum": ["StableDiffusion", "Midjourney", "RunwayGen2", "Veo"]
+    },
+    "Audio DAW": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/software.enum.json"
+      },
+      "minItems": 1,
+      "enum": ["Ableton", "ProTools", "Reaper"]
+    },
+    "Pipeline / Tracking": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/software.enum.json"
+      },
+      "minItems": 1,
+      "enum": ["ShotGrid", "FTrack", "git"]
+    },
+    "Other": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/software.enum.json"
+      },
+      "minItems": 1,
+      "enum": ["other"]
+    }
+  }
+} 

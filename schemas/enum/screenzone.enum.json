@@ -1,0 +1,14 @@
+{
+  "$id": "https://example.com/schemas/enum/screenzone.enum.json",
+  "title": "Screen zone enum",
+  "type": "string",
+  "enum": [
+    "zenith", "upper_band", "horizon_band", "lower_band", "nadir",
+    "front", "rear", "left", "right", "north", "east", "south", "west",
+    "upper_front_left", "upper_front_right",
+    "upper_rear_left", "upper_rear_right",
+    "lower_front_left", "lower_front_right",
+    "lower_rear_left", "lower_rear_right",
+    "full_dome"
+  ]
+} 

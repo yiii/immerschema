@@ -1,0 +1,17 @@
+{
+  "$id": "https://example.com/schemas/enum/software.enum.json",
+  "$comment": "ENUM – software used in pipeline; update via governance workflow.",
+  "title": "Software enum",
+  "description": "Enumerates software tools used in production pipelines. Use 'other' for unlisted tools.",
+  "type": "string",
+  "enum": [
+    "Houdini", "Blender", "Maya", "Cinema4D",
+    "Unreal", "Unity", "Notch", "TouchDesigner",
+    "AfterEffects", "Nuke", "DaVinciResolve",
+    "Redshift", "Octane", "Arnold", "VRay",
+    "StableDiffusion", "Midjourney", "RunwayGen2", "Veo",
+    "Ableton", "ProTools", "Reaper",
+    "ShotGrid", "FTrack", "git",
+    "other"
+  ]
+} 

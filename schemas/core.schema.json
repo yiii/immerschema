@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id"    : "https://example.com/schemas/core.schema.json",
+  "$comment": "CORE – shot-level schema for fulldome projects.",
+  "title"  : "Fulldome Shot – core v1.0.0",
+  "description": "Schema for individual shots in a fulldome project, including techniques, software, and crew.",
+  "type"   : "object",
+
+  "required": [
+    "schemaVersion", "id", "index", "scene", "durationSec",
+    "voice", "screenZone", "primaryTechnique"
+  ],
+
+  "additionalProperties": false,
+
+  "properties": {
+    "schemaVersion": { "type": "string", "const": "1.0.0" },
+
+    "id"   : { "type": "string", "pattern": "^[a-z]{2}\\d{2}-ss\\d{2}$" },
+    "index": { "type": "integer", "minimum": 0 },
+
+    "scene"    : { "type": "integer", "minimum": 1 },
+    "subScene" : { "type": "integer", "minimum": 0 },
+    "sceneName": { "type": "string" },
+    "subSceneTitle": { "type": "string" },
+
+    "durationSec": { "type": "integer", "minimum": 1 },
+
+    "imageFile": { "type": "string" },
+
+    "voice": {
+      "type": "object",
+      "required": ["lang", "text"],
+      "additionalProperties": false,
+      "properties": {
+        "lang": { "type": "string", "pattern": "^[a-z]{2}$" },
+        "text": { "type": "string" }
+      }
+    },
+
+    "transitionIn" : { "$ref": "#/$defs/TransitionArray" },
+    "action"       : { "type": "string" },
+    "transitionOut": { "$ref": "#/$defs/TransitionArray" },
+
+    "cameraMotion": { "$ref": "#/$defs/StringArray" },
+    "screenZone"  : { "$ref": "./enum/screenzone.enum.json" },
+
+    "immersiveCue": { "type": "string" },
+
+    "primaryTechnique": { "$ref": "./enum/technique.enum.json" },
+    "otherTechniques" : { "$ref": "#/$defs/TechniqueArray" },
+
+    "softwarePipeline": {
+      "$comment": "List of software used for this shot.",
+      "type": "array",
+      "items": { "$ref": "./enum/software.enum.json" },
+      "default": [],
+      "description": "Software used in this shot's pipeline."
+    },
+    "music"           : { "$ref": "#/$defs/StringArray" },
+    "soundFx"         : { "$ref": "#/$defs/StringArray" },
+
+    "tasks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "task", "dept", "prio", "status"],
+        "properties": {
+          "id"    : { "type": "integer" },
+          "task"  : { "type": "string" },
+          "dept"  : { "type": "string" },
+          "prio"  : { "type": "string", "enum": ["low","med","high"] },
+          "owner" : { "type": "string" },
+          "status": { "type": "string", "enum": ["todo","in_progress","done","blocked"] }
+        },
+        "additionalProperties": false
+      },
+      "default": []
+    },
+
+    "people": {
+      "$comment": "Crew members involved in this shot.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["role", "name"],
+        "properties": {
+          "role": { "$ref": "./enum/role.enum.json", "description": "Crew role (enum)." },
+          "customRole": { "type": "string", "description": "Custom role if 'other' is selected." },
+          "name": { "type": "string", "description": "Full name of the crew member." },
+          "contacts": { "type": "object", "additionalProperties": { "type": "string" }, "description": "Contact details." },
+          "note": { "type": "string", "description": "Notes about this person or their role." },
+          "availability": { "type": "string", "description": "Availability window for this person." }
+        },
+        "additionalProperties": false
+      },
+      "default": [],
+      "description": "List of people involved in this shot."
+    },
+
+    "riskFlags": {
+      "type": "array",
+      "items": { "$ref": "./enum/riskflag.enum.json" },
+      "default": []
+    },
+
+    "authorNote"  : { "type": "string" },
+    "userNote"    : { "type": "string" },
+    "llmNote"     : { "type": "string" },
+    "refLinks"    : { "$ref": "#/$defs/StringArray" },
+    "autoFixNotes": { "type": "string" },
+
+    "debug": { "$ref": "./ext/debug.schema.json#/properties/debug" }
+  },
+
+  "$defs": {
+    "StringArray": { "type": "array", "items": { "type": "string" }, "default": [] },
+    "TransitionArray": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "TechniqueArray": {
+      "type": "array",
+      "items": { "$ref": "./enum/technique.enum.json" },
+      "default": []
+    }
+  }
+} 

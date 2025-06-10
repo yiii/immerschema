@@ -1,0 +1,54 @@
+{
+  "$id": "https://example.com/schemas/taxonomy/screenzone.taxonomy.json",
+  "title": "Screen zone taxonomy (UI helper)",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "Vertical": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/screenzone.enum.json"
+      },
+      "minItems": 1,
+      "enum": ["zenith", "upper_band", "horizon_band", "lower_band", "nadir"]
+    },
+    "Cardinal": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/screenzone.enum.json"
+      },
+      "minItems": 1,
+      "enum": ["front", "rear", "left", "right", "north", "east", "south", "west"]
+    },
+    "Quadrants-Upper": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/screenzone.enum.json"
+      },
+      "minItems": 1,
+      "enum": [
+        "upper_front_left", "upper_front_right",
+        "upper_rear_left", "upper_rear_right"
+      ]
+    },
+    "Quadrants-Lower": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/screenzone.enum.json"
+      },
+      "minItems": 1,
+      "enum": [
+        "lower_front_left", "lower_front_right",
+        "lower_rear_left", "lower_rear_right"
+      ]
+    },
+    "Full": {
+      "type": "array",
+      "items": {
+        "$ref": "../enum/screenzone.enum.json"
+      },
+      "minItems": 1,
+      "enum": ["full_dome"]
+    }
+  }
+} 
