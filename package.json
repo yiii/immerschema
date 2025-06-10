@@ -1,6 +1,6 @@
 {
   "name": "fulldome-schema-suite",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Comprehensive JSON Schema suite for fulldome immersive experiences",
   "main": "index.js",
   "scripts": {
@@ -11,13 +11,9 @@
     "install-global-ajv": "npm install -g ajv-cli"
   },
   "keywords": [
-    "fulldome",
-    "immersive",
     "json-schema",
-    "validation",
-    "vr",
-    "planetarium",
-    "dome-projection"
+    "schema-validation",
+    "json-validation",
   ],
   "author": "Fulldome Schema Consortium",
   "license": "MIT",
