@@ -1,3 +1,5 @@
+adjust/
+
 # Dependencies
 node_modules/
 npm-debug.log*
@@ -8,7 +10,7 @@ yarn-error.log*
 pids
 *.pid
 *.seed
-*.pid.lock
+*.pid.loc
 
 # Coverage directory used by tools like istanbul
 coverage/

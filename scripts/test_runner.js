@@ -13,10 +13,15 @@
  *   npm install ajv ajv-formats
  */
 
-const Ajv = require('ajv').default;
-const addFormats = require('ajv-formats');
-const fs = require('fs');
-const path = require('path');
+import Ajv from 'ajv';
+import addFormats from 'ajv-formats';
+import { readFileSync } from 'fs';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+// Get the directory name in ESM
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // Color codes for console output
 const colors = {
@@ -43,8 +48,8 @@ async function validateJson(schemaDir, dataOrPath, schemaPath, isDataObject = fa
   addFormats(ajv);
 
   // Load core schemas
-  const coreSchema = JSON.parse(fs.readFileSync(path.join(schemaDir, 'schemas/core.schema.json'), 'utf8'));
-  const projectSchema = JSON.parse(fs.readFileSync(path.join(schemaDir, 'schemas/project.schema.json'), 'utf8'));
+  const coreSchema = JSON.parse(readFileSync(join(schemaDir, 'schemas/core.schema.json'), 'utf8'));
+  const projectSchema = JSON.parse(readFileSync(join(schemaDir, 'schemas/project.schema.json'), 'utf8'));
 
   // Load all enum and extension schemas
   const enumSchemas = [
@@ -55,7 +60,7 @@ async function validateJson(schemaDir, dataOrPath, schemaPath, isDataObject = fa
     'schemas/enum/software.enum.json',
     'schemas/ext/debug.schema.json'
   ];
-  const loadedEnumSchemas = enumSchemas.map(p => JSON.parse(fs.readFileSync(path.join(schemaDir, p), 'utf8')));
+  const loadedEnumSchemas = enumSchemas.map(p => JSON.parse(readFileSync(join(schemaDir, p), 'utf8')));
 
   ajv.addSchema([coreSchema, projectSchema, ...loadedEnumSchemas]);
 
@@ -64,9 +69,9 @@ async function validateJson(schemaDir, dataOrPath, schemaPath, isDataObject = fa
   if (isDataObject) {
     data = dataOrPath;
   } else {
-    data = JSON.parse(fs.readFileSync(dataOrPath, 'utf8'));
+    data = JSON.parse(readFileSync(dataOrPath, 'utf8'));
   }
-  const schema = JSON.parse(fs.readFileSync(schemaPath, 'utf8'));
+  const schema = JSON.parse(readFileSync(schemaPath, 'utf8'));
   
   const validate = ajv.getSchema(schema.$id) ?? ajv.compile(schema);
   const valid = validate(data);
@@ -119,7 +124,7 @@ async function runExampleValidation() {
 async function runTestSuite(testFilePath) {
   log(colors.blue, `\n🧪 Running test suite: ${testFilePath}`);
   
-  const testData = JSON.parse(fs.readFileSync(testFilePath, 'utf8'));
+  const testData = JSON.parse(readFileSync(testFilePath, 'utf8'));
   if (!testData || !testData.tests) {
     log(colors.red, `❌ Invalid test file format`);
     return { passed: 0, failed: 0 };
