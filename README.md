@@ -1,6 +1,6 @@
 # Fulldome Schema Suite
 
-A comprehensive JSON Schema validation suite for fulldome immersive experiences, designed to ensure consistent data structure across production pipelines, from concept to dome projection.
+A JSON Schema designed to ensure consistent data structure across production pipelines.
 
 ## 🌟 Features
 
@@ -294,13 +294,4 @@ npm run validate-project examples/comprehensive_project.json
 
 MIT License - see LICENSE file for details.
 
-## 🔗 Related Resources
-
-- [JSON Schema Documentation](https://json-schema.org/)
-- [AJV Validator](https://ajv.js.org/)
-- [Fulldome Production Best Practices](https://fulldome.org/)
-- [Immersive Media Standards](https://immersive-media.org/)
-
 ---
-
-*This schema suite is designed to grow with the fulldome community. Submit issues and feature requests to help improve production workflows across the industry.* 
