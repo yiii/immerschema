@@ -1,5 +1,5 @@
 {
-  "$id": "https://example.com/schemas/enum/screenzone.enum.json",
+  "$id": "file:///enum/screenzone.enum.json#",
   "title": "Screen zone enum",
   "type": "string",
   "enum": [

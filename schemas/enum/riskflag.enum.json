@@ -1,8 +1,8 @@
 {
-  "$id"  : "https://example.com/schemas/enum/riskflag.enum.json",
+  "$id": "file:///enum/riskflag.enum.json#",
   "title": "Risk flag enum",
-  "type" : "string",
-  "enum" : [
+  "type": "string",
+  "enum": [
     "photosensitive_seizure", "motion_sickness", "vertigo_trigger",
     "claustrophobia_trigger", "fear_of_heights_trigger",
     "loud_volume", "low_frequency_rumble",

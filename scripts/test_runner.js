@@ -43,7 +43,19 @@ async function validateJson(schemaDir, dataOrPath, schemaPath, isDataObject = fa
     strict: false, 
     allErrors: true,
     verbose: true,
-    validateFormats: false
+    validateFormats: false,
+    loadSchema: async (uri) => {
+      // Handle file:/// protocol
+      if (uri.startsWith('file:///')) {
+        const filePath = uri.replace('file:///', '');
+        return JSON.parse(readFileSync(join(schemaDir, filePath), 'utf8'));
+      }
+      // Handle relative paths
+      if (uri.startsWith('./')) {
+        return JSON.parse(readFileSync(join(schemaDir, uri), 'utf8'));
+      }
+      return null;
+    }
   });
   addFormats(ajv);
 
@@ -62,7 +74,13 @@ async function validateJson(schemaDir, dataOrPath, schemaPath, isDataObject = fa
   ];
   const loadedEnumSchemas = enumSchemas.map(p => JSON.parse(readFileSync(join(schemaDir, p), 'utf8')));
 
-  ajv.addSchema([coreSchema, projectSchema, ...loadedEnumSchemas]);
+  // Add all schemas with their IDs
+  ajv.addSchema(coreSchema, 'file:///core.schema.json#');
+  ajv.addSchema(projectSchema, 'file:///project.schema.json#');
+  loadedEnumSchemas.forEach(schema => {
+    const id = schema.$id || `file:///enum/${schema.title.toLowerCase().replace(/\s+/g, '_')}.enum.json#`;
+    ajv.addSchema(schema, id);
+  });
 
   // Load and validate data
   let data;

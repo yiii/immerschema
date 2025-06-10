@@ -1,5 +1,5 @@
 {
-  "$id": "https://example.com/schemas/enum/technique.enum.json",
+  "$id": "file:///enum/technique.enum.json#",
   "title": "Technique enum",
   "type": "string",
   "enum": [
