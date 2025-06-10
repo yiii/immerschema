@@ -1,0 +1,309 @@
+{
+  "description": "Edge cases and boundary condition tests for the Fulldome Schema Suite",
+  "tests": [
+    {
+      "name": "zero_duration_shot",
+      "description": "Tests shot with zero duration (should fail - minimum is 1)",
+      "schema": "core.schema.json",
+      "data": {
+        "schemaVersion": "1.0.0",
+        "id": "zd01-ss01", 
+        "index": 0,
+        "scene": 1,
+        "durationSec": 0,
+        "voice": {
+          "lang": "en",
+          "text": "Zero duration test"
+        },
+        "screenZone": "full_dome",
+        "primaryTechnique": "cgi_3d_pre_render"
+      },
+      "expected": "invalid",
+      "error": "Duration must be at least 1 second"
+    },
+    {
+      "name": "maximum_duration_shot",
+      "description": "Tests shot with very long duration (valid but edge case)",
+      "schema": "core.schema.json",
+      "data": {
+        "schemaVersion": "1.0.0",
+        "id": "md01-ss01",
+        "index": 0,
+        "scene": 1,
+        "durationSec": 3600,
+        "voice": {
+          "lang": "en",
+          "text": "One hour duration test"
+        },
+        "screenZone": "full_dome",
+        "primaryTechnique": "live_action_plate"
+      },
+      "expected": "valid"
+    },
+    {
+      "name": "zero_scene_number",
+      "description": "Tests scene number of 0 (should fail - minimum is 1)",
+      "schema": "core.schema.json",
+      "data": {
+        "schemaVersion": "1.0.0",
+        "id": "zs01-ss01",
+        "index": 0,
+        "scene": 0,
+        "durationSec": 10,
+        "voice": {
+          "lang": "en",
+          "text": "Zero scene test"
+        },
+        "screenZone": "full_dome",
+        "primaryTechnique": "cgi_3d_pre_render"
+      },
+      "expected": "invalid",
+      "error": "Scene number must be at least 1"
+    },
+    {
+      "name": "large_scene_subscene_numbers",
+      "description": "Tests very large scene and subscene numbers (valid)",
+      "schema": "core.schema.json",
+      "data": {
+        "schemaVersion": "1.0.0",
+        "id": "ls99-ss99",
+        "index": 0,
+        "scene": 999,
+        "subScene": 999,
+        "durationSec": 10,
+        "voice": {
+          "lang": "en",
+          "text": "Large numbers test"
+        },
+        "screenZone": "full_dome",
+        "primaryTechnique": "cgi_3d_pre_render"
+      },
+      "expected": "valid"
+    },
+    {
+      "name": "empty_string_fields",
+      "description": "Tests empty string values in optional fields",
+      "schema": "core.schema.json",
+      "data": {
+        "schemaVersion": "1.0.0",
+        "id": "es01-ss01",
+        "index": 0,
+        "scene": 1,
+        "sceneName": "",
+        "subSceneTitle": "",
+        "durationSec": 10,
+        "voice": {
+          "lang": "en",
+          "text": ""
+        },
+        "screenZone": "full_dome",
+        "primaryTechnique": "cgi_3d_pre_render",
+        "authorNote": "",
+        "userNote": "",
+        "llmNote": ""
+      },
+      "expected": "valid"
+    },
+    {
+      "name": "unicode_text_content",
+      "description": "Tests unicode characters in text fields",
+      "schema": "core.schema.json",
+      "data": {
+        "schemaVersion": "1.0.0",
+        "id": "un01-ss01",
+        "index": 0,
+        "scene": 1,
+        "sceneName": "Unicode Test 🌟",
+        "subSceneTitle": "Émotions et Symboles ∑∆π",
+        "durationSec": 30,
+        "voice": {
+          "lang": "zh",
+          "text": "这是一个测试 🚀 ñoël"
+        },
+        "screenZone": "full_dome",
+        "primaryTechnique": "hand_drawn_2d",
+        "authorNote": "Testing unicode: café naïve résumé",
+        "immersiveCue": "Look 👀 and feel ❤️ the experience"
+      },
+      "expected": "valid"
+    },
+    {
+      "name": "negative_index",
+      "description": "Tests negative index value (should fail - minimum is 0)",
+      "schema": "core.schema.json",
+      "data": {
+        "schemaVersion": "1.0.0",
+        "id": "ni01-ss01",
+        "index": -1,
+        "scene": 1,
+        "durationSec": 10,
+        "voice": {
+          "lang": "en",
+          "text": "Negative index test"
+        },
+        "screenZone": "full_dome",
+        "primaryTechnique": "cgi_3d_pre_render"
+      },
+      "expected": "invalid",
+      "error": "Index must be non-negative"
+    },
+    {
+      "name": "empty_arrays",
+      "description": "Tests empty arrays for optional array fields",
+      "schema": "core.schema.json",
+      "data": {
+        "schemaVersion": "1.0.0",
+        "id": "ea01-ss01",
+        "index": 0,
+        "scene": 1,
+        "durationSec": 10,
+        "voice": {
+          "lang": "en",
+          "text": "Empty arrays test"
+        },
+        "screenZone": "full_dome",
+        "primaryTechnique": "cgi_3d_pre_render",
+        "otherTechniques": [],
+        "softwarePipeline": [],
+        "music": [],
+        "soundFx": [],
+        "tasks": [],
+        "people": [],
+        "riskFlags": [],
+        "refLinks": []
+      },
+      "expected": "valid"
+    },
+    {
+      "name": "maximum_task_complexity",
+      "description": "Tests complex task with all optional fields",
+      "schema": "core.schema.json",
+      "data": {
+        "schemaVersion": "1.0.0",
+        "id": "mt01-ss01",
+        "index": 0,
+        "scene": 1,
+        "durationSec": 45,
+        "voice": {
+          "lang": "en",
+          "text": "Complex task test"
+        },
+        "screenZone": "full_dome",
+        "primaryTechnique": "cgi_3d_pre_render",
+        "tasks": [
+          {
+            "id": 1,
+            "task": "Ultra complex rendering task with multiple dependencies and sub-tasks that require careful coordination across multiple departments",
+            "dept": "VFX",
+            "prio": "high",
+            "owner": "Senior Technical Director with 20+ years experience",
+            "status": "in_progress"
+          },
+          {
+            "id": 2,
+            "task": "Quality assurance review",
+            "dept": "QA",
+            "prio": "low",
+            "status": "blocked"
+          }
+        ]
+      },
+      "expected": "valid"
+    },
+    {
+      "name": "maximum_people_complexity",
+      "description": "Tests complex people entries with all optional fields",
+      "schema": "core.schema.json",
+      "data": {
+        "schemaVersion": "1.0.0",
+        "id": "mp01-ss01",
+        "index": 0,
+        "scene": 1,
+        "durationSec": 30,
+        "voice": {
+          "lang": "en",
+          "text": "Complex people test"
+        },
+        "screenZone": "full_dome",
+        "primaryTechnique": "volumetric_capture",
+        "people": [
+          {
+            "role": "Director",
+            "name": "Christopher Nolan-Smith Jr. III",
+            "contacts": {
+              "email": "chris.nolan-smith@verylongdomainname.international",
+              "phone": "+1-555-123-4567",
+              "mobile": "+1-555-987-6543",
+              "office": "+1-555-111-2222",
+              "assistant": "assistant@domain.com",
+              "emergency": "+1-555-999-8888"
+            },
+            "note": "Award-winning director with extensive experience in immersive media, specializing in complex narrative structures and innovative cinematography techniques. Has worked on multiple fulldome projects.",
+            "availability": "Available Monday-Friday 9AM-6PM PST, occasional weekends for urgent matters"
+          },
+          {
+            "role": "other",
+            "customRole": "Volumetric Capture Specialist & Post-Production Supervisor",
+            "name": "María González-Rodriguez",
+            "contacts": {
+              "email": "maria.gonzalez-rodriguez@volumetricstudios.com"
+            },
+            "note": "Expert in cutting-edge volumetric capture technology"
+          }
+        ]
+      },
+      "expected": "valid"
+    },
+    {
+      "name": "all_risk_flags",
+      "description": "Tests shot with all possible risk flags",
+      "schema": "core.schema.json",
+      "data": {
+        "schemaVersion": "1.0.0",
+        "id": "rf99-ss01",
+        "index": 0,
+        "scene": 1,
+        "durationSec": 120,
+        "voice": {
+          "lang": "en",
+          "text": "Maximum risk assessment test sequence"
+        },
+        "screenZone": "full_dome",
+        "primaryTechnique": "mixed_media_collage",
+        "riskFlags": [
+          "photosensitive_seizure", "motion_sickness", "vertigo_trigger",
+          "claustrophobia_trigger", "fear_of_heights_trigger",
+          "loud_volume", "low_frequency_rumble",
+          "laser_hazard", "strobe_light", "heavy_fog", "scent_allergy",
+          "graphic_medical_content", "body_horror",
+          "religious_sensitivity", "political_sensitivity", "mature_themes",
+          "copyright_unverified", "ai_copyright_unclear", "talent_release_missing",
+          "render_time_overrun", "hardware_overheat", "projector_alignment_risk",
+          "sync_drift", "frame_drop_risk",
+          "narrative_confusion", "translation_required"
+        ]
+      },
+      "expected": "valid"
+    },
+    {
+      "name": "invalid_wrong_schema_version",
+      "description": "Tests shot with wrong schema version (should fail)",
+      "schema": "core.schema.json",
+      "data": {
+        "schemaVersion": "2.0.0",
+        "id": "ws01-ss01",
+        "index": 0,
+        "scene": 1,
+        "durationSec": 10,
+        "voice": {
+          "lang": "en",
+          "text": "Wrong schema version test"
+        },
+        "screenZone": "full_dome",
+        "primaryTechnique": "cgi_3d_pre_render"
+      },
+      "expected": "invalid",
+      "error": "Schema version must be exactly '1.0.0'"
+    }
+  ]
+} 

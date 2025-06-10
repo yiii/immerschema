@@ -42,15 +42,15 @@
         "$ref": "../enum/role.enum.json"
       },
       "minItems": 1,
-      "enum": ["Animator", "FXTD", "LightingTD", "Compositor"]
+      "enum": ["Animator", "FXTD", "LightingTD", "Compositor", "HoudiniArtist", "MotionDesigner"]
     },
-    "Realtime": {
+    "Realtime & Interactive": {
       "type": "array",
       "items": {
         "$ref": "../enum/role.enum.json"
       },
       "minItems": 1,
-      "enum": ["UnrealEngineer", "TechnicalArtist"]
+      "enum": ["UnrealArtist", "TouchDesignerArtist", "TouchDesignerDeveloper", "NotchArtist"]
     },
     "Audio": {
       "type": "array",
@@ -58,7 +58,7 @@
         "$ref": "../enum/role.enum.json"
       },
       "minItems": 1,
-      "enum": ["Composer", "SoundDesigner", "AudioEngineer", "VOActor"]
+      "enum": ["Composer", "SoundFXDesigner", "AudioEngineer", "VOActor"]
     },
     "Editorial": {
       "type": "array",
@@ -66,15 +66,15 @@
         "$ref": "../enum/role.enum.json"
       },
       "minItems": 1,
-      "enum": ["Editor", "Colorist"]
+      "enum": ["Editor", "Colorist", "MontageArtist"]
     },
-    "Misc": {
+    "Production Support": {
       "type": "array",
       "items": {
         "$ref": "../enum/role.enum.json"
       },
       "minItems": 1,
-      "enum": ["QA", "Researcher"]
+      "enum": ["CameraMan", "QA", "Researcher"]
     },
     "Other": {
       "type": "array",

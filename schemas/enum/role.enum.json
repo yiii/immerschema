@@ -7,12 +7,13 @@
   "enum": [
     "Director", "Producer", "ProjectManager",
     "Writer", "StoryboardArtist", "ConceptArtist",
-    "VFXSupervisor", "CGSupervisor", "PipelineTD",
-    "Modeler", "TextureArtist", "Rigger", "LookDev",
-    "Animator", "FXTD", "LightingTD", "Compositor",
-    "UnrealEngineer", "TechnicalArtist",
-    "Composer", "SoundDesigner", "AudioEngineer", "VOActor",
-    "Editor", "Colorist",
+    "VFXSupervisor", "CGSupervisor", "PipelineTD", 
+    "Modeler", "TextureArtist", "Rigger", "LookDev", 
+    "Animator", "FXTD", "LightingTD", "Compositor", "HoudiniArtist", "MotionDesigner",
+    "UnrealArtist", "TouchDesignerArtist", "NotchArtist","TouchDesignerDeveloper",
+    "Composer", "SoundFXDesigner", "AudioEngineer", "VOActor",
+    "Editor", "Colorist", "MontageArtist", 
+    "CameraMan", 
     "QA", "Researcher",
     "other"
   ]

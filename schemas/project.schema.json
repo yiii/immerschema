@@ -1,5 +1,4 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id"    : "https://example.com/schemas/project.schema.json",
   "$comment": "PROJECT – root schema for fulldome projects.",
   "title"  : "Fulldome Project",
@@ -16,7 +15,7 @@
 
     "shots": {
       "type": "array",
-      "items": { "$ref": "./core.schema.json" },
+      "items": { "$ref": "https://example.com/schemas/core.schema.json#" },
       "minItems": 1,
       "description": "List of shots in the project."
     },

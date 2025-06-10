@@ -1,0 +1,210 @@
+{
+  "projectId": "comprehensive-dome-2024",
+  "title": "Journey Through the Cosmos - A Comprehensive Fulldome Experience",
+  "schemaVersion": "1.0.0",
+  "globalSoftware": ["Blender", "Maya", "Unreal", "AfterEffects", "Houdini", "DaVinciResolve", "Ableton"],
+  "globalMusic": "assets/music/cosmic_symphony.mp3",
+  "shots": [
+    {
+      "schemaVersion": "1.0.0",
+      "id": "sc01-ss01",
+      "index": 0,
+      "scene": 1,
+      "subScene": 1,
+      "sceneName": "Cosmic Opening",
+      "subSceneTitle": "Birth of Stars",
+      "durationSec": 45,
+      "imageFile": "renders/sc01-ss01-stellar_birth.exr",
+      "voice": {
+        "lang": "en",
+        "text": "In the beginning, there was darkness. Then, from the primordial chaos, the first stars ignited, painting the cosmos with light."
+      },
+      "transitionIn": ["fade_in", "zoom_in"],
+      "action": "stellar_formation_sequence",
+      "transitionOut": ["dissolve"],
+      "cameraMotion": ["orbital_movement", "zoom_out"],
+      "screenZone": "full_dome",
+      "immersiveCue": "Look up and witness the birth of the universe",
+      "primaryTechnique": "cgi_3d_pre_render",
+      "otherTechniques": ["particle_system", "procedural_geometry", "fluid_sim"],
+      "softwarePipeline": ["Houdini", "Blender", "Redshift", "Nuke"],
+      "music": ["cosmic_ambient", "orchestral_crescendo"],
+      "soundFx": ["cosmic_wind", "stellar_ignition", "space_rumble"],
+      "tasks": [
+        {
+          "id": 1,
+          "task": "Create star formation particle system",
+          "dept": "VFX",
+          "prio": "high",
+          "owner": "Alex Chen",
+          "status": "in_progress"
+        },
+        {
+          "id": 2,
+          "task": "Render final sequence at 8K",
+          "dept": "Rendering",
+          "prio": "high",
+          "owner": "Maria Rodriguez",
+          "status": "todo"
+        }
+      ],
+      "people": [
+        {
+          "role": "Director",
+          "name": "Sarah Johnson",
+          "contacts": {
+            "email": "sarah.johnson@cosmicstudios.com",
+            "phone": "+1-555-0123"
+          },
+          "note": "Lead creative vision",
+          "availability": "Full-time on project"
+        },
+        {
+          "role": "VFXSupervisor",
+          "name": "David Kim",
+          "contacts": {
+            "email": "david.kim@cosmicstudios.com"
+          }
+        },
+        {
+          "role": "FXTD",
+          "name": "Alex Chen",
+          "contacts": {
+            "email": "alex.chen@cosmicstudios.com"
+          },
+          "note": "Specialist in particle systems"
+        }
+      ],
+      "riskFlags": ["photosensitive_seizure", "render_time_overrun"],
+      "authorNote": "Key opening sequence - sets the tone for entire experience",
+      "userNote": "Consider adding subtle motion to reduce motion sickness",
+      "refLinks": ["https://hubblesite.org/contents/articles/the-birth-of-stars"],
+      "autoFixNotes": "Automatically adjusted brightness levels for dome projection"
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "sc02-ss01",
+      "index": 1,
+      "scene": 2,
+      "subScene": 1,
+      "sceneName": "Planetary Dance",
+      "subSceneTitle": "Solar System Formation",
+      "durationSec": 60,
+      "imageFile": "renders/sc02-ss01-planetary_dance.exr",
+      "voice": {
+        "lang": "en",
+        "text": "As gravity sculpted the cosmos, planets began their eternal dance around young stars."
+      },
+      "transitionIn": ["crossfade"],
+      "action": "planetary_orbital_animation",
+      "transitionOut": ["spiral_transition"],
+      "cameraMotion": ["smooth_orbit", "follow_path"],
+      "screenZone": "horizon_band",
+      "immersiveCue": "Follow the planets as they form their orbits",
+      "primaryTechnique": "cgi_3d_realtime",
+      "otherTechniques": ["procedural_geometry", "data_driven_visual"],
+      "softwarePipeline": ["Unreal", "Blender", "Houdini"],
+      "music": ["ethereal_harmony"],
+      "soundFx": ["gravitational_waves", "cosmic_debris"],
+      "tasks": [
+        {
+          "id": 3,
+          "task": "Real-time planetary physics simulation",
+          "dept": "Technical",
+          "prio": "med",
+          "owner": "James Wilson",
+          "status": "in_progress"
+        }
+      ],
+      "people": [
+        {
+          "role": "UnrealArtist",
+          "name": "James Wilson",
+          "contacts": {
+            "email": "james.wilson@cosmicstudios.com"
+          }
+        },
+        {
+          "role": "TouchDesignerDeveloper",
+          "name": "Lisa Park",
+          "contacts": {
+            "email": "lisa.park@cosmicstudios.com"
+          }
+        }
+      ],
+      "riskFlags": ["motion_sickness", "vertigo_trigger"],
+      "authorNote": "Focus on educational accuracy of orbital mechanics",
+      "userNote": "Ensure smooth frame rate for real-time rendering"
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "sc03-ss01",
+      "index": 2,
+      "scene": 3,
+      "subScene": 1,
+      "sceneName": "Life Emerges",
+      "subSceneTitle": "Earth's First Breath",
+      "durationSec": 90,
+      "imageFile": "renders/sc03-ss01-life_emerges.exr",
+      "voice": {
+        "lang": "en",
+        "text": "On a small blue planet, the miracle of life began to stir."
+      },
+      "transitionIn": ["zoom_to_earth"],
+      "action": "evolution_sequence",
+      "transitionOut": ["fade_to_black"],
+      "cameraMotion": ["descent_to_surface", "microscopic_zoom"],
+      "screenZone": "lower_band",
+      "immersiveCue": "Dive into the primordial oceans",
+      "primaryTechnique": "volumetric_capture",
+      "otherTechniques": ["photogrammetry", "macro_photography", "ai_image"],
+      "softwarePipeline": ["Maya", "Arnold", "AfterEffects"],
+      "music": ["organic_textures", "life_theme"],
+      "soundFx": ["ocean_waves", "cellular_activity", "heartbeat"],
+      "tasks": [
+        {
+          "id": 4,
+          "task": "Volumetric capture of underwater sequences",
+          "dept": "Capture",
+          "prio": "high",
+          "owner": "Emma Thompson",
+          "status": "done"
+        },
+        {
+          "id": 5,
+          "task": "Color grading for organic feel",
+          "dept": "Post",
+          "prio": "med",
+          "owner": "Robert Lee",
+          "status": "todo"
+        }
+      ],
+      "people": [
+        {
+          "role": "CameraMan",
+          "customRole": "Underwater CameraMan",
+          "name": "Emma Thompson",
+          "contacts": {
+            "email": "emma.thompson@oceanicprod.com"
+          },
+          "note": "Specialist in underwater macro photography"
+        },
+        {
+          "role": "Colorist",
+          "name": "Robert Lee",
+          "contacts": {
+            "email": "robert.lee@colorworks.com"
+          }
+        }
+      ],
+      "riskFlags": ["claustrophobia_trigger", "graphic_medical_content"],
+      "authorNote": "Balance scientific accuracy with artistic interpretation",
+      "userNote": "Consider adding interactive elements for educational value",
+      "llmNote": "AI-generated textures enhanced with photographic elements",
+      "refLinks": [
+        "https://www.nature.com/articles/origin-of-life",
+        "https://oceanexplorer.noaa.gov/edu/learning/deep-sea-life"
+      ]
+    }
+  ]
+} 

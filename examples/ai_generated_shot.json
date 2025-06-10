@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "ai01-ss01",
+  "index": 0,
+  "scene": 1,
+  "subScene": 1,
+  "sceneName": "AI Dreamscape",
+  "subSceneTitle": "Neural Network Visions",
+  "durationSec": 45,
+  "imageFile": "renders/ai01-ss01-neural_visions.jpg",
+  "voice": {
+    "lang": "en",
+    "text": "Witness the dreams of artificial minds as they paint impossible worlds."
+  },
+  "transitionIn": ["neural_dissolve"],
+  "action": "morphing_landscapes",
+  "transitionOut": ["digital_glitch"],
+  "cameraMotion": ["ai_guided_movement"],
+  "screenZone": "full_dome",
+  "immersiveCue": "Watch as reality bends and transforms around you",
+  "primaryTechnique": "ai_image",
+  "otherTechniques": ["ai_video", "style_transfer", "motion_graphics"],
+  "softwarePipeline": ["StableDiffusion", "RunwayGen2", "AfterEffects", "TouchDesigner"],
+  "music": ["synthetic_ambient"],
+  "soundFx": ["digital_artifacts", "neural_processing"],
+  "tasks": [
+    {
+      "id": 1,
+      "task": "Generate base AI imagery sequences",
+      "dept": "AI",
+      "prio": "high",
+      "owner": "Neural Artist",
+      "status": "in_progress"
+    },
+    {
+      "id": 2,
+      "task": "Apply style transfer effects",
+      "dept": "VFX",
+      "prio": "med",
+      "owner": "Style Specialist",
+      "status": "todo"
+    }
+  ],
+  "people": [
+    {
+      "role": "other",
+      "customRole": "AI Artist",
+      "name": "Sam Neural",
+      "contacts": {
+        "email": "sam.neural@aiartcollective.com"
+      },
+      "note": "Specializes in generative AI content for immersive experiences"
+    },
+    {
+      "role": "TouchDesignerDeveloper", 
+      "name": "Casey Pixel",
+      "contacts": {
+        "email": "casey.pixel@pixelstudios.com"
+      }
+    }
+  ],
+  "riskFlags": ["ai_copyright_unclear", "photosensitive_seizure", "narrative_confusion"],
+  "authorNote": "Experimental sequence pushing boundaries of AI-generated content",
+  "userNote": "Monitor for any uncanny valley effects",
+  "llmNote": "Generated using custom trained models on space imagery",
+  "refLinks": [
+    "https://arxiv.org/abs/ai-art-paper",
+    "https://stability.ai/research/stable-diffusion"
+  ],
+  "autoFixNotes": "Adjusted AI generation parameters for dome projection"
+} 

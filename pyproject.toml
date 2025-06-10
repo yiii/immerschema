@@ -1,0 +1,14 @@
+[project]
+name = "immerschema"
+version = "1.0.0"
+description = "JSON-Schema & taxonomy for Fulldome pipelines"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [{name = "yiii"}]
+
+[project.urls]
+Homepage = "https://github.com/yiii/immerschema"
+
+[tool.setuptools.package-data]
+"*" = ["*.json", "*.md"] 
