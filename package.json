@@ -1,6 +1,6 @@
 {
   "name": "fulldome-schema-suite",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Comprehensive JSON Schema suite for  CG pipeline",
   "type": "module",
   "main": "./index.cjs",
@@ -39,10 +39,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-org/fulldome-schema-suite.git"
+    "url": "git+https://github.com/yiii/immerschema.git"
   },
   "bugs": {
-    "url": "https://github.com/your-org/fulldome-schema-suite/issues"
+    "url": "https://github.com/yiii/immerschema/issues"
   },
-  "homepage": "https://github.com/your-org/fulldome-schema-suite#readme"
+  "homepage": "https://github.com/yiii/immerschema#readme"
 }
