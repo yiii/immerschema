@@ -1,5 +1,5 @@
 {
-  "$id": "file:///ext/debug.schema.json#",
+  "$id": "fulldome-schema-suite/schemas/ext/debug.schema.json#",
   "$comment": "EXTENSION – debug / scratch fields",
   "title": "Debug block",
   "type": "object",

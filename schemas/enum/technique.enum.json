@@ -1,5 +1,5 @@
 {
-  "$id": "file:///enum/technique.enum.json#",
+  "$id": "fulldome-schema-suite/schemas/enum/technique.enum.json#",
   "title": "Technique enum",
   "type": "string",
   "enum": [

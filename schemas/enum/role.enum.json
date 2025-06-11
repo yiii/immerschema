@@ -1,5 +1,5 @@
 {
-  "$id": "file:///enum/role.enum.json#",
+  "$id": "fulldome-schema-suite/schemas/enum/role.enum.json#",
   "$comment": "ENUM – crew roles; update via governance workflow.",
   "title": "Role enum",
   "description": "Enumerates crew roles for project staffing. Use 'other' for unlisted or hybrid roles.",

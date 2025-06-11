@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.com/schemas/io/response_envelope.schema.json",
+  "$id": "fulldome-schema-suite/schemas/io/response_envelope.schema.json",
 
   "title": "LLM Response Envelope (model ➜ middleware)",
   "$comment": "First item is chain-of-thoughts (CoT). Strip before showing user if needed.",
@@ -13,7 +13,7 @@
     {
       "type": "string",
       "title": "CHAIN_OF_THOUGHTS",
-      "description": "Model’s internal reasoning. Keep for logs; hide from user UI."
+      "description": "Model's internal reasoning. Keep for logs; hide from user UI."
     },
     {
       "type": "string",

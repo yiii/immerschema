@@ -1,5 +1,5 @@
 {
-  "$id": "file:///core.schema.json#",
+  "$id": "fulldome-schema-suite/schemas/core.schema.json#",
   "$comment": "CORE – shot-level schema for fulldome projects.",
   "title"  : "Fulldome Shot – core v1.0.0",
   "description": "Schema for individual shots in a fulldome project, including techniques, software, and crew.",

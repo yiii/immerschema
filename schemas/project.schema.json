@@ -1,5 +1,5 @@
 {
-  "$id": "file:///project.schema.json#",
+  "$id": "fulldome-schema-suite/schemas/project.schema.json",
   "$comment": "PROJECT – root schema for fulldome projects.",
   "title": "Fulldome Project",
   "description": "Schema for fulldome project root, including global software and shots.",
@@ -15,7 +15,7 @@
 
     "shots": {
       "type": "array",
-      "items": { "$ref": "file:///core.schema.json#" },
+      "items": { "$ref": "fulldome-schema-suite/schemas/core.schema.json" },
       "minItems": 1,
       "description": "List of shots in the project."
     },
@@ -23,12 +23,12 @@
     "globalSoftware": {
       "$comment": "Master list of all software used in the project.",
       "type": "array",
-      "items": { "$ref": "./enum/software.enum.json#" },
+      "items": { "$ref": "fulldome-schema-suite/schemas/enum/software.enum.json" },
       "default": [],
       "description": "All software used in the project for licensing/IT."
     },
 
     "globalMusic": { "type": "string", "description": "Global music for the project." },
-    "debug": { "$ref": "./ext/debug.schema.json#/properties/debug", "description": "Debug or scratch fields." }
+    "debug": { "$ref": "fulldome-schema-suite/schemas/ext/debug.schema.json#/properties/debug", "description": "Debug or scratch fields." }
   }
 } 
