@@ -1,6 +1,6 @@
 [project]
 name = "immerschema"
-version = "1.0.6"
+version = "1.0.7"
 description = "JSON-Schema & taxonomy for Fulldome pipelines"
 readme = "README.md"
 requires-python = ">=3.9"

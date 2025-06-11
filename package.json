@@ -1,12 +1,14 @@
 {
   "name": "immerschema",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Comprehensive JSON Schema suite for  CG pipeline",
   "type": "module",
   "main": "./index.cjs",
   "exports": {
-    "require": "./index.cjs",
-    "import": "./index.js",
+    ".": {
+      "require": "./index.cjs",
+      "import": "./index.js"
+    },
     "./schemas/*": "./schemas/*",
     "./schemas/enum/*": "./schemas/enum/*",
     "./schemas/ext/*": "./schemas/ext/*",
