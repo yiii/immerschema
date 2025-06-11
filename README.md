@@ -1,4 +1,4 @@
-# Fulldome Schema Suite
+# Immersive Projects CG Pipeline Schema Suite
 
 A JSON Schema designed to ensure consistent data structure across production pipelines.
 
@@ -11,8 +11,19 @@ A JSON Schema designed to ensure consistent data structure across production pip
 * **LLM I/O schema** – guarantees safe, auditable AI edits
 * **Comprehensive examples** – real-world usage patterns and edge cases
 * **Automated testing** – full validation suite with edge case coverage
+* **ESM/CommonJS Support** – dual module format support for modern Node.js environments
 
-## 📁 Project Structure
+## 📦 Installation
+
+```bash
+# npm
+npm install immerschema@1.0.7
+
+# pip
+pip install immerschema==1.0.7
+```
+
+## �� Project Structure
 
 ```
 immerschema/
