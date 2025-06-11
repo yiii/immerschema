@@ -99,4 +99,52 @@ If you encounter issues during the release process:
 If you encounter any issues during the release process, please:
 1. Check the GitHub Issues
 2. Contact the maintainers
-3. Review the GitHub Actions logs 
+3. Review the GitHub Actions logs
+
+## Quick Cheat Sheet
+
+### 1. Update Version Numbers
+```bash
+# Update in all files:
+- package.json
+- pyproject.toml
+- README.md
+- docs/CHANGELOG.md
+```
+
+### 2. Commit Changes
+```bash
+git add package.json pyproject.toml README.md docs/CHANGELOG.md
+git commit -m "chore: bump version to X.Y.Z"
+git push origin main
+```
+
+### 3. Create and Push Tag
+```bash
+git tag -a vX.Y.Z -m "Release version X.Y.Z"
+git push origin vX.Y.Z
+```
+
+### 4. Monitor Build
+1. Go to GitHub repository
+2. Click "Actions" tab
+3. Watch the workflow triggered by the tag
+4. Check build logs for any issues
+
+### Common Issues & Solutions
+
+1. **Build Fails**
+   - Check GitHub Actions logs
+   - Verify all version numbers match
+   - Ensure all files are committed
+
+2. **Package Not Published**
+   - Check npm/PyPI credentials in GitHub Secrets
+   - Verify workflow permissions
+   - Check for rate limiting
+
+3. **Version Already Exists**
+   - Increment version number
+   - Delete local tag: `git tag -d vX.Y.Z`
+   - Delete remote tag: `git push origin :vX.Y.Z`
+   - Create new tag with incremented version 
