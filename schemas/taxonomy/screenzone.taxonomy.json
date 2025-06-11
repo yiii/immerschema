@@ -1,5 +1,5 @@
 {
-  "$id": "fulldome-schema-suite/schemas/taxonomy/screenzone.taxonomy.json",
+  "$id": "immerschema/schemas/taxonomy/screenzone.taxonomy.json",
   "title": "Screen zone taxonomy (UI helper)",
   "type": "object",
   "additionalProperties": false,

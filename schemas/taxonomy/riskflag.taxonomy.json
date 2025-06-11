@@ -1,5 +1,5 @@
 {
-  "$id": "fulldome-schema-suite/schemas/taxonomy/riskflag.taxonomy.json",
+  "$id": "immerschema/schemas/taxonomy/riskflag.taxonomy.json",
   "title": "Risk flag taxonomy (UI helper)",
   "type": "object",
   "additionalProperties": false,

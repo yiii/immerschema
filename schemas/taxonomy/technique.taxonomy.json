@@ -1,5 +1,5 @@
 {
-  "$id": "fulldome-schema-suite/schemas/taxonomy/technique.taxonomy.json",
+  "$id": "immerschema/schemas/taxonomy/technique.taxonomy.json",
   "title": "Technique taxonomy (UI helper)",
   "type": "object",
   "additionalProperties": false,

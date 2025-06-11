@@ -15,7 +15,7 @@ A JSON Schema designed to ensure consistent data structure across production pip
 ## 📁 Project Structure
 
 ```
-fulldome-schema-suite/
+immerschema/
 ├── schemas/                    # Core JSON Schema files
 │   ├── core.schema.json       # Individual shot validation
 │   ├── project.schema.json    # Project-level validation

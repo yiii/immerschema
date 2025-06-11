@@ -1,5 +1,5 @@
 {
-  "$id": "fulldome-schema-suite/schemas/taxonomy/software.taxonomy.json",
+  "$id": "immerschema/schemas/taxonomy/software.taxonomy.json",
   "title": "Software taxonomy (UI helper)",
   "type": "object",
   "additionalProperties": false,

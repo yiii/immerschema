@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "fulldome-schema-suite/schemas/io/patch.schema.json",
+  "$id": "immerschema/schemas/io/patch.schema.json",
 
   "title": "Single Scene Patch (RFC-6902 wrapper)",
   "type": "object",

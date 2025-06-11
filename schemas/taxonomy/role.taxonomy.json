@@ -1,5 +1,5 @@
 {
-  "$id": "fulldome-schema-suite/schemas/taxonomy/role.taxonomy.json",
+  "$id": "immerschema/schemas/taxonomy/role.taxonomy.json",
   "title": "Role taxonomy (UI helper)",
   "type": "object",
   "additionalProperties": false,

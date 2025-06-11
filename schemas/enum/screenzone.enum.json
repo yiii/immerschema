@@ -1,5 +1,5 @@
 {
-  "$id": "fulldome-schema-suite/schemas/enum/screenzone.enum.json#",
+  "$id": "immerschema/schemas/enum/screenzone.enum.json",
   "title": "Screen zone enum",
   "type": "string",
   "enum": [

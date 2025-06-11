@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "fulldome-schema-suite/schemas/io/response_envelope.schema.json",
+  "$id": "immerschema/schemas/io/response_envelope.schema.json",
 
   "title": "LLM Response Envelope (model ➜ middleware)",
   "$comment": "First item is chain-of-thoughts (CoT). Strip before showing user if needed.",

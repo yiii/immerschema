@@ -37,50 +37,61 @@ function log(color, message) {
   console.log(`${color}${message}${colors.reset}`);
 }
 
-async function validateJson(schemaDir, dataOrPath, schemaPath, isDataObject = false) {
-  // Create new AJV instance for each validation
-  const ajv = new Ajv({ 
+// Global AJV instance
+let globalAjv = null;
+
+function setupAjv() {
+  if (globalAjv) return globalAjv;
+  
+  globalAjv = new Ajv({ 
     strict: false, 
     allErrors: true,
     verbose: true,
-    validateFormats: false,
-    loadSchema: async (uri) => {
-      // Handle file:/// protocol
-      if (uri.startsWith('file:///')) {
-        const filePath = uri.replace('file:///', '');
-        return JSON.parse(readFileSync(join(schemaDir, filePath), 'utf8'));
-      }
-      // Handle relative paths
-      if (uri.startsWith('./')) {
-        return JSON.parse(readFileSync(join(schemaDir, uri), 'utf8'));
-      }
-      return null;
-    }
+    validateFormats: false
   });
-  addFormats(ajv);
+  addFormats(globalAjv);
 
-  // Load core schemas
-  const coreSchema = JSON.parse(readFileSync(join(schemaDir, 'schemas/core.schema.json'), 'utf8'));
-  const projectSchema = JSON.parse(readFileSync(join(schemaDir, 'schemas/project.schema.json'), 'utf8'));
-
-  // Load all enum and extension schemas
+  // Load all schemas first
   const enumSchemas = [
     'schemas/enum/technique.enum.json',
-    'schemas/enum/screenzone.enum.json',
+    'schemas/enum/screenzone.enum.json', 
     'schemas/enum/riskflag.enum.json',
     'schemas/enum/role.enum.json',
-    'schemas/enum/software.enum.json',
+    'schemas/enum/software.enum.json'
+  ];
+  
+  const extSchemas = [
     'schemas/ext/debug.schema.json'
   ];
-  const loadedEnumSchemas = enumSchemas.map(p => JSON.parse(readFileSync(join(schemaDir, p), 'utf8')));
+  
+  const coreSchemas = [
+    'schemas/core.schema.json',
+    'schemas/project.schema.json'
+  ];
 
-  // Add all schemas with their IDs
-  ajv.addSchema(coreSchema, 'file:///core.schema.json#');
-  ajv.addSchema(projectSchema, 'file:///project.schema.json#');
-  loadedEnumSchemas.forEach(schema => {
-    const id = schema.$id || `file:///enum/${schema.title.toLowerCase().replace(/\s+/g, '_')}.enum.json#`;
-    ajv.addSchema(schema, id);
+  // Register enum schemas first  
+  enumSchemas.forEach(path => {
+    const schema = JSON.parse(readFileSync(join('.', path), 'utf8'));
+    globalAjv.addSchema(schema, schema.$id);
   });
+  
+  // Register extension schemas
+  extSchemas.forEach(path => {
+    const schema = JSON.parse(readFileSync(join('.', path), 'utf8'));
+    globalAjv.addSchema(schema, schema.$id);
+  });
+  
+  // Register core schemas last
+  coreSchemas.forEach(path => {
+    const schema = JSON.parse(readFileSync(join('.', path), 'utf8'));
+    globalAjv.addSchema(schema, schema.$id);
+  });
+  
+  return globalAjv;
+}
+
+async function validateJson(schemaDir, dataOrPath, schemaPath, isDataObject = false) {
+  const ajv = setupAjv();
 
   // Load and validate data
   let data;

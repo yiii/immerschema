@@ -1,5 +1,5 @@
 {
-  "$id": "fulldome-schema-suite/schemas/enum/riskflag.enum.json#",
+  "$id": "immerschema/schemas/enum/riskflag.enum.json",
   "title": "Risk flag enum",
   "type": "string",
   "enum": [

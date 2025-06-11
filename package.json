@@ -1,5 +1,5 @@
 {
-  "name": "fulldome-schema-suite",
+  "name": "immerschema",
   "version": "1.0.5",
   "description": "Comprehensive JSON Schema suite for  CG pipeline",
   "type": "module",
