@@ -17,10 +17,10 @@ A JSON Schema designed to ensure consistent data structure across production pip
 
 ```bash
 # npm
-npm install immerschema@1.0.7
+npm install immerschema@1.1.0
 
 # pip
-pip install immerschema==1.0.7
+pip install immerschema==1.1.0
 ```
 
 ## �� Project Structure

@@ -1,3 +1,9 @@
+## 1.1.0  –  2024-12-19
+* Version bump to 1.1.0
+
+## 1.1.0  –  2024-12-20
+* Version bump to 1.1.0
+
 ## 1.0.7  –  2024-03-19
 * Fixed package.json exports configuration for proper ESM/CommonJS compatibility
 * Improved module resolution for schema files
