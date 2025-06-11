@@ -1,5 +1,5 @@
 {
-  "$id": "https://example.com/schemas/taxonomy/role.taxonomy.json",
+  "$id": "fulldome-schema-suite/schemas/taxonomy/role.taxonomy.json",
   "title": "Role taxonomy (UI helper)",
   "type": "object",
   "additionalProperties": false,
@@ -7,82 +7,82 @@
     "Direction & Production": {
       "type": "array",
       "items": {
-        "$ref": "../enum/role.enum.json"
+        "type": "string",
+        "enum": ["Director", "Producer", "ProjectManager"]
       },
-      "minItems": 1,
-      "enum": ["Director", "Producer", "ProjectManager"]
+      "minItems": 1
     },
     "Story & Art": {
       "type": "array",
       "items": {
-        "$ref": "../enum/role.enum.json"
+        "type": "string",
+        "enum": ["Writer", "StoryboardArtist", "ConceptArtist"]
       },
-      "minItems": 1,
-      "enum": ["Writer", "StoryboardArtist", "ConceptArtist"]
+      "minItems": 1
     },
     "Supervision": {
       "type": "array",
       "items": {
-        "$ref": "../enum/role.enum.json"
+        "type": "string",
+        "enum": ["VFXSupervisor", "CGSupervisor", "PipelineTD"]
       },
-      "minItems": 1,
-      "enum": ["VFXSupervisor", "CGSupervisor", "PipelineTD"]
+      "minItems": 1
     },
     "Asset Creation": {
       "type": "array",
       "items": {
-        "$ref": "../enum/role.enum.json"
+        "type": "string",
+        "enum": ["Modeler", "TextureArtist", "Rigger", "LookDev"]
       },
-      "minItems": 1,
-      "enum": ["Modeler", "TextureArtist", "Rigger", "LookDev"]
+      "minItems": 1
     },
     "Shot Creation": {
       "type": "array",
       "items": {
-        "$ref": "../enum/role.enum.json"
+        "type": "string",
+        "enum": ["Animator", "FXTD", "LightingTD", "Compositor", "HoudiniArtist", "MotionDesigner"]
       },
-      "minItems": 1,
-      "enum": ["Animator", "FXTD", "LightingTD", "Compositor", "HoudiniArtist", "MotionDesigner"]
+      "minItems": 1
     },
     "Realtime & Interactive": {
       "type": "array",
       "items": {
-        "$ref": "../enum/role.enum.json"
+        "type": "string",
+        "enum": ["UnrealArtist", "TouchDesignerArtist", "TouchDesignerDeveloper", "NotchArtist"]
       },
-      "minItems": 1,
-      "enum": ["UnrealArtist", "TouchDesignerArtist", "TouchDesignerDeveloper", "NotchArtist"]
+      "minItems": 1
     },
     "Audio": {
       "type": "array",
       "items": {
-        "$ref": "../enum/role.enum.json"
+        "type": "string",
+        "enum": ["Composer", "SoundFXDesigner", "AudioEngineer", "VOActor"]
       },
-      "minItems": 1,
-      "enum": ["Composer", "SoundFXDesigner", "AudioEngineer", "VOActor"]
+      "minItems": 1
     },
     "Editorial": {
       "type": "array",
       "items": {
-        "$ref": "../enum/role.enum.json"
+        "type": "string",
+        "enum": ["Editor", "Colorist", "MontageArtist"]
       },
-      "minItems": 1,
-      "enum": ["Editor", "Colorist", "MontageArtist"]
+      "minItems": 1
     },
     "Production Support": {
       "type": "array",
       "items": {
-        "$ref": "../enum/role.enum.json"
+        "type": "string",
+        "enum": ["CameraMan", "QA", "Researcher"]
       },
-      "minItems": 1,
-      "enum": ["CameraMan", "QA", "Researcher"]
+      "minItems": 1
     },
     "Other": {
       "type": "array",
       "items": {
-        "$ref": "../enum/role.enum.json"
+        "type": "string",
+        "enum": ["other"]
       },
-      "minItems": 1,
-      "enum": ["other"]
+      "minItems": 1
     }
   }
 } 

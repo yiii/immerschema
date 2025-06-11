@@ -1,5 +1,5 @@
 {
-  "$id": "https://example.com/schemas/taxonomy/software.taxonomy.json",
+  "$id": "fulldome-schema-suite/schemas/taxonomy/software.taxonomy.json",
   "title": "Software taxonomy (UI helper)",
   "type": "object",
   "additionalProperties": false,
@@ -7,66 +7,66 @@
     "3-D DCC": {
       "type": "array",
       "items": {
-        "$ref": "../enum/software.enum.json"
+        "type": "string",
+        "enum": ["Houdini", "Blender", "Maya", "Cinema4D"]
       },
-      "minItems": 1,
-      "enum": ["Houdini", "Blender", "Maya", "Cinema4D"]
+      "minItems": 1
     },
     "Engines / Realtime": {
       "type": "array",
       "items": {
-        "$ref": "../enum/software.enum.json"
+        "type": "string",
+        "enum": ["Unreal", "Unity", "Notch", "TouchDesigner"]
       },
-      "minItems": 1,
-      "enum": ["Unreal", "Unity", "Notch", "TouchDesigner"]
+      "minItems": 1
     },
     "Compositing": {
       "type": "array",
       "items": {
-        "$ref": "../enum/software.enum.json"
+        "type": "string",
+        "enum": ["AfterEffects", "Nuke", "DaVinciResolve"]
       },
-      "minItems": 1,
-      "enum": ["AfterEffects", "Nuke", "DaVinciResolve"]
+      "minItems": 1
     },
     "Renderers": {
       "type": "array",
       "items": {
-        "$ref": "../enum/software.enum.json"
+        "type": "string",
+        "enum": ["Redshift", "Octane", "Arnold", "VRay"]
       },
-      "minItems": 1,
-      "enum": ["Redshift", "Octane", "Arnold", "VRay"]
+      "minItems": 1
     },
     "AI / Gen": {
       "type": "array",
       "items": {
-        "$ref": "../enum/software.enum.json"
+        "type": "string",
+        "enum": ["StableDiffusion", "Midjourney", "RunwayGen2", "Veo"]
       },
-      "minItems": 1,
-      "enum": ["StableDiffusion", "Midjourney", "RunwayGen2", "Veo"]
+      "minItems": 1
     },
     "Audio DAW": {
       "type": "array",
       "items": {
-        "$ref": "../enum/software.enum.json"
+        "type": "string",
+        "enum": ["Ableton", "ProTools", "Reaper"]
       },
-      "minItems": 1,
-      "enum": ["Ableton", "ProTools", "Reaper"]
+      "minItems": 1
     },
     "Pipeline / Tracking": {
       "type": "array",
       "items": {
-        "$ref": "../enum/software.enum.json"
+        "type": "string",
+        "enum": ["ShotGrid", "FTrack", "git"]
       },
-      "minItems": 1,
-      "enum": ["ShotGrid", "FTrack", "git"]
+      "minItems": 1
     },
     "Other": {
       "type": "array",
       "items": {
-        "$ref": "../enum/software.enum.json"
+        "type": "string",
+        "enum": ["other"]
       },
-      "minItems": 1,
-      "enum": ["other"]
+      "minItems": 1
     }
   }
 } 

@@ -1,5 +1,5 @@
 {
-  "$id": "https://example.com/schemas/taxonomy/technique.taxonomy.json",
+  "$id": "fulldome-schema-suite/schemas/taxonomy/technique.taxonomy.json",
   "title": "Technique taxonomy (UI helper)",
   "type": "object",
   "additionalProperties": false,
@@ -7,103 +7,103 @@
     "3D CGI": {
       "type": "array",
       "items": {
-        "$ref": "../enum/technique.enum.json"
+        "type": "string",
+        "enum": [
+          "cgi_3d_pre_render",
+          "cgi_3d_realtime",
+          "volumetric_capture",
+          "photogrammetry"
+        ]
       },
-      "minItems": 1,
-      "enum": [
-        "cgi_3d_pre_render",
-        "cgi_3d_realtime",
-        "volumetric_capture",
-        "photogrammetry"
-      ]
+      "minItems": 1
     },
     "2D & Motion-Graphics": {
       "type": "array",
       "items": {
-        "$ref": "../enum/technique.enum.json"
+        "type": "string",
+        "enum": [
+          "hand_drawn_2d",
+          "vector_2d",
+          "cutout_animation",
+          "motion_graphics",
+          "info_graphics"
+        ]
       },
-      "minItems": 1,
-      "enum": [
-        "hand_drawn_2d",
-        "vector_2d",
-        "cutout_animation",
-        "motion_graphics",
-        "info_graphics"
-      ]
+      "minItems": 1
     },
     "Procedural / Generative": {
       "type": "array",
       "items": {
-        "$ref": "../enum/technique.enum.json"
+        "type": "string",
+        "enum": [
+          "procedural_geometry",
+          "particle_system",
+          "fractal_render",
+          "data_driven_visual"
+        ]
       },
-      "minItems": 1,
-      "enum": [
-        "procedural_geometry",
-        "particle_system",
-        "fractal_render",
-        "data_driven_visual"
-      ]
+      "minItems": 1
     },
     "Simulation": {
       "type": "array",
       "items": {
-        "$ref": "../enum/technique.enum.json"
+        "type": "string",
+        "enum": [
+          "fluid_sim",
+          "smoke_fire_sim",
+          "cloth_softbody_sim"
+        ]
       },
-      "minItems": 1,
-      "enum": [
-        "fluid_sim",
-        "smoke_fire_sim",
-        "cloth_softbody_sim"
-      ]
+      "minItems": 1
     },
     "AI / ML": {
       "type": "array",
       "items": {
-        "$ref": "../enum/technique.enum.json"
+        "type": "string",
+        "enum": [
+          "ai_image",
+          "ai_video",
+          "style_transfer"
+        ]
       },
-      "minItems": 1,
-      "enum": [
-        "ai_image",
-        "ai_video",
-        "style_transfer"
-      ]
+      "minItems": 1
     },
     "Live-action & Hybrid": {
       "type": "array",
       "items": {
-        "$ref": "../enum/technique.enum.json"
+        "type": "string",
+        "enum": [
+          "live_action_plate",
+          "macro_photography",
+          "timelapse",
+          "stereo_3d_capture",
+          "mixed_media_collage"
+        ]
       },
-      "minItems": 1,
-      "enum": [
-        "live_action_plate",
-        "macro_photography",
-        "timelapse",
-        "stereo_3d_capture",
-        "mixed_media_collage"
-      ]
+      "minItems": 1
     },
     "Stylised": {
       "type": "array",
       "items": {
-        "$ref": "../enum/technique.enum.json"
+        "type": "string",
+        "enum": [
+          "cel_shaded",
+          "toon_shader",
+          "stop_motion"
+        ]
       },
-      "minItems": 1,
-      "enum": [
-        "cel_shaded",
-        "toon_shader",
-        "stop_motion"
-      ]
+      "minItems": 1
     },
     "Audio-Reactive": {
       "type": "array",
       "items": {
-        "$ref": "../enum/technique.enum.json"
+        "type": "string",
+        "enum": [
+          "audio_reactive",
+          "music_visualizer"
+        ]
       },
-      "minItems": 1,
-      "enum": [
-        "audio_reactive",
-        "music_visualizer"
-      ]
+      "minItems": 1
     }
   }
 } 
