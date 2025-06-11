@@ -10,7 +10,10 @@ for enum_file in base.glob("enum/*.enum.json"):
     # Get all enum values from the taxonomy's properties correctly
     flat = []
     for prop in tax["properties"].values():
-        if "enum" in prop:
+        # Handle nested structure: items.enum instead of just enum
+        if "items" in prop and "enum" in prop["items"]:
+            flat.extend(prop["items"]["enum"])
+        elif "enum" in prop:
             flat.extend(prop["enum"])
     miss  = set(enum) - set(flat)
     extra = set(flat) - set(enum)

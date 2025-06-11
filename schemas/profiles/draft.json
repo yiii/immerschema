@@ -1,0 +1,17 @@
+{
+  "$id": "immerschema/schemas/profiles/draft.schema.json",
+  "type": "object",
+  "allOf": [
+    { "$ref": "immerschema/schemas/slices/id.schema.json" },
+    { "$ref": "immerschema/schemas/slices/content.slice.json" }
+  ],
+  "required": ["id"],
+  "anyOf": [
+    { "required": ["action"] },
+    { "required": ["userNote"] },
+    { "required": ["durationSec"] },
+    { "required": ["primaryTechnique"] },
+    { "required": ["voice"] }
+  ],
+  "additionalProperties": true
+} 

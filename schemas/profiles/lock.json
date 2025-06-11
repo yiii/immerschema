@@ -1,0 +1,10 @@
+{
+  "$id": "immerschema/schemas/profiles/lock.schema.json",
+  "type": "object",
+  "allOf": [
+    { "$ref": "immerschema/schemas/profiles/draft.schema.json" },
+    { "$ref": "immerschema/schemas/slices/assets.slice.json" }
+  ],
+  "required": ["id", "schemaVersion", "durationSec", "primaryTechnique", "assets", "voice"],
+  "additionalProperties": true
+} 

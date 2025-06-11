@@ -1,0 +1,21 @@
+{
+  "projectId": "simple-dome-001",
+  "title": "Simple Fulldome Experience",
+  "schemaVersion": "1.0.0",
+  "shots": [
+    {
+      "schemaVersion": "1.0.0",
+      "id": "sc01-ss01",
+      "index": 0,
+      "scene": 1,
+      "sceneName": "Opening",
+      "durationSec": 15,
+      "voice": {
+        "lang": "en",
+        "text": "Welcome to the universe"
+      },
+      "screenZone": "full_dome",
+      "primaryTechnique": "cgi_3d_pre_render"
+    }
+  ]
+} 

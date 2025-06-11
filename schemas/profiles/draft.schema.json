@@ -1,0 +1,27 @@
+{
+  "$id": "immerschema/schemas/profiles/draft.schema.json",
+  "title": "Profile – Draft",
+  "type": "object",
+  "additionalProperties": true,
+
+  "allOf": [
+    { "$ref": "../slices/id.schema.json"      },
+    { "$ref": "../slices/note.schema.json"    },
+    { "$ref": "../slices/timing.sec.schema.json"   },
+    { "$ref": "../slices/timing.frames.schema.json"},
+    { "$ref": "../slices/technique.schema.json"    },
+    { "$ref": "../slices/voice.schema.json"   }
+  ],
+
+  "required": ["id"],
+
+  "anyOf": [
+    { "required": ["action"]          },
+    { "required": ["userNote"]        },
+    { "required": ["llmNote"]         },
+    { "required": ["durationSec"]     },
+    { "required": ["durationFrames"]  },
+    { "required": ["primaryTechnique"]},
+    { "required": ["voice"]           }
+  ]
+}

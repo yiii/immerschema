@@ -1,0 +1,13 @@
+{
+  "$id": "immerschema/schemas/slices/safety.schema.json",
+  "title": "Safety slice",
+  "type": "object",
+  "properties": {
+    "riskFlags": {
+      "type": "array",
+      "items": { "$ref": "../enum/riskflag.enum.json" },
+      "default": []
+    }
+  },
+  "additionalProperties": true
+} 

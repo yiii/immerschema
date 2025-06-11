@@ -1,0 +1,14 @@
+{
+  "id": "shot42",
+  "scene": 3,
+  "subScene": 1,
+  "durationSec": 7.5,
+  "primaryTechnique": "particle_system",
+  "voice": { 
+    "lang": "ru", 
+    "text": "Рождение разума." 
+  },
+  "assets": [
+    { "path": "./boards/shot42_key.png" }
+  ]
+} 

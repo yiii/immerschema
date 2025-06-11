@@ -1,0 +1,13 @@
+{
+  "$id": "immerschema/schemas/profiles/plan.schema.json",
+  "title": "Profile – Plan (tech lock)",
+  "allOf": [
+    { "$ref": "./review.schema.json" },
+    { "$ref": "../slices/software.schema.json" }
+  ],
+  "required": [
+    "softwarePipeline",         
+    "primaryTechnique",
+    "voice"          
+  ]
+}

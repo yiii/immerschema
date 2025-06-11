@@ -1,0 +1,29 @@
+{
+  "$id": "immerschema/schemas/slices/voice.schema.json",
+  "title": "Voice slice (nested)",
+  "type": "object",
+  "required": ["voice"],
+  "properties": {
+    "voice": {
+      "type": "object",
+      "required": ["lang", "text"],
+      "additionalProperties": false,
+      "properties": {
+        "lang": {
+          "type": "string",
+          "pattern": "^[a-z]{2}$",
+          "description": "ISO-639-1 language code"
+        },
+        "text": {
+          "type": "string",
+          "description": "Narration line for this shot"
+        }
+      }
+    },
+    "llmNote": {
+      "type": "string",
+      "description": "Private note from LLM about the voice line"
+    }
+  },
+  "additionalProperties": true
+} 

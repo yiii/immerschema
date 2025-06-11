@@ -26,9 +26,28 @@
       "screenZone": "full_dome",
       "immersiveCue": "Look up and witness the birth of the universe",
       "primaryTechnique": "cgi_3d_pre_render",
-      "otherTechniques": ["particle_system", "procedural_geometry", "fluid_sim"],
-      "softwarePipeline": ["Houdini", "Blender", "Redshift", "Nuke"],
-      "music": ["cosmic_ambient", "orchestral_crescendo"],
+      "otherTechniques": [
+        "particle_system",
+        "procedural_geometry",
+        "fluid_sim"
+      ],
+      "softwarePipeline": [
+        "Houdini",
+        "Blender",
+        "Redshift",
+        "Nuke"
+      ],
+      "assets": [
+        {
+          "path": "./renders/sc01-ss01-stellar_birth.exr",
+          "kind": "image",
+          "role": "reference"
+        }
+      ],
+      "music": [
+        "cosmic_ambient",
+        "orchestral_crescendo"
+      ],
       "soundFx": ["cosmic_wind", "stellar_ignition", "space_rumble"],
       "tasks": [
         {
@@ -102,9 +121,25 @@
       "screenZone": "horizon_band",
       "immersiveCue": "Follow the planets as they form their orbits",
       "primaryTechnique": "cgi_3d_realtime",
-      "otherTechniques": ["procedural_geometry", "data_driven_visual"],
-      "softwarePipeline": ["Unreal", "Blender", "Houdini"],
-      "music": ["ethereal_harmony"],
+      "otherTechniques": [
+        "procedural_geometry",
+        "data_driven_visual"
+      ],
+      "softwarePipeline": [
+        "Unreal",
+        "Blender",
+        "Houdini"
+      ],
+      "assets": [
+        {
+          "path": "./renders/sc02-ss01-planetary_dance.exr",
+          "kind": "image",
+          "role": "reference"
+        }
+      ],
+      "music": [
+        "ethereal_harmony"
+      ],
       "soundFx": ["gravitational_waves", "cosmic_debris"],
       "tasks": [
         {
@@ -157,9 +192,27 @@
       "screenZone": "lower_band",
       "immersiveCue": "Dive into the primordial oceans",
       "primaryTechnique": "volumetric_capture",
-      "otherTechniques": ["photogrammetry", "macro_photography", "ai_image"],
-      "softwarePipeline": ["Maya", "Arnold", "AfterEffects"],
-      "music": ["organic_textures", "life_theme"],
+      "otherTechniques": [
+        "photogrammetry",
+        "macro_photography",
+        "ai_image"
+      ],
+      "softwarePipeline": [
+        "Maya",
+        "Arnold",
+        "AfterEffects"
+      ],
+      "assets": [
+        {
+          "path": "./renders/sc03-ss01-life_emerges.exr",
+          "kind": "image",
+          "role": "reference"
+        }
+      ],
+      "music": [
+        "organic_textures",
+        "life_theme"
+      ],
       "soundFx": ["ocean_waves", "cellular_activity", "heartbeat"],
       "tasks": [
         {
@@ -173,6 +226,94 @@
         {
           "id": 5,
           "task": "Color grading for organic feel",
+          "dept": "Post",
+          "prio": "med",
+          "owner": "Robert Lee",
+          "status": "todo"
+        }
+      ],
+      "people": [
+        {
+          "role": "CameraMan",
+          "customRole": "Underwater CameraMan",
+          "name": "Emma Thompson",
+          "contacts": {
+            "email": "emma.thompson@oceanicprod.com"
+          },
+          "note": "Specialist in underwater macro photography"
+        },
+        {
+          "role": "Colorist",
+          "name": "Robert Lee",
+          "contacts": {
+            "email": "robert.lee@colorworks.com"
+          }
+        }
+      ],
+      "riskFlags": ["claustrophobia_trigger", "graphic_medical_content"],
+      "authorNote": "Balance scientific accuracy with artistic interpretation",
+      "userNote": "Consider adding interactive elements for educational value",
+      "llmNote": "AI-generated textures enhanced with photographic elements",
+      "refLinks": [
+        "https://www.nature.com/articles/origin-of-life",
+        "https://oceanexplorer.noaa.gov/edu/learning/deep-sea-life"
+      ]
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "sc04-ss01",
+      "index": 3,
+      "scene": 4,
+      "subScene": 1,
+      "sceneName": "Cosmic Evolution",
+      "subSceneTitle": "The Journey of Life",
+      "durationSec": 120,
+      "imageFile": "renders/sc04-ss01-cosmic_evolution.exr",
+      "voice": {
+        "lang": "en",
+        "text": "From the birth of stars to the emergence of life, the cosmos has been a stage for countless transformations."
+      },
+      "transitionIn": ["fade_in"],
+      "action": "cosmic_evolution_sequence",
+      "transitionOut": ["dissolve"],
+      "cameraMotion": ["orbital_movement", "zoom_out"],
+      "screenZone": "full_dome",
+      "immersiveCue": "Witness the evolution of the universe",
+      "primaryTechnique": "volumetric_capture",
+      "otherTechniques": [
+        "photogrammetry",
+        "macro_photography",
+        "ai_image"
+      ],
+      "softwarePipeline": [
+        "Maya",
+        "Arnold",
+        "AfterEffects"
+      ],
+      "assets": [
+        {
+          "path": "./renders/sc04-ss01-cosmic_evolution.exr",
+          "kind": "image",
+          "role": "reference"
+        }
+      ],
+      "music": [
+        "organic_textures",
+        "life_theme"
+      ],
+      "soundFx": ["cosmic_wind", "stellar_ignition", "space_rumble"],
+      "tasks": [
+        {
+          "id": 6,
+          "task": "Volumetric capture of cosmic evolution sequences",
+          "dept": "Capture",
+          "prio": "high",
+          "owner": "Emma Thompson",
+          "status": "in_progress"
+        },
+        {
+          "id": 7,
+          "task": "Color grading for cosmic evolution feel",
           "dept": "Post",
           "prio": "med",
           "owner": "Robert Lee",

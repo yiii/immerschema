@@ -4,7 +4,7 @@
     {
       "name": "minimal_valid_project",
       "description": "Tests the absolute minimum required fields for a valid project",
-      "schema": "project.schema.json",
+      "schema": "schemas/project.draft.schema.json",
       "data": {
         "projectId": "min-001",
         "title": "Minimal Project",
@@ -29,10 +29,10 @@
     {
       "name": "invalid_shot_id_pattern",
       "description": "Tests invalid shot ID pattern (should fail)",
-      "schema": "core.schema.json",
+      "schema": "schemas/profiles/draft.schema.json",
       "data": {
         "schemaVersion": "1.0.0",
-        "id": "invalid-id",
+        "id": "@invalid-id",
         "index": 0,
         "scene": 1,
         "durationSec": 10,
@@ -44,12 +44,12 @@
         "primaryTechnique": "cgi_3d_pre_render"
       },
       "expected": "invalid",
-      "error": "Shot ID must match pattern ^[a-z]{2}\\d{2}-ss\\d{2}$"
+      "error": "Shot ID must start with alphanumeric and can only contain alphanumeric, dots, underscores, and hyphens"
     },
     {
       "name": "invalid_language_code",
       "description": "Tests invalid language code in voice (should fail)",
-      "schema": "core.schema.json", 
+      "schema": "schemas/profiles/draft.schema.json", 
       "data": {
         "schemaVersion": "1.0.0",
         "id": "sc01-ss01",
@@ -69,7 +69,7 @@
     {
       "name": "all_screen_zones_valid",
       "description": "Tests all valid screen zone values",
-      "schema": "core.schema.json",
+      "schema": "schemas/profiles/draft.schema.json",
       "data": {
         "schemaVersion": "1.0.0",
         "id": "sz01-ss01",
@@ -95,7 +95,7 @@
     {
       "name": "all_techniques_valid",
       "description": "Tests all valid technique values",
-      "schema": "core.schema.json",
+      "schema": "schemas/profiles/draft.schema.json",
       "data": {
         "schemaVersion": "1.0.0",
         "id": "tc01-ss01",
@@ -124,7 +124,7 @@
     {
       "name": "task_priority_validation",
       "description": "Tests task priority field validation",
-      "schema": "core.schema.json",
+      "schema": "schemas/profiles/assign.schema.json",
       "data": {
         "schemaVersion": "1.0.0",
         "id": "tp01-ss01",
@@ -137,6 +137,14 @@
         },
         "screenZone": "full_dome",
         "primaryTechnique": "cgi_3d_pre_render",
+        "softwarePipeline": ["Maya", "Nuke"],
+        "assets": [
+          {
+            "path": "./test/sample.png",
+            "kind": "image",
+            "role": "reference"
+          }
+        ],
         "tasks": [
           {
             "id": 1,
@@ -144,6 +152,12 @@
             "dept": "VFX",
             "prio": "high",
             "status": "todo"
+          }
+        ],
+        "people": [
+          {
+            "role": "Director",
+            "name": "Jane Smith"
           }
         ]
       },
@@ -153,7 +167,7 @@
     {
       "name": "task_status_validation",
       "description": "Tests task status field validation",
-      "schema": "core.schema.json",
+      "schema": "schemas/profiles/assign.schema.json",
       "data": {
         "schemaVersion": "1.0.0",
         "id": "ts01-ss01",
@@ -166,6 +180,14 @@
         },
         "screenZone": "full_dome",
         "primaryTechnique": "cgi_3d_pre_render",
+        "softwarePipeline": ["Maya", "Nuke"],
+        "assets": [
+          {
+            "path": "./test/sample.png",
+            "kind": "image",
+            "role": "reference"
+          }
+        ],
         "tasks": [
           {
             "id": 1,
@@ -174,15 +196,67 @@
             "prio": "med",
             "status": "todo"
           }
+        ],
+        "people": [
+          {
+            "role": "Director",
+            "name": "Jane Smith"
+          }
         ]
       },
       "expected": "valid",
       "status_variations": ["todo", "in_progress", "done", "blocked"]
     },
     {
-      "name": "multiple_risk_flags",
-      "description": "Tests multiple risk flags in a single shot",
-      "schema": "core.schema.json",
+      "name": "maximum_people_complexity",
+      "description": "Tests maximum people complexity",
+      "schema": "schemas/profiles/review.schema.json",
+      "data": {
+        "schemaVersion": "1.0.0",
+        "id": "mp01-ss01",
+        "index": 0,
+        "scene": 1,
+        "durationSec": 10,
+        "voice": {
+          "lang": "en",
+          "text": "Testing maximum people complexity"
+        },
+        "screenZone": "full_dome",
+        "primaryTechnique": "cgi_3d_pre_render",
+        "softwarePipeline": ["Maya", "Nuke"],
+        "assets": [
+          {
+            "path": "./renders/mp01-ss01-complex_people.exr",
+            "kind": "image",
+            "role": "reference"
+          }
+        ],
+        "tasks": [
+          {
+            "id": 1,
+            "task": "Test task",
+            "dept": "VFX",
+            "prio": "med",
+            "status": "todo"
+          }
+        ],
+        "people": [
+          {
+            "role": "Director",
+            "name": "Jane Smith",
+            "email": "jane@example.com",
+            "phone": "+1-555-0123",
+            "department": "Direction",
+            "notes": "Lead director"
+          }
+        ]
+      },
+      "expected": "valid"
+    },
+    {
+      "name": "all_risk_flags",
+      "description": "Tests shot with all possible risk flags",
+      "schema": "schemas/profiles/review.schema.json",
       "data": {
         "schemaVersion": "1.0.0",
         "id": "rf01-ss01",
@@ -191,13 +265,40 @@
         "durationSec": 60,
         "voice": {
           "lang": "en",
-          "text": "This sequence has multiple risk considerations"
+          "text": "Testing all risk flags"
         },
         "screenZone": "full_dome",
         "primaryTechnique": "cgi_3d_realtime",
+        "softwarePipeline": ["Maya", "Nuke"],
+        "assets": [
+          {
+            "path": "./renders/rf01-ss01-risk_flags.exr",
+            "kind": "image",
+            "role": "reference"
+          }
+        ],
+        "tasks": [
+          {
+            "id": 1,
+            "task": "Basic task",
+            "dept": "VFX",
+            "prio": "high",
+            "status": "in_progress"
+          }
+        ],
+        "people": [
+          {
+            "role": "Director",
+            "name": "Jane Smith",
+            "email": "jane@example.com",
+            "phone": "+1-555-0123",
+            "department": "Direction",
+            "notes": "Lead director"
+          }
+        ],
         "riskFlags": [
           "photosensitive_seizure",
-          "motion_sickness", 
+          "motion_sickness",
           "vertigo_trigger",
           "loud_volume",
           "render_time_overrun"
@@ -208,7 +309,7 @@
     {
       "name": "custom_role_usage",
       "description": "Tests usage of custom roles with 'other' enum value",
-      "schema": "core.schema.json",
+      "schema": "schemas/profiles/assign.schema.json",
       "data": {
         "schemaVersion": "1.0.0",
         "id": "cr01-ss01",
@@ -221,6 +322,23 @@
         },
         "screenZone": "full_dome",
         "primaryTechnique": "ai_image",
+        "softwarePipeline": ["Maya", "Nuke"],
+        "assets": [
+          {
+            "path": "./test/sample.png",
+            "kind": "image",
+            "role": "reference"
+          }
+        ],
+        "tasks": [
+          {
+            "id": 1,
+            "task": "Basic task",
+            "dept": "VFX",
+            "prio": "high",
+            "status": "in_progress"
+          }
+        ],
         "people": [
           {
             "role": "other",
@@ -237,7 +355,7 @@
     {
       "name": "missing_required_fields",
       "description": "Tests validation failure when required fields are missing",
-      "schema": "core.schema.json",
+      "schema": "schemas/profiles/draft.schema.json",
       "data": {
         "id": "mr01-ss01",
         "index": 0,

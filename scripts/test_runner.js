@@ -64,27 +64,86 @@ function setupAjv() {
     'schemas/ext/debug.schema.json'
   ];
   
-  const coreSchemas = [
-    'schemas/core.schema.json',
-    'schemas/project.schema.json'
+  const sliceSchemas = [
+    'schemas/slices/id.schema.json',
+    'schemas/slices/note.schema.json',
+    'schemas/slices/timing.sec.schema.json',
+    'schemas/slices/timing.frames.schema.json',
+    'schemas/slices/technique.schema.json',
+    'schemas/slices/software.schema.json',
+    'schemas/slices/tasks.schema.json',
+    'schemas/slices/crew.schema.json',
+    'schemas/slices/safety.schema.json',
+    'schemas/slices/voice.schema.json',
+    'schemas/slices/meta.scene.schema.json',
+    'schemas/slices/screen.schema.json',
+    'schemas/slices/assets.schema.json'
+  ];
+  
+  const profileSchemas = [
+    'schemas/profiles/draft.schema.json',
+    'schemas/profiles/review.schema.json',
+    'schemas/profiles/plan.schema.json',
+    'schemas/profiles/assign.schema.json',
+    'schemas/profiles/lock.schema.json'
+  ];
+  
+  const projectSchemas = [
+    'schemas/project.draft.schema.json',
+    'schemas/project.review.schema.json',
+    'schemas/project.plan.schema.json',
+    'schemas/project.assign.schema.json',
+    'schemas/project.lock.schema.json'
   ];
 
   // Register enum schemas first  
   enumSchemas.forEach(path => {
-    const schema = JSON.parse(readFileSync(join('.', path), 'utf8'));
-    globalAjv.addSchema(schema, schema.$id);
+    try {
+      const schema = JSON.parse(readFileSync(join('.', path), 'utf8'));
+      globalAjv.addSchema(schema, schema.$id);
+    } catch (e) {
+      console.warn(`Warning: Could not load schema ${path}: ${e.message}`);
+    }
   });
   
   // Register extension schemas
   extSchemas.forEach(path => {
-    const schema = JSON.parse(readFileSync(join('.', path), 'utf8'));
-    globalAjv.addSchema(schema, schema.$id);
+    try {
+      const schema = JSON.parse(readFileSync(join('.', path), 'utf8'));
+      globalAjv.addSchema(schema, schema.$id);
+    } catch (e) {
+      console.warn(`Warning: Could not load schema ${path}: ${e.message}`);
+    }
   });
   
-  // Register core schemas last
-  coreSchemas.forEach(path => {
-    const schema = JSON.parse(readFileSync(join('.', path), 'utf8'));
-    globalAjv.addSchema(schema, schema.$id);
+  // Register slice schemas
+  sliceSchemas.forEach(path => {
+    try {
+      const schema = JSON.parse(readFileSync(join('.', path), 'utf8'));
+      globalAjv.addSchema(schema, schema.$id);
+    } catch (e) {
+      console.warn(`Warning: Could not load schema ${path}: ${e.message}`);
+    }
+  });
+  
+  // Register profile schemas
+  profileSchemas.forEach(path => {
+    try {
+      const schema = JSON.parse(readFileSync(join('.', path), 'utf8'));
+      globalAjv.addSchema(schema, schema.$id);
+    } catch (e) {
+      console.warn(`Warning: Could not load schema ${path}: ${e.message}`);
+    }
+  });
+  
+  // Register project schemas last
+  projectSchemas.forEach(path => {
+    try {
+      const schema = JSON.parse(readFileSync(join('.', path), 'utf8'));
+      globalAjv.addSchema(schema, schema.$id);
+    } catch (e) {
+      console.warn(`Warning: Could not load schema ${path}: ${e.message}`);
+    }
   });
   
   return globalAjv;
@@ -115,11 +174,11 @@ async function runExampleValidation() {
   log(colors.blue, `\n📋 Validating example files`);
   
   const examples = [
-    { file: 'examples/simple_project.json', schema: 'schemas/project.schema.json' },
-    { file: 'examples/comprehensive_project.json', schema: 'schemas/project.schema.json' },
-    { file: 'examples/ai_generated_shot.json', schema: 'schemas/core.schema.json' },
-    { file: 'examples/live_action_shot.json', schema: 'schemas/core.schema.json' },
-    { file: 'examples/audio_reactive_shot.json', schema: 'schemas/core.schema.json' }
+    { file: 'examples/simple_project.json', schema: 'schemas/project.draft.schema.json' },
+    { file: 'examples/comprehensive_project.json', schema: 'schemas/project.lock.schema.json' },
+    { file: 'examples/ai_generated_shot.json', schema: 'schemas/profiles/draft.schema.json' },
+    { file: 'examples/live_action_shot.json', schema: 'schemas/profiles/draft.schema.json' },
+    { file: 'examples/audio_reactive_shot.json', schema: 'schemas/profiles/draft.schema.json' }
   ];
   
   let passed = 0;
@@ -163,7 +222,7 @@ async function runTestSuite(testFilePath) {
   let failed = 0;
   
   for (const test of testData.tests) {
-    const schemaPath = `schemas/${test.schema}`;
+    const schemaPath = test.schema;
     const expectedValid = test.expected === 'valid';
     
     log(colors.yellow, `\n  Testing: ${test.name}`);
