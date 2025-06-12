@@ -40,16 +40,24 @@ try {
     
     // Handle relative paths
     if (ref.startsWith('./') || ref.startsWith('../')) {
-      const resolved = path.join(path.dirname(basePath), ref);
+      // Always use the __dirname as base and the basePath directory
+      const baseDir = path.join(__dirname, path.dirname(basePath));
+      const resolved = path.resolve(baseDir, ref);
       console.log(`Resolved relative path to: ${resolved}`);
-      return resolved;
+      return path.relative(__dirname, resolved); // Return relative to project root
     }
     
     // Handle absolute paths (from $id)
     if (ref.startsWith('immerschema/')) {
-      const resolved = path.join(__dirname, ref.replace('immerschema/', ''));
+      const resolved = ref.replace('immerschema/', '');
       console.log(`Resolved immerschema path to: ${resolved}`);
       return resolved;
+    }
+    
+    // Handle direct file references
+    if (ref.endsWith('.json')) {
+      console.log(`Resolved direct file reference to: ${ref}`);
+      return ref;
     }
     
     return null;
@@ -59,7 +67,7 @@ try {
   const registeredSchemas = new Set();
   
   function registerSchema(schemaPath) {
-    // Avoid infinite recursion
+    // Avoid infinite recursion and duplicate registrations
     if (registeredSchemas.has(schemaPath)) {
       console.log(`Schema already registered: ${schemaPath}`);
       return;
@@ -70,8 +78,16 @@ try {
       registeredSchemas.add(schemaPath);
       
       // Register the schema itself
-      ajv.addSchema(schema, schema.$id || schemaPath);
-      console.log(`Registered schema: ${schema.$id || schemaPath}`);
+      try {
+        ajv.addSchema(schema, schema.$id || schemaPath);
+        console.log(`Registered schema: ${schema.$id || schemaPath}`);
+      } catch (e) {
+        if (e.message.includes('already exists')) {
+          console.log(`Schema already registered: ${schema.$id || schemaPath}`);
+        } else {
+          throw e;
+        }
+      }
       
       // Handle direct $ref
       if (schema.$ref) {
@@ -80,6 +96,8 @@ try {
           registerSchema(refPath);
         } else if (refPath) {
           console.warn(`Reference not found: ${refPath}`);
+          console.warn(`  Referenced from: ${schemaPath}`);
+          console.warn(`  Reference: ${schema.$ref}`);
         }
       }
       
@@ -93,6 +111,8 @@ try {
                 registerSchema(refPath);
               } else if (refPath) {
                 console.warn(`Reference not found: ${refPath}`);
+                console.warn(`  Referenced from: ${schemaPath}`);
+                console.warn(`  Reference: ${subSchema.$ref}`);
               }
             }
           });
@@ -101,32 +121,38 @@ try {
 
       // Handle properties that might contain $refs
       if (schema.properties) {
-        Object.values(schema.properties).forEach(prop => {
+        Object.entries(schema.properties).forEach(([propName, prop]) => {
           if (prop.$ref) {
             const refPath = resolveSchemaRef(schemaPath, prop.$ref);
             if (refPath && fs.existsSync(refPath)) {
               registerSchema(refPath);
             } else if (refPath) {
               console.warn(`Reference not found: ${refPath}`);
+              console.warn(`  Referenced from: ${schemaPath}`);
+              console.warn(`  Property: ${propName}`);
+              console.warn(`  Reference: ${prop.$ref}`);
             }
           }
         });
       }
     } catch (e) {
       console.error(`Failed to register schema: ${schemaPath}`);
-      console.error(e.message);
+      console.error(`Error details: ${e.message}`);
+      if (e.stack) {
+        console.error(`Stack trace: ${e.stack}`);
+      }
     }
   }
 
   // Register all base schemas first
   console.log('\nRegistering base schemas...');
   const baseSchemas = [
-    'schemas/enum/technique.enum.json',
-    'schemas/enum/riskflag.enum.json',
-    'schemas/enum/screenzone.enum.json',
-    'schemas/enum/software.enum.json',
-    'schemas/enum/role.enum.json',
-    'schemas/ext/debug.schema.json'
+    'node_modules/immerschema/schemas/enum/technique.enum.json',
+    'node_modules/immerschema/schemas/enum/riskflag.enum.json',
+    'node_modules/immerschema/schemas/enum/screenzone.enum.json',
+    'node_modules/immerschema/schemas/enum/software.enum.json',
+    'node_modules/immerschema/schemas/enum/role.enum.json',
+    'node_modules/immerschema/schemas/ext/debug.schema.json'
   ];
   
   baseSchemas.forEach(schemaPath => {
@@ -136,16 +162,25 @@ try {
   // Register slice schemas
   console.log('\nRegistering slice schemas...');
   const sliceSchemas = [
-    'schemas/slices/id.schema.json',
-    'schemas/slices/note.schema.json',
-    'schemas/slices/timing.sec.schema.json',
-    'schemas/slices/timing.frames.schema.json',
-    'schemas/slices/technique.schema.json',
-    'schemas/slices/software.schema.json',
-    'schemas/slices/tasks.schema.json',
-    'schemas/slices/crew.schema.json',
-    'schemas/slices/safety.schema.json',
-    'schemas/slices/voice.schema.json'
+    'node_modules/immerschema/schemas/slices/id.slice.schema.json',
+    'node_modules/immerschema/schemas/slices/note.slice.schema.json',
+    'node_modules/immerschema/schemas/slices/timing-seconds.slice.schema.json',
+    'node_modules/immerschema/schemas/slices/timing-frames.slice.schema.json',
+    'node_modules/immerschema/schemas/slices/timing.slice.schema.json',
+    'node_modules/immerschema/schemas/slices/tech-group.slice.schema.json',
+    'node_modules/immerschema/schemas/slices/technique.slice.schema.json',
+    'node_modules/immerschema/schemas/slices/software.slice.schema.json',
+    'node_modules/immerschema/schemas/slices/tasks.slice.schema.json',
+    'node_modules/immerschema/schemas/slices/crew.slice.schema.json',
+    'node_modules/immerschema/schemas/slices/risk.slice.json',
+    'node_modules/immerschema/schemas/slices/voice.slice.schema.json',
+    'node_modules/immerschema/schemas/slices/meta-scene.slice.schema.json',
+    'node_modules/immerschema/schemas/slices/screen.slice.schema.json',
+    'node_modules/immerschema/schemas/slices/assets.slice.schema.json',
+    'node_modules/immerschema/schemas/slices/description.slice.schema.json',
+    'node_modules/immerschema/schemas/slices/workload.slice.json',
+    'node_modules/immerschema/schemas/slices/bottleneck.slice.json',
+    'node_modules/immerschema/schemas/slices/audio.slice.schema.json'
   ];
   
   sliceSchemas.forEach(schemaPath => {
@@ -154,11 +189,11 @@ try {
 
   // Register profile schemas FIRST (before core schema that references them)
   const profileSchemas = [
-    'schemas/profiles/draft.schema.json',
-    'schemas/profiles/review.schema.json',
-    'schemas/profiles/plan.schema.json',
-    'schemas/profiles/assign.schema.json',
-    'schemas/profiles/lock.schema.json'
+    'node_modules/immerschema/schemas/profiles/draft.schema.json',
+    'node_modules/immerschema/schemas/profiles/review.schema.json',
+    'node_modules/immerschema/schemas/profiles/plan.schema.json',
+    'node_modules/immerschema/schemas/profiles/assign.schema.json',
+    'node_modules/immerschema/schemas/profiles/lock.schema.json'
   ];
   
   console.log('\nRegistering profile schemas...');
@@ -168,7 +203,7 @@ try {
 
   // Load and register project schema (depends on profiles)
   console.log('\nRegistering project schema...');
-  const projectSchema = loadSchema('schemas/project.schema.json');
+  const projectSchema = loadSchema('node_modules/immerschema/schemas/project.draft.schema.json');
   ajv.addSchema(projectSchema, projectSchema.$id);
 
   // Helper to validate a file against a schema
@@ -184,7 +219,12 @@ try {
       
       const data = loadSchema(filePath);
       const schema = loadSchema(schemaPath);
-      const validate = ajv.compile(schema);
+      // Use already-registered schema by $id or path
+      const validate = ajv.getSchema(schema.$id || schemaPath);
+      if (!validate) {
+        console.error(`❌ No validator found for schema: ${schema.$id || schemaPath}`);
+        return false;
+      }
       const valid = validate(data);
       
       if (valid) {
@@ -211,11 +251,11 @@ try {
 
   // Validate shots against different profiles
   const shotFiles = [
-    { file: 'test_shot.draft.json', profile: 'schemas/profiles/draft.schema.json', desc: 'Draft shot' },
-    { file: 'test_shot.review.json', profile: 'schemas/profiles/review.schema.json', desc: 'Review shot' },
-    { file: 'test_shot.plan.json', profile: 'schemas/profiles/plan.schema.json', desc: 'Plan shot' },
-    { file: 'test_shot.assign.json', profile: 'schemas/profiles/assign.schema.json', desc: 'Assign shot' },
-    { file: 'test_shot.lock.json', profile: 'schemas/profiles/lock.schema.json', desc: 'Lock shot' }
+    { file: 'test_shot.draft.json', profile: 'node_modules/immerschema/schemas/profiles/draft.schema.json', desc: 'Draft shot' },
+    { file: 'test_shot.review.json', profile: 'node_modules/immerschema/schemas/profiles/review.schema.json', desc: 'Review shot' },
+    { file: 'test_shot.plan.json', profile: 'node_modules/immerschema/schemas/profiles/plan.schema.json', desc: 'Plan shot' },
+    { file: 'test_shot.assign.json', profile: 'node_modules/immerschema/schemas/profiles/assign.schema.json', desc: 'Assign shot' },
+    { file: 'test_shot.lock.json', profile: 'node_modules/immerschema/schemas/profiles/lock.schema.json', desc: 'Lock shot' }
   ];
 
   shotFiles.forEach(({ file, profile, desc }) => {
@@ -232,7 +272,7 @@ try {
 
   // Validate project
   results.total++;
-  const projectResult = validateFile('test_project.json', 'schemas/project.schema.json', 'Project');
+  const projectResult = validateFile('test_project.json', 'node_modules/immerschema/schemas/project.draft.schema.json', 'Project');
   if (projectResult === null) {
     results.skipped++;
   } else if (projectResult) {

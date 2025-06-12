@@ -1,0 +1,24 @@
+{
+  "$id": "immerschema/schemas/slices/bottleneck.slice.json",
+  "title": "Pipeline bottlenecks",
+  "type": "object",
+  "properties": {
+    "bottlenecks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "description", "kpiTrigger"],
+        "properties": {
+          "id":          { "type": "string" },
+          "description": { "type": "string" },
+          "cause":       { "type": "string" },
+          "kpiTrigger":  { "type": "string" },
+          "owner":       { "type": "string" }
+        },
+        "additionalProperties": false
+      },
+      "default": []
+    }
+  },
+  "additionalProperties": true
+} 

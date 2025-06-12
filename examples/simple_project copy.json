@@ -15,7 +15,7 @@
         "text": "Welcome to the universe"
       },
       "screenZone": "full_dome",
-      "primaryTechnique": "cgi_3d_pre_render"
+      "primaryTechnique": "3d_render"
     }
   ]
 } 

@@ -1,0 +1,25 @@
+{
+  "$id": "immerschema/schemas/slices/tasks.slice.schema.json",
+  "title": "Tasks slice",
+  "type": "object",
+  "properties": {
+    "tasks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "task", "dept", "prio", "status"],
+        "properties": {
+          "id":    { "type": "integer" },
+          "task":  { "type": "string" },
+          "dept":  { "type": "string" },
+          "prio":  { "enum": ["low","med","high"] },
+          "owner": { "type": "string" },
+          "status":{ "enum": ["todo","in_progress","done","blocked"] }
+        },
+        "additionalProperties": true
+      },
+      "default": []
+    }
+  },
+  "additionalProperties": true
+} 

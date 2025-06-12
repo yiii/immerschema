@@ -1,9 +1,0 @@
-{
-  "$id": "immerschema/schemas/slices/timing.sec.schema.json",
-  "title": "Timing slice – seconds",
-  "type": "object",
-  "properties": {
-    "durationSec": { "type": "number", "minimum": 0.01 }
-  },
-  "additionalProperties": true
-} 

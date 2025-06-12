@@ -1,0 +1,24 @@
+{
+  "$id": "immerschema/schemas/slices/workload.slice.json",
+  "title": "Work-load breakdown (person hours)",
+  "type": "object",
+  "properties": {
+    "workloadBreakdown": {
+      "type": "object",
+      "required": [
+        "preprod","assetCreation","sim",
+        "lightingRender","comp","bufferPct"
+      ],
+      "properties": {
+        "preprod":         { "type": "number", "minimum": 0 },
+        "assetCreation":   { "type": "number", "minimum": 0 },
+        "sim":             { "type": "number", "minimum": 0 },
+        "lightingRender":  { "type": "number", "minimum": 0 },
+        "comp":            { "type": "number", "minimum": 0 },
+        "bufferPct":       { "type": "integer", "minimum": 0, "maximum": 100 }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": true
+} 

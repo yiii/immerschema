@@ -1,0 +1,38 @@
+{
+    "$id": "immerschema/schemas/slices/audio.slice.schema.json",
+    "title": "Audio slice",
+    "type": "object",
+    "properties": {
+      "music": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["path"],
+          "properties": {
+            "path":   { "type":"string", "pattern":"^(https?://|/|\\./).+" },
+            "genre":  { "type":"string" },
+            "bpm":    { "type":"number", "minimum":20, "maximum":300 },
+            "key":    { "type":"string", "pattern":"^[A-G][b#]?(?:m|M)?$" },
+            "note":   { "type":"string" }
+          },
+          "additionalProperties": false
+        },
+        "default": []
+      },
+      "soundFx": {
+        "type": "array",
+        "items": {
+          "type":"object",
+          "required":["path"],
+          "properties": {
+            "path": { "type":"string", "pattern":"^(https?://|/|\\./).+" },
+            "note": { "type":"string" }
+          },
+          "additionalProperties": false
+        },
+        "default": []
+      }
+    },
+    "additionalProperties": true
+  }
+  

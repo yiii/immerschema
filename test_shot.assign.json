@@ -1,0 +1,61 @@
+{
+  "id": "test_shot_001",
+  "notes": "Test shot for assign stage",
+  "timing": {
+    "start": 0,
+    "end": 100,
+    "unit": "frames"
+  },
+  "technique": {
+    "name": "test_technique",
+    "group": "test_group"
+  },
+  "description": "A test shot for validating the assign schema",
+  "voice": {
+    "script": "Test voice script",
+    "notes": "Test voice notes"
+  },
+  "audio": {
+    "description": "Test audio description",
+    "notes": "Test audio notes"
+  },
+  "meta_scene": {
+    "description": "Test meta scene description",
+    "notes": "Test meta scene notes"
+  },
+  "screen": {
+    "zone": "center",
+    "description": "Test screen description",
+    "notes": "Test screen notes"
+  },
+  "assets": {
+    "description": "Test assets description",
+    "notes": "Test assets notes"
+  },
+  "software": {
+    "name": "test_software",
+    "version": "1.0.0",
+    "notes": "Test software notes"
+  },
+  "bottleneck": {
+    "description": "Test bottleneck description",
+    "notes": "Test bottleneck notes"
+  },
+  "workload": {
+    "description": "Test workload description",
+    "notes": "Test workload notes"
+  },
+  "risk": {
+    "flag": "low",
+    "description": "Test risk description",
+    "notes": "Test risk notes"
+  },
+  "tasks": {
+    "description": "Test tasks description",
+    "notes": "Test tasks notes"
+  },
+  "crew": {
+    "description": "Test crew description",
+    "notes": "Test crew notes"
+  }
+} 

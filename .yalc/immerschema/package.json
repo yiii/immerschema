@@ -1,0 +1,58 @@
+{
+  "name": "immerschema",
+  "version": "1.1.1",
+  "description": "Comprehensive JSON Schema suite for  CG pipeline",
+  "type": "module",
+  "main": "./index.cjs",
+  "exports": {
+    ".": {
+      "require": "./index.cjs",
+      "import": "./index.js"
+    },
+    "./schemas/*": "./schemas/*",
+    "./schemas/enum/*": "./schemas/enum/*",
+    "./schemas/ext/*": "./schemas/ext/*",
+    "./schemas/io/*": "./schemas/io/*",
+    "./schemas/taxonomy/*": "./schemas/taxonomy/*",
+    "./taxonomy/*": "./taxonomy/*"
+  },
+  "files": [
+    "schemas/",
+    "taxonomy/",
+    "docs/",
+    "dist/",
+    "index.js",
+    "index.cjs",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "node scripts/build.js",
+    "test": "node scripts/test_runner.js",
+    "validate-examples": "npm run test",
+    "validate-shot": "ajv validate -s schemas/core.schema.json -d",
+    "validate-project": "ajv validate -s schemas/project.schema.json -d",
+    "install-global-ajv": "npm install -g ajv-cli",
+    "lint:draft": "ajv validate -s schemas/profiles/draft.json -d shots/draft/*.json",
+    "lint:lock": "ajv validate -s schemas/profiles/lock.json -d shots/lock/*.json",
+    "reindex": "python tools/reindex.py shots/**/*.json"
+  },
+  "keywords": [
+    "json-schema",
+    "schema-validation",
+    "json-validation"
+  ],
+  "author": "Fulldome Schema Consortium",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yiii/immerschema.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yiii/immerschema/issues"
+  },
+  "homepage": "https://github.com/yiii/immerschema#readme",
+  "dependencies": {
+    "immerschema": "file:.yalc/immerschema"
+  },
+  "yalcSig": "ecdd621ade0de7b4aa4d32dc7e8a267b"
+}

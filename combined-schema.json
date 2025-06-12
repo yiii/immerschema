@@ -1,0 +1,1713 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "immerschema/combined-schema.json",
+  "title": "Combined Immerschema - All Schemas",
+  "description": "Complete schema combining all slices, enums, profiles, and project schemas",
+  "definitions": {
+    "enum_riskflag": {
+      "title": "Risk flag enum",
+      "type": "string",
+      "enum": [
+        "photosensitive_seizure",
+        "motion_sickness",
+        "vertigo_trigger",
+        "claustrophobia_trigger",
+        "fear_of_heights_trigger",
+        "loud_volume",
+        "low_frequency_rumble",
+        "laser_hazard",
+        "strobe_light",
+        "heavy_fog",
+        "scent_allergy",
+        "graphic_medical_content",
+        "body_horror",
+        "religious_sensitivity",
+        "political_sensitivity",
+        "mature_themes",
+        "copyright_unverified",
+        "ai_copyright_unclear",
+        "talent_release_missing",
+        "render_time_overrun",
+        "asset_backlog",
+        "hardware_failure",
+        "creative_deadlock",
+        "hardware_overheat",
+        "projector_alignment_risk",
+        "sync_drift",
+        "frame_drop_risk",
+        "narrative_confusion",
+        "translation_required"
+      ]
+    },
+    "enum_role": {
+      "$comment": "ENUM – crew roles; update via governance workflow.",
+      "title": "Role enum",
+      "description": "Enumerates crew roles for project staffing. Use 'other' for unlisted or hybrid roles.",
+      "type": "string",
+      "enum": [
+        "Director",
+        "Producer",
+        "ProjectManager",
+        "Writer",
+        "StoryboardArtist",
+        "ConceptArtist",
+        "VFXSupervisor",
+        "CGSupervisor",
+        "PipelineTD",
+        "Modeler",
+        "TextureArtist",
+        "Rigger",
+        "LookDev",
+        "Animator",
+        "FXTD",
+        "LightingTD",
+        "Compositor",
+        "HoudiniArtist",
+        "MotionDesigner",
+        "UnrealArtist",
+        "TouchDesignerArtist",
+        "NotchArtist",
+        "TouchDesignerDeveloper",
+        "Composer",
+        "SoundFXDesigner",
+        "AudioEngineer",
+        "VOActor",
+        "Editor",
+        "Colorist",
+        "MontageArtist",
+        "CameraMan",
+        "QA",
+        "Researcher",
+        "other"
+      ]
+    },
+    "enum_screenzone": {
+      "title": "Screen zone enum",
+      "type": "string",
+      "enum": [
+        "zenith",
+        "upper_band",
+        "horizon_band",
+        "lower_band",
+        "nadir",
+        "front",
+        "rear",
+        "left",
+        "right",
+        "north",
+        "east",
+        "south",
+        "west",
+        "upper_front_left",
+        "upper_front_right",
+        "upper_rear_left",
+        "upper_rear_right",
+        "lower_front_left",
+        "lower_front_right",
+        "lower_rear_left",
+        "lower_rear_right",
+        "full_dome"
+      ]
+    },
+    "enum_software": {
+      "$comment": "ENUM - software used in pipeline; update via governance workflow.",
+      "title": "Software enum",
+      "description": "Enumerates software tools used in production pipelines. Use 'other' for unlisted tools.",
+      "type": "string",
+      "enum": [
+        "Houdini",
+        "Blender",
+        "Cinema4D",
+        "Unreal",
+        "Notch",
+        "TouchDesigner",
+        "AfterEffects",
+        "Redshift",
+        "Octane",
+        "Midjourney",
+        "RunwayGen2",
+        "Veo",
+        "ElevenLabs",
+        "Ableton",
+        "VCV",
+        "git",
+        "other"
+      ]
+    },
+    "enum_technique": {
+      "title": "Technique enum",
+      "type": "string",
+      "enum": [
+        "3d_render",
+        "3d_realtime",
+        "capture_video",
+        "capture_volumetric",
+        "capture_photogrammetry",
+        "capture_360",
+        "capture_stock",
+        "rig_animation",
+        "mocap_performance",
+        "2d_montage",
+        "2d_multiscreen",
+        "2d_video_collage",
+        "2d_hand_drawn",
+        "2d_shape_animation",
+        "2d_info_graphics",
+        "2d_typography",
+        "gen_procedural",
+        "gen_particle",
+        "gen_data_viz",
+        "gen_audio_reactive",
+        "gen_generative_art",
+        "sim_fluid",
+        "sim_smoke_fire",
+        "sim_cloth_softbody",
+        "ai_generate",
+        "ai_style_transfer",
+        "ai_avatar",
+        "ai_face_swap"
+      ]
+    },
+    "ext_debug": {
+      "$comment": "EXTENSION – debug / scratch fields",
+      "title": "Debug block",
+      "type": "object",
+      "properties": {
+        "debug": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Any temp or diagnostic keys go here."
+        }
+      }
+    },
+    "io_patch": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "title": "Single Scene Patch (RFC-6902 wrapper)",
+      "type": "object",
+      "required": [
+        "id",
+        "baseRev",
+        "patch"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Target scene ID (matches `core.schema.json` /id)."
+        },
+        "baseRev": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Optimistic-lock revision number the patch was generated from."
+        },
+        "patch": {
+          "type": "array",
+          "description": "Standard JSON-Patch operations list.",
+          "items": {
+            "type": "object",
+            "required": [
+              "op",
+              "path"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "op": {
+                "type": "string",
+                "description": "RFC-6902 verb.",
+                "enum": [
+                  "add",
+                  "remove",
+                  "replace",
+                  "move",
+                  "copy",
+                  "test"
+                ]
+              },
+              "path": {
+                "type": "string"
+              },
+              "from": {
+                "type": "string"
+              },
+              "value": {}
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "io_prompt_envelope": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "title": "LLM Prompt Envelope (author ➜ model)",
+      "$comment": "Always 2 or 3 items. All elements are *required* when present.",
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 3,
+      "prefixItems": [
+        {
+          "type": "string",
+          "title": "USER_MESSAGE",
+          "description": "Human instruction or question sent to the model."
+        },
+        {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_core",
+          "title": "CURRENT_ITEM",
+          "description": "The scene (or sub-scene) JSON the user is editing."
+        },
+        {
+          "type": "array",
+          "title": "FULL_PIPELINE (optional)",
+          "description": "If present, every scene in the project—used for global checks.",
+          "items": {
+            "$ref": "#/definitions/_git_Brain_Scenario_immerschema_core"
+          }
+        }
+      ],
+      "items": false
+    },
+    "io_response_envelope": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "title": "LLM Response Envelope (model ➜ middleware)",
+      "$comment": "First item is chain-of-thoughts (CoT). Strip before showing user if needed.",
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "prefixItems": [
+        {
+          "type": "string",
+          "title": "CHAIN_OF_THOUGHTS",
+          "description": "Model's internal reasoning. Keep for logs; hide from user UI."
+        },
+        {
+          "type": "string",
+          "title": "LLM_ANSWER",
+          "description": "Human-readable reply to display."
+        },
+        {
+          "type": "array",
+          "title": "ITEMS_UPDATE",
+          "description": "List of RFC-6902 patches to apply (may be empty).",
+          "items": {
+            "$ref": "#/definitions/_git_Brain_Scenario_immerschema_io_patch"
+          }
+        }
+      ],
+      "items": false
+    },
+    "profiles_assign": {
+      "title": "Profile – Assign (crew & tasks)",
+      "allOf": [
+        {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_profiles_plan"
+        },
+        {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_tasks_slice"
+        },
+        {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_crew_slice"
+        },
+        {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_audio_slice"
+        }
+      ],
+      "required": [
+        "tasks",
+        "people",
+        "voice",
+        "music",
+        "soundFx"
+      ]
+    },
+    "profiles_draft": {
+      "title": "Profile – Draft",
+      "type": "object",
+      "additionalProperties": true,
+      "allOf": [
+        {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_id_slice"
+        },
+        {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_note_slice"
+        },
+        {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_timing_seconds_slice"
+        },
+        {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_timing_frames_slice"
+        },
+        {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_technique_slice"
+        },
+        {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_voice_slice"
+        },
+        {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_audio_slice"
+        }
+      ],
+      "required": [
+        "id"
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "action"
+          ]
+        },
+        {
+          "required": [
+            "userNote"
+          ]
+        },
+        {
+          "required": [
+            "llmNote"
+          ]
+        },
+        {
+          "required": [
+            "durationSec"
+          ]
+        },
+        {
+          "required": [
+            "durationFrames"
+          ]
+        },
+        {
+          "required": [
+            "primaryTechnique"
+          ]
+        },
+        {
+          "required": [
+            "voice"
+          ]
+        },
+        {
+          "required": [
+            "music"
+          ]
+        },
+        {
+          "required": [
+            "soundFx"
+          ]
+        }
+      ]
+    },
+    "profiles_lock": {
+      "title": "Profile – Lock (final safety gate)",
+      "type": "object",
+      "additionalProperties": true,
+      "allOf": [
+        {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_profiles_assign"
+        },
+        {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_risk_slice"
+        }
+      ],
+      "required": [
+        "voice",
+        "riskFlags"
+      ]
+    },
+    "profiles_plan": {
+      "title": "Profile – Plan (tech lock)",
+      "allOf": [
+        {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_profiles_review"
+        },
+        {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_software_slice"
+        },
+        {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_bottleneck_slice"
+        },
+        {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_workload_slice"
+        },
+        {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_risk_slice"
+        }
+      ],
+      "required": [
+        "softwarePipeline",
+        "primaryTechnique",
+        "voice",
+        "workloadBreakdown",
+        "riskFlags"
+      ]
+    },
+    "profiles_review": {
+      "title": "Profile – Review (creative + timing)",
+      "type": "object",
+      "additionalProperties": true,
+      "allOf": [
+        {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_profiles_draft"
+        },
+        {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_meta_scene_slice"
+        },
+        {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_screen_slice"
+        },
+        {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_assets_slice"
+        }
+      ],
+      "required": [
+        "durationSec",
+        "primaryTechnique",
+        "techGroup",
+        "voice",
+        "assets"
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "screenZone"
+          ]
+        },
+        {
+          "required": [
+            "cameraMotion"
+          ]
+        }
+      ]
+    },
+    "project_assign": {
+      "title": "Fulldome Project – Assign",
+      "type": "object",
+      "required": [
+        "projectId",
+        "title",
+        "shots"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "projectId": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "schemaVersion": {
+          "type": "string",
+          "default": "1.0.0"
+        },
+        "shots": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/_git_Brain_Scenario_immerschema_profiles_assign"
+          },
+          "description": "Shot documents validated against the Assign profile."
+        },
+        "globalSoftware": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/_git_Brain_Scenario_immerschema_enum_software"
+          },
+          "default": []
+        },
+        "globalMusic": {
+          "type": "string"
+        },
+        "debug": {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_ext_debug_schema_json__properties_debug"
+        }
+      }
+    },
+    "project_draft": {
+      "title": "Fulldome Project – Draft",
+      "type": "object",
+      "required": [
+        "projectId",
+        "title",
+        "shots"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "projectId": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "schemaVersion": {
+          "type": "string",
+          "default": "1.0.0"
+        },
+        "shots": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/_git_Brain_Scenario_immerschema_profiles_draft"
+          },
+          "description": "Shot documents validated against the Draft profile."
+        },
+        "globalSoftware": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/_git_Brain_Scenario_immerschema_enum_software"
+          },
+          "default": []
+        },
+        "globalMusic": {
+          "type": "string"
+        },
+        "debug": {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_ext_debug_schema_json__properties_debug"
+        }
+      }
+    },
+    "project_lock": {
+      "title": "Fulldome Project – Lock",
+      "type": "object",
+      "required": [
+        "projectId",
+        "title",
+        "shots"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "projectId": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "schemaVersion": {
+          "type": "string",
+          "default": "1.0.0"
+        },
+        "shots": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/_git_Brain_Scenario_immerschema_profiles_lock"
+          },
+          "description": "Shot documents validated against the Lock profile."
+        },
+        "globalSoftware": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/_git_Brain_Scenario_immerschema_enum_software"
+          },
+          "default": []
+        },
+        "globalMusic": {
+          "type": "string"
+        },
+        "debug": {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_ext_debug_schema_json__properties_debug"
+        }
+      }
+    },
+    "project_plan": {
+      "title": "Fulldome Project – Plan",
+      "type": "object",
+      "required": [
+        "projectId",
+        "title",
+        "shots"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "projectId": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "schemaVersion": {
+          "type": "string",
+          "default": "1.0.0"
+        },
+        "shots": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/_git_Brain_Scenario_immerschema_profiles_plan"
+          },
+          "description": "Shot documents validated against the Plan profile."
+        },
+        "globalSoftware": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/_git_Brain_Scenario_immerschema_enum_software"
+          },
+          "default": []
+        },
+        "globalMusic": {
+          "type": "string"
+        },
+        "debug": {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_ext_debug_schema_json__properties_debug"
+        }
+      }
+    },
+    "project_review": {
+      "title": "Fulldome Project – Review",
+      "type": "object",
+      "required": [
+        "projectId",
+        "title",
+        "shots"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "projectId": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "schemaVersion": {
+          "type": "string",
+          "default": "1.0.0"
+        },
+        "shots": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/_git_Brain_Scenario_immerschema_profiles_review"
+          },
+          "description": "Shot documents validated against the Review profile."
+        },
+        "globalSoftware": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/_git_Brain_Scenario_immerschema_enum_software"
+          },
+          "default": []
+        },
+        "globalMusic": {
+          "type": "string"
+        },
+        "debug": {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_ext_debug_schema_json__properties_debug"
+        }
+      }
+    },
+    "slices_assets_slice": {
+      "title": "Asset list slice (flat rows)",
+      "description": "Schema for managing project assets including images, videos, audio, 3D models, and other media types. Each asset must specify its path, kind (type), and role (purpose) in the project. Optional fields allow for additional metadata like descriptions, language, and notes. Preview assets must reference their source asset.",
+      "type": "object",
+      "properties": {
+        "assets": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "path",
+              "kind",
+              "role"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "path": {
+                "type": "string",
+                "pattern": "^(https?://|/|\\./).+"
+              },
+              "kind": {
+                "enum": [
+                  "image",
+                  "video",
+                  "audio",
+                  "3d",
+                  "pdf",
+                  "other"
+                ]
+              },
+              "role": {
+                "enum": [
+                  "reference",
+                  "plate",
+                  "texture",
+                  "hdr",
+                  "preview",
+                  "storyboard",
+                  "animatic",
+                  "legal",
+                  "other"
+                ]
+              },
+              "sourcePath": {
+                "type": "string",
+                "pattern": "^(https?://|/|\\./).+",
+                "description": "Path of the heavy asset this preview belongs to."
+              },
+              "visualDescription": {
+                "type": "string"
+              },
+              "motionDescription": {
+                "type": "string"
+              },
+              "audioDescription": {
+                "type": "string"
+              },
+              "lang": {
+                "type": "string",
+                "pattern": "^[a-z]{2}$"
+              },
+              "note": {
+                "type": "string"
+              }
+            },
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "role": {
+                      "const": "preview"
+                    }
+                  }
+                },
+                "then": {
+                  "required": [
+                    "sourcePath"
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "slices_audio_slice": {
+      "title": "Audio slice",
+      "type": "object",
+      "properties": {
+        "music": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "path"
+            ],
+            "properties": {
+              "path": {
+                "type": "string",
+                "pattern": "^(https?://|/|\\./).+"
+              },
+              "genre": {
+                "type": "string"
+              },
+              "bpm": {
+                "type": "number",
+                "minimum": 20,
+                "maximum": 300
+              },
+              "key": {
+                "type": "string",
+                "pattern": "^[A-G][b#]?(?:m|M)?$"
+              },
+              "note": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "default": []
+        },
+        "soundFx": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "path"
+            ],
+            "properties": {
+              "path": {
+                "type": "string",
+                "pattern": "^(https?://|/|\\./).+"
+              },
+              "note": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "default": []
+        }
+      },
+      "additionalProperties": true
+    },
+    "slices_crew_slice": {
+      "title": "Crew slice",
+      "type": "object",
+      "properties": {
+        "people": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "role",
+              "name"
+            ],
+            "properties": {
+              "role": {
+                "$ref": "#/definitions/_git_Brain_Scenario_immerschema_enum_role"
+              },
+              "customRole": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "contacts": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              },
+              "note": {
+                "type": "string"
+              },
+              "availability": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": true
+          },
+          "default": []
+        }
+      },
+      "additionalProperties": true
+    },
+    "slices_id_slice": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
+          "description": "Shot ID can be alphanumeric with dots, underscores, and hyphens, but must start with alphanumeric"
+        },
+        "schemaVersion": {
+          "type": "string",
+          "pattern": "^1\\.0\\.0$",
+          "default": "1.0.0"
+        },
+        "scene": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "subScene": {
+          "type": [
+            "integer",
+            "string"
+          ],
+          "description": "Whole number, optionally one lowercase letter for inserts (e.g. 3a)."
+        },
+        "index": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": true
+    },
+    "slices_meta_scene_slice": {
+      "title": "Scene metadata slice",
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "scene": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "subScene": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sceneName": {
+          "type": "string"
+        },
+        "subSceneTitle": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "slices_note_slice": {
+      "title": "Quick note slice",
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string"
+        },
+        "userNote": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "slices_screen_slice": {
+      "title": "Screen zone & motion slice",
+      "type": "object",
+      "properties": {
+        "screenZone": {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_enum_screenzone"
+        },
+        "cameraMotion": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "transitionIn": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "action": {
+          "type": "string"
+        },
+        "transitionOut": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "immersiveCue": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "slices_software_slice": {
+      "title": "Software slice",
+      "type": "object",
+      "properties": {
+        "softwarePipeline": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/_git_Brain_Scenario_immerschema_enum_software"
+          },
+          "default": []
+        }
+      },
+      "additionalProperties": true
+    },
+    "slices_tasks_slice": {
+      "title": "Tasks slice",
+      "type": "object",
+      "properties": {
+        "tasks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "task",
+              "dept",
+              "prio",
+              "status"
+            ],
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "task": {
+                "type": "string"
+              },
+              "dept": {
+                "type": "string"
+              },
+              "prio": {
+                "enum": [
+                  "low",
+                  "med",
+                  "high"
+                ]
+              },
+              "owner": {
+                "type": "string"
+              },
+              "status": {
+                "enum": [
+                  "todo",
+                  "in_progress",
+                  "done",
+                  "blocked"
+                ]
+              }
+            },
+            "additionalProperties": true
+          },
+          "default": []
+        }
+      },
+      "additionalProperties": true
+    },
+    "slices_tech_group_slice": {
+      "title": "Top-level technique group (UI tokens)",
+      "type": "object",
+      "properties": {
+        "techGroup": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "3D",
+              "2D",
+              "SIM",
+              "GEN",
+              "AI",
+              "CAP"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true,
+          "description": "High-level bucket for primaryTechnique"
+        }
+      },
+      "additionalProperties": true
+    },
+    "slices_technique_slice": {
+      "title": "Technique slice",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_tech_group_slice"
+        }
+      ],
+      "properties": {
+        "primaryTechnique": {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_enum_technique",
+          "description": "The main visual technique for this shot."
+        },
+        "otherTechniques": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/_git_Brain_Scenario_immerschema_enum_technique"
+          },
+          "default": [],
+          "description": "Additional techniques in this shot."
+        }
+      },
+      "required": [
+        "primaryTechnique"
+      ],
+      "additionalProperties": false
+    },
+    "slices_timing_frames_slice": {
+      "title": "Timing slice – frames",
+      "type": "object",
+      "properties": {
+        "durationFrames": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "fps": {
+          "type": "number",
+          "minimum": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "durationFrames"
+            ]
+          },
+          "then": {
+            "properties": {
+              "durationFrames": {
+                "minimum": 1
+              }
+            }
+          }
+        }
+      ],
+      "additionalProperties": true
+    },
+    "slices_timing_seconds_slice": {
+      "title": "Timing slice – seconds",
+      "type": "object",
+      "properties": {
+        "durationSec": {
+          "type": "number",
+          "minimum": 0.01
+        }
+      },
+      "additionalProperties": true
+    },
+    "slices_timing_slice": {
+      "title": "Timing slice",
+      "type": "object",
+      "description": "Base timing schema that can be extended by timing.sec and timing.frames",
+      "additionalProperties": true
+    },
+    "slices_voice_slice": {
+      "title": "Voice slice (nested)",
+      "type": "object",
+      "required": [
+        "voice"
+      ],
+      "properties": {
+        "voice": {
+          "type": "object",
+          "required": [
+            "lang",
+            "text"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "lang": {
+              "type": "string",
+              "pattern": "^[a-z]{2}$",
+              "description": "ISO-639-1 language code"
+            },
+            "text": {
+              "type": "string",
+              "description": "Narration line for this shot"
+            }
+          }
+        },
+        "llmNote": {
+          "type": "string",
+          "description": "Private note from LLM about the voice line"
+        }
+      },
+      "additionalProperties": true
+    },
+    "taxonomy_riskflag": {
+      "title": "Risk flag taxonomy (UI helper)",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Viewer Health": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "photosensitive_seizure",
+              "motion_sickness",
+              "vertigo_trigger",
+              "claustrophobia_trigger",
+              "fear_of_heights_trigger"
+            ]
+          },
+          "minItems": 1
+        },
+        "Audio SPL": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "loud_volume",
+              "low_frequency_rumble"
+            ]
+          },
+          "minItems": 1
+        },
+        "Environmental FX": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "laser_hazard",
+              "strobe_light",
+              "heavy_fog",
+              "scent_allergy"
+            ]
+          },
+          "minItems": 1
+        },
+        "Content Sensitivity": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "graphic_medical_content",
+              "body_horror",
+              "religious_sensitivity",
+              "political_sensitivity",
+              "mature_themes"
+            ]
+          },
+          "minItems": 1
+        },
+        "IP / Legal": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "copyright_unverified",
+              "ai_copyright_unclear",
+              "talent_release_missing"
+            ]
+          },
+          "minItems": 1
+        },
+        "Technical": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "render_time_overrun",
+              "hardware_overheat",
+              "projector_alignment_risk",
+              "sync_drift",
+              "frame_drop_risk"
+            ]
+          },
+          "minItems": 1
+        },
+        "Narrative / UX": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "narrative_confusion",
+              "translation_required"
+            ]
+          },
+          "minItems": 1
+        },
+        "Other": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": []
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "taxonomy_role": {
+      "title": "Role taxonomy (UI helper)",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Direction & Production": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Director",
+              "Producer",
+              "ProjectManager"
+            ]
+          },
+          "minItems": 1
+        },
+        "Story & Art": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Writer",
+              "StoryboardArtist",
+              "ConceptArtist"
+            ]
+          },
+          "minItems": 1
+        },
+        "Supervision": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "VFXSupervisor",
+              "CGSupervisor",
+              "PipelineTD"
+            ]
+          },
+          "minItems": 1
+        },
+        "Asset Creation": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Modeler",
+              "TextureArtist",
+              "Rigger",
+              "LookDev"
+            ]
+          },
+          "minItems": 1
+        },
+        "Shot Creation": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Animator",
+              "FXTD",
+              "LightingTD",
+              "Compositor",
+              "HoudiniArtist",
+              "MotionDesigner"
+            ]
+          },
+          "minItems": 1
+        },
+        "Realtime & Interactive": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "UnrealArtist",
+              "TouchDesignerArtist",
+              "TouchDesignerDeveloper",
+              "NotchArtist"
+            ]
+          },
+          "minItems": 1
+        },
+        "Audio": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Composer",
+              "SoundFXDesigner",
+              "AudioEngineer",
+              "VOActor"
+            ]
+          },
+          "minItems": 1
+        },
+        "Editorial": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Editor",
+              "Colorist",
+              "MontageArtist"
+            ]
+          },
+          "minItems": 1
+        },
+        "Production Support": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "CameraMan",
+              "QA",
+              "Researcher"
+            ]
+          },
+          "minItems": 1
+        },
+        "Other": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "other"
+            ]
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "taxonomy_screenzone": {
+      "title": "Screen zone taxonomy (UI helper)",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Vertical": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "zenith",
+              "upper_band",
+              "horizon_band",
+              "lower_band",
+              "nadir"
+            ]
+          },
+          "minItems": 1
+        },
+        "Cardinal": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "front",
+              "rear",
+              "left",
+              "right",
+              "north",
+              "east",
+              "south",
+              "west"
+            ]
+          },
+          "minItems": 1
+        },
+        "Quadrants-Upper": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "upper_front_left",
+              "upper_front_right",
+              "upper_rear_left",
+              "upper_rear_right"
+            ]
+          },
+          "minItems": 1
+        },
+        "Quadrants-Lower": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "lower_front_left",
+              "lower_front_right",
+              "lower_rear_left",
+              "lower_rear_right"
+            ]
+          },
+          "minItems": 1
+        },
+        "Full": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "full_dome"
+            ]
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "taxonomy_software": {
+      "title": "Software taxonomy (UI helper)",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "3-D DCC": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Houdini",
+              "Blender",
+              "Cinema4D"
+            ]
+          },
+          "minItems": 1
+        },
+        "Engines / Realtime": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Unreal",
+              "Notch",
+              "TouchDesigner"
+            ]
+          },
+          "minItems": 1
+        },
+        "Compositing": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "AfterEffects"
+            ]
+          },
+          "minItems": 1
+        },
+        "Renderers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Redshift",
+              "Octane"
+            ]
+          },
+          "minItems": 1
+        },
+        "AI / Gen": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Midjourney",
+              "RunwayGen2",
+              "Veo",
+              "ElevenLabs"
+            ]
+          },
+          "minItems": 1
+        },
+        "Audio DAW": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Ableton",
+              "VCV"
+            ]
+          },
+          "minItems": 1
+        },
+        "Pipeline / Tracking": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "git"
+            ]
+          },
+          "minItems": 1
+        },
+        "Other": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "other"
+            ]
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "taxonomy_technique": {
+      "title": "Technique taxonomy (UI helper)",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "3D Rendering & Realtime": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "3d_render",
+              "3d_realtime"
+            ]
+          }
+        },
+        "Capture & Scanning": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "capture_video",
+              "capture_volumetric",
+              "capture_photogrammetry",
+              "capture_360",
+              "capture_stock"
+            ]
+          }
+        },
+        "Character Animation": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "rig_animation",
+              "mocap_performance"
+            ]
+          }
+        },
+        "2D / Motion-Graphics": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "2d_montage",
+              "2d_multiscreen",
+              "2d_video_collage",
+              "2d_hand_drawn",
+              "2d_shape_animation",
+              "2d_info_graphics",
+              "2d_typography"
+            ]
+          }
+        },
+        "Generative & Procedural": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "gen_procedural",
+              "gen_particle",
+              "gen_data_viz",
+              "gen_audio_reactive",
+              "gen_generative_art"
+            ]
+          }
+        },
+        "Simulation (Physics)": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "sim_fluid",
+              "sim_smoke_fire",
+              "sim_cloth_softbody"
+            ]
+          }
+        },
+        "AI / ML": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "ai_generate",
+              "ai_style_transfer",
+              "ai_avatar",
+              "ai_face_swap"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "properties": {
+    "assign": {
+      "$ref": "#/definitions/project_assign"
+    },
+    "draft": {
+      "$ref": "#/definitions/project_draft"
+    },
+    "lock": {
+      "$ref": "#/definitions/project_lock"
+    },
+    "plan": {
+      "$ref": "#/definitions/project_plan"
+    },
+    "review": {
+      "$ref": "#/definitions/project_review"
+    }
+  },
+  "oneOf": [
+    {
+      "$ref": "#/definitions/project_assign"
+    },
+    {
+      "$ref": "#/definitions/project_draft"
+    },
+    {
+      "$ref": "#/definitions/project_lock"
+    },
+    {
+      "$ref": "#/definitions/project_plan"
+    },
+    {
+      "$ref": "#/definitions/project_review"
+    }
+  ]
+}

@@ -1,7 +1,0 @@
-{
-  "$id": "immerschema/schemas/slices/timing.schema.json",
-  "title": "Timing slice",
-  "type": "object",
-  "description": "Base timing schema that can be extended by timing.sec and timing.frames",
-  "additionalProperties": true
-} 

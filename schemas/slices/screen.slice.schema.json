@@ -1,0 +1,26 @@
+{
+  "$id": "immerschema/schemas/slices/screen.slice.schema.json",
+  "title": "Screen zone & motion slice",
+  "type": "object",
+  "properties": {
+    "screenZone": { "$ref": "../enum/screenzone.enum.json" },
+    "cameraMotion": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    },
+    "transitionIn": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "action": { "type": "string" },
+    "transitionOut": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "immersiveCue": { "type": "string" }
+  },
+  "additionalProperties": true
+} 

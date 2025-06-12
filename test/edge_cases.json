@@ -1,347 +1,388 @@
 {
-  "description": "Edge case tests for the Fulldome Schema Suite",
-  "tests": [
-    {
-      "name": "zero_duration_shot",
-      "description": "Tests shot with zero duration (should fail - minimum is 1)",
-      "schema": "schemas/profiles/draft.schema.json",
-      "data": {
-        "id": "zd01-ss01",
-        "index": 0,
-        "scene": 1,
-        "durationSec": 0,
-        "voice": {
-          "lang": "en",
-          "text": "Testing zero duration"
-        },
-        "screenZone": "full_dome",
-        "primaryTechnique": "cgi_3d_pre_render",
-        "softwarePipeline": ["Maya", "Nuke"],
-        "schemaVersion": "1.0.0"
-      },
-      "expected": "invalid"
-    },
-    {
-      "name": "maximum_duration_shot",
-      "description": "Tests shot with very long duration (valid but edge case)",
-      "schema": "schemas/profiles/draft.schema.json",
-      "data": {
-        "id": "md01-ss01",
-        "index": 0,
-        "scene": 1,
-        "durationSec": 3600,
-        "voice": {
-          "lang": "en",
-          "text": "Testing maximum duration"
-        },
-        "screenZone": "full_dome",
-        "primaryTechnique": "cgi_3d_pre_render",
-        "softwarePipeline": ["Maya", "Nuke"],
-        "schemaVersion": "1.0.0"
-      },
-      "expected": "valid"
-    },
-    {
-      "name": "zero_scene_number",
-      "description": "Tests scene number of 0 (should fail - minimum is 1)",
-      "schema": "schemas/profiles/draft.schema.json",
-      "data": {
-        "id": "zs01-ss01",
-        "index": 0,
-        "scene": 0,
-        "durationSec": 10,
-        "voice": {
-          "lang": "en",
-          "text": "Testing zero scene number"
-        },
-        "screenZone": "full_dome",
-        "primaryTechnique": "cgi_3d_pre_render",
-        "softwarePipeline": ["Maya", "Nuke"],
-        "schemaVersion": "1.0.0"
-      },
-      "expected": "invalid"
-    },
-    {
-      "name": "large_scene_subscene_numbers",
-      "description": "Tests very large scene and subscene numbers (valid)",
-      "schema": "schemas/profiles/draft.schema.json",
-      "data": {
-        "id": "ls01-ss99",
-        "index": 0,
-        "scene": 999,
-        "durationSec": 10,
-        "voice": {
-          "lang": "en",
-          "text": "Testing large scene numbers"
-        },
-        "screenZone": "full_dome",
-        "primaryTechnique": "cgi_3d_pre_render",
-        "softwarePipeline": ["Maya", "Nuke"],
-        "schemaVersion": "1.0.0"
-      },
-      "expected": "valid"
-    },
-    {
-      "name": "empty_string_fields",
-      "description": "Tests empty string values in optional fields",
-      "schema": "schemas/profiles/draft.schema.json",
-      "data": {
-        "id": "es01-ss01",
-        "index": 0,
-        "scene": 1,
-        "durationSec": 10,
-        "voice": {
-          "lang": "en",
-          "text": ""
-        },
-        "screenZone": "full_dome",
-        "primaryTechnique": "cgi_3d_pre_render",
-        "softwarePipeline": ["Maya", "Nuke"],
-        "action": "",
-        "userNote": "",
-        "schemaVersion": "1.0.0"
-      },
-      "expected": "valid"
-    },
-    {
-      "name": "unicode_text_content",
-      "description": "Tests unicode characters in text fields",
-      "schema": "schemas/profiles/draft.schema.json",
-      "data": {
-        "id": "ut01-ss01",
-        "index": 0,
-        "scene": 1,
-        "durationSec": 10,
-        "voice": {
-          "lang": "en",
-          "text": "Testing Unicode: 你好世界 🌍"
-        },
-        "screenZone": "full_dome",
-        "primaryTechnique": "cgi_3d_pre_render",
-        "softwarePipeline": ["Maya", "Nuke"],
-        "schemaVersion": "1.0.0"
-      },
-      "expected": "valid"
-    },
-    {
-      "name": "negative_index",
-      "description": "Tests negative index value (should fail - minimum is 0)",
-      "schema": "schemas/profiles/draft.schema.json",
-      "data": {
-        "id": "ni01-ss01",
-        "index": -1,
-        "scene": 1,
-        "durationSec": 10,
-        "voice": {
-          "lang": "en",
-          "text": "Testing negative index"
-        },
-        "screenZone": "full_dome",
-        "primaryTechnique": "cgi_3d_pre_render",
-        "softwarePipeline": ["Maya", "Nuke"],
-        "schemaVersion": "1.0.0"
-      },
-      "expected": "invalid"
-    },
-    {
-      "name": "empty_arrays",
-      "description": "Tests empty arrays for optional array fields",
-      "schema": "schemas/profiles/assign.schema.json",
-      "data": {
-        "id": "ea01-ss01",
-        "index": 0,
-        "scene": 1,
-        "durationSec": 10,
-        "voice": {
-          "lang": "en",
-          "text": "Testing empty arrays"
-        },
-        "screenZone": "full_dome",
-        "primaryTechnique": "cgi_3d_pre_render",
-        "softwarePipeline": ["Maya", "Nuke"],
-        "assets": [
-          {
-            "path": "./test/sample.png",
-            "kind": "image",
-            "role": "reference"
-          }
-        ],
-        "tasks": [],
-        "people": [],
-        "schemaVersion": "1.0.0"
-      },
-      "expected": "valid"
-    },
-    {
-      "name": "maximum_task_complexity",
-      "description": "Tests complex task with all optional fields",
-      "schema": "schemas/profiles/assign.schema.json",
-      "data": {
-        "id": "mt01-ss01",
-        "index": 0,
-        "scene": 1,
-        "durationSec": 10,
-        "voice": {
-          "lang": "en",
-          "text": "Testing complex task"
-        },
-        "screenZone": "full_dome",
-        "primaryTechnique": "cgi_3d_pre_render",
-        "softwarePipeline": ["Maya", "Nuke"],
-        "assets": [
-          {
-            "path": "./test/sample.png",
-            "kind": "image",
-            "role": "reference"
-          }
-        ],
-        "tasks": [
-          {
-            "id": 1,
-            "task": "Complex task with all fields",
-            "dept": "VFX",
-            "prio": "high",
-            "status": "in_progress",
-            "assignee": "John Doe",
-            "dueDate": "2024-12-31",
-            "notes": "Complex task notes",
-            "dependencies": [2, 3],
-            "estimatedHours": 40,
-            "actualHours": 35
-          }
-        ],
-        "people": [
-          {
-            "role": "Director",
-            "name": "Jane Smith",
-            "email": "jane@example.com",
-            "phone": "+1-555-0123",
-            "department": "Direction",
-            "notes": "Lead director"
-          }
-        ],
-        "schemaVersion": "1.0.0"
-      },
-      "expected": "valid"
-    },
-    {
-      "name": "maximum_people_complexity",
-      "description": "Tests complex people entries with all optional fields",
-      "schema": "schemas/profiles/review.schema.json",
-      "data": {
-        "id": "mp01-ss01",
-        "index": 0,
-        "scene": 1,
-        "durationSec": 10,
-        "voice": {
-          "lang": "en",
-          "text": "Testing complex people"
-        },
-        "screenZone": "full_dome",
-        "primaryTechnique": "cgi_3d_pre_render",
-        "softwarePipeline": ["Maya", "Nuke"],
-        "assets": [
-          {
-            "path": "./renders/mp01-ss01-complex_people.exr",
-            "kind": "image",
-            "role": "reference"
-          }
-        ],
-        "tasks": [
-          {
-            "id": 1,
-            "task": "Basic task",
-            "dept": "VFX",
-            "prio": "high",
-            "status": "in_progress"
-          }
-        ],
-        "people": [
-          {
-            "role": "Director",
-            "name": "Jane Smith",
-            "email": "jane@example.com",
-            "phone": "+1-555-0123",
-            "department": "Direction",
-            "notes": "Lead director"
-          }
-        ],
-        "schemaVersion": "1.0.0"
-      },
-      "expected": "valid"
-    },
-    {
-      "name": "all_risk_flags",
-      "description": "Tests shot with all possible risk flags",
-      "schema": "schemas/profiles/review.schema.json",
-      "data": {
-        "id": "rf01-ss01",
-        "index": 0,
-        "scene": 1,
-        "durationSec": 60,
-        "voice": {
-          "lang": "en",
-          "text": "Testing all risk flags"
-        },
-        "screenZone": "full_dome",
-        "primaryTechnique": "cgi_3d_realtime",
-        "softwarePipeline": ["Maya", "Nuke"],
-        "assets": [
-          {
-            "path": "./renders/rf01-ss01-risk_flags.exr",
-            "kind": "image",
-            "role": "reference"
-          }
-        ],
-        "tasks": [
-          {
-            "id": 1,
-            "task": "Basic task",
-            "dept": "VFX",
-            "prio": "high",
-            "status": "in_progress"
-          }
-        ],
-        "people": [
-          {
-            "role": "Director",
-            "name": "Jane Smith",
-            "email": "jane@example.com",
-            "phone": "+1-555-0123",
-            "department": "Direction",
-            "notes": "Lead director"
-          }
-        ],
-        "riskFlags": [
-          "photosensitive_seizure",
-          "motion_sickness",
-          "vertigo_trigger",
-          "loud_volume",
-          "render_time_overrun"
-        ],
-        "schemaVersion": "1.0.0"
-      },
-      "expected": "valid"
-    },
-    {
-      "name": "invalid_wrong_schema_version",
-      "description": "Tests shot with wrong schema version (should fail)",
-      "schema": "schemas/profiles/draft.schema.json",
-      "data": {
-        "id": "sv01-ss01",
-        "index": 0,
-        "scene": 1,
-        "durationSec": 10,
-        "voice": {
-          "lang": "en",
-          "text": "Testing wrong schema version"
-        },
-        "screenZone": "full_dome",
-        "primaryTechnique": "cgi_3d_pre_render",
-        "softwarePipeline": ["Maya", "Nuke"],
-        "schemaVersion": "0.0.0"
-      },
-      "expected": "invalid"
-    }
-  ]
-} 
+    "description":  "Edge case tests for the Fulldome Schema Suite",
+    "tests":  [
+                  {
+                      "name":  "zero_duration_shot",
+                      "description":  "Tests shot with zero duration (should fail - minimum is 1)",
+                      "schema":  "schemas/profiles/draft.schema.json",
+                      "data":  {
+                                   "id":  "zd01-ss01",
+                                   "index":  0,
+                                   "scene":  1,
+                                   "durationSec":  0,
+                                   "voice":  {
+                                                 "lang":  "en",
+                                                 "text":  "Testing zero duration"
+                                             },
+                                   "screenZone":  "full_dome",
+                                   "primaryTechnique":  "3d_render",
+                                   "softwarePipeline":  [
+                                                            "Maya",
+                                                            "Nuke"
+                                                        ],
+                                   "schemaVersion":  "1.0.0"
+                               },
+                      "expected":  "invalid"
+                  },
+                  {
+                      "name":  "maximum_duration_shot",
+                      "description":  "Tests shot with very long duration (valid but edge case)",
+                      "schema":  "schemas/profiles/draft.schema.json",
+                      "data":  {
+                                   "id":  "md01-ss01",
+                                   "index":  0,
+                                   "scene":  1,
+                                   "durationSec":  3600,
+                                   "voice":  {
+                                                 "lang":  "en",
+                                                 "text":  "Testing maximum duration"
+                                             },
+                                   "screenZone":  "full_dome",
+                                   "primaryTechnique":  "3d_render",
+                                   "softwarePipeline":  [
+                                                            "Maya",
+                                                            "Nuke"
+                                                        ],
+                                   "schemaVersion":  "1.0.0"
+                               },
+                      "expected":  "valid"
+                  },
+                  {
+                      "name":  "zero_scene_number",
+                      "description":  "Tests scene number of 0 (should fail - minimum is 1)",
+                      "schema":  "schemas/profiles/draft.schema.json",
+                      "data":  {
+                                   "id":  "zs01-ss01",
+                                   "index":  0,
+                                   "scene":  0,
+                                   "durationSec":  10,
+                                   "voice":  {
+                                                 "lang":  "en",
+                                                 "text":  "Testing zero scene number"
+                                             },
+                                   "screenZone":  "full_dome",
+                                   "primaryTechnique":  "3d_render",
+                                   "softwarePipeline":  [
+                                                            "Maya",
+                                                            "Nuke"
+                                                        ],
+                                   "schemaVersion":  "1.0.0"
+                               },
+                      "expected":  "invalid"
+                  },
+                  {
+                      "name":  "large_scene_subscene_numbers",
+                      "description":  "Tests very large scene and subscene numbers (valid)",
+                      "schema":  "schemas/profiles/draft.schema.json",
+                      "data":  {
+                                   "id":  "ls01-ss99",
+                                   "index":  0,
+                                   "scene":  999,
+                                   "durationSec":  10,
+                                   "voice":  {
+                                                 "lang":  "en",
+                                                 "text":  "Testing large scene numbers"
+                                             },
+                                   "screenZone":  "full_dome",
+                                   "primaryTechnique":  "3d_render",
+                                   "softwarePipeline":  [
+                                                            "Maya",
+                                                            "Nuke"
+                                                        ],
+                                   "schemaVersion":  "1.0.0"
+                               },
+                      "expected":  "valid"
+                  },
+                  {
+                      "name":  "empty_string_fields",
+                      "description":  "Tests empty string values in optional fields",
+                      "schema":  "schemas/profiles/draft.schema.json",
+                      "data":  {
+                                   "id":  "es01-ss01",
+                                   "index":  0,
+                                   "scene":  1,
+                                   "durationSec":  10,
+                                   "voice":  {
+                                                 "lang":  "en",
+                                                 "text":  ""
+                                             },
+                                   "screenZone":  "full_dome",
+                                   "primaryTechnique":  "3d_render",
+                                   "softwarePipeline":  [
+                                                            "Maya",
+                                                            "Nuke"
+                                                        ],
+                                   "action":  "",
+                                   "userNote":  "",
+                                   "schemaVersion":  "1.0.0"
+                               },
+                      "expected":  "valid"
+                  },
+                  {
+                      "name":  "unicode_text_content",
+                      "description":  "Tests unicode characters in text fields",
+                      "schema":  "schemas/profiles/draft.schema.json",
+                      "data":  {
+                                   "id":  "ut01-ss01",
+                                   "index":  0,
+                                   "scene":  1,
+                                   "durationSec":  10,
+                                   "voice":  {
+                                                 "lang":  "en",
+                                                 "text":  "Testing Unicode: 你好世界 🌍"
+                                             },
+                                   "screenZone":  "full_dome",
+                                   "primaryTechnique":  "3d_render",
+                                   "softwarePipeline":  [
+                                                            "Maya",
+                                                            "Nuke"
+                                                        ],
+                                   "schemaVersion":  "1.0.0"
+                               },
+                      "expected":  "valid"
+                  },
+                  {
+                      "name":  "negative_index",
+                      "description":  "Tests negative index value (should fail - minimum is 0)",
+                      "schema":  "schemas/profiles/draft.schema.json",
+                      "data":  {
+                                   "id":  "ni01-ss01",
+                                   "index":  -1,
+                                   "scene":  1,
+                                   "durationSec":  10,
+                                   "voice":  {
+                                                 "lang":  "en",
+                                                 "text":  "Testing negative index"
+                                             },
+                                   "screenZone":  "full_dome",
+                                   "primaryTechnique":  "3d_render",
+                                   "softwarePipeline":  [
+                                                            "Maya",
+                                                            "Nuke"
+                                                        ],
+                                   "schemaVersion":  "1.0.0"
+                               },
+                      "expected":  "invalid"
+                  },
+                  {
+                      "name":  "empty_arrays",
+                      "description":  "Tests empty arrays for optional array fields",
+                      "schema":  "schemas/profiles/assign.schema.json",
+                      "data":  {
+                                   "id":  "ea01-ss01",
+                                   "index":  0,
+                                   "scene":  1,
+                                   "durationSec":  10,
+                                   "voice":  {
+                                                 "lang":  "en",
+                                                 "text":  "Testing empty arrays"
+                                             },
+                                   "screenZone":  "full_dome",
+                                   "primaryTechnique":  "3d_render",
+                                   "softwarePipeline":  [
+                                                            "Maya",
+                                                            "Nuke"
+                                                        ],
+                                   "assets":  [
+                                                  {
+                                                      "path":  "./test/sample.png",
+                                                      "kind":  "image",
+                                                      "role":  "reference"
+                                                  }
+                                              ],
+                                   "tasks":  [
+
+                                             ],
+                                   "people":  [
+
+                                              ],
+                                   "schemaVersion":  "1.0.0"
+                               },
+                      "expected":  "valid"
+                  },
+                  {
+                      "name":  "maximum_task_complexity",
+                      "description":  "Tests complex task with all optional fields",
+                      "schema":  "schemas/profiles/assign.schema.json",
+                      "data":  {
+                                   "id":  "mt01-ss01",
+                                   "index":  0,
+                                   "scene":  1,
+                                   "durationSec":  10,
+                                   "voice":  {
+                                                 "lang":  "en",
+                                                 "text":  "Testing complex task"
+                                             },
+                                   "screenZone":  "full_dome",
+                                   "primaryTechnique":  "3d_render",
+                                   "softwarePipeline":  [
+                                                            "Maya",
+                                                            "Nuke"
+                                                        ],
+                                   "assets":  [
+                                                  {
+                                                      "path":  "./test/sample.png",
+                                                      "kind":  "image",
+                                                      "role":  "reference"
+                                                  }
+                                              ],
+                                   "tasks":  [
+                                                 {
+                                                     "id":  1,
+                                                     "task":  "Complex task with all fields",
+                                                     "dept":  "VFX",
+                                                     "prio":  "high",
+                                                     "status":  "in_progress",
+                                                     "assignee":  "John Doe",
+                                                     "dueDate":  "2024-12-31",
+                                                     "notes":  "Complex task notes",
+                                                     "dependencies":  [
+                                                                          2,
+                                                                          3
+                                                                      ],
+                                                     "estimatedHours":  40,
+                                                     "actualHours":  35
+                                                 }
+                                             ],
+                                   "people":  [
+                                                  {
+                                                      "role":  "Director",
+                                                      "name":  "Jane Smith",
+                                                      "email":  "jane@example.com",
+                                                      "phone":  "+1-555-0123",
+                                                      "department":  "Direction",
+                                                      "notes":  "Lead director"
+                                                  }
+                                              ],
+                                   "schemaVersion":  "1.0.0"
+                               },
+                      "expected":  "valid"
+                  },
+                  {
+                      "name":  "maximum_people_complexity",
+                      "description":  "Tests complex people entries with all optional fields",
+                      "schema":  "schemas/profiles/review.schema.json",
+                      "data":  {
+                                   "id":  "mp01-ss01",
+                                   "index":  0,
+                                   "scene":  1,
+                                   "durationSec":  10,
+                                   "voice":  {
+                                                 "lang":  "en",
+                                                 "text":  "Testing complex people"
+                                             },
+                                   "screenZone":  "full_dome",
+                                   "primaryTechnique":  "3d_render",
+                                   "softwarePipeline":  [
+                                                            "Maya",
+                                                            "Nuke"
+                                                        ],
+                                   "assets":  [
+                                                  {
+                                                      "path":  "./renders/mp01-ss01-complex_people.exr",
+                                                      "kind":  "image",
+                                                      "role":  "reference"
+                                                  }
+                                              ],
+                                   "tasks":  [
+                                                 {
+                                                     "id":  1,
+                                                     "task":  "Basic task",
+                                                     "dept":  "VFX",
+                                                     "prio":  "high",
+                                                     "status":  "in_progress"
+                                                 }
+                                             ],
+                                   "people":  [
+                                                  {
+                                                      "role":  "Director",
+                                                      "name":  "Jane Smith",
+                                                      "email":  "jane@example.com",
+                                                      "phone":  "+1-555-0123",
+                                                      "department":  "Direction",
+                                                      "notes":  "Lead director"
+                                                  }
+                                              ],
+                                   "schemaVersion":  "1.0.0"
+                               },
+                      "expected":  "valid"
+                  },
+                  {
+                      "name":  "all_risk_flags",
+                      "description":  "Tests shot with all possible risk flags",
+                      "schema":  "schemas/profiles/review.schema.json",
+                      "data":  {
+                                   "id":  "rf01-ss01",
+                                   "index":  0,
+                                   "scene":  1,
+                                   "durationSec":  60,
+                                   "voice":  {
+                                                 "lang":  "en",
+                                                 "text":  "Testing all risk flags"
+                                             },
+                                   "screenZone":  "full_dome",
+                                   "primaryTechnique":  "3d_realtime",
+                                   "techGroup":  "cgi",
+                                   "description":  "A test shot demonstrating all possible risk flags",
+                                   "assets":  [
+                                                  {
+                                                      "path":  "./renders/rf01-ss01-risk_flags.exr",
+                                                      "kind":  "image",
+                                                      "role":  "reference"
+                                                  }
+                                              ],
+                                   "tasks":  [
+                                                 {
+                                                     "id":  1,
+                                                     "task":  "Basic task",
+                                                     "dept":  "VFX",
+                                                     "prio":  "high",
+                                                     "status":  "in_progress"
+                                                 }
+                                             ],
+                                   "people":  [
+                                                  {
+                                                      "role":  "Director",
+                                                      "name":  "Jane Smith",
+                                                      "email":  "jane@example.com",
+                                                      "phone":  "+1-555-0123",
+                                                      "department":  "Direction",
+                                                      "notes":  "Lead director"
+                                                  }
+                                              ],
+                                   "riskFlags":  [
+                                                     "photosensitive_seizure",
+                                                     "motion_sickness",
+                                                     "vertigo_trigger",
+                                                     "loud_volume",
+                                                     "render_time_overrun"
+                                                 ],
+                                   "schemaVersion":  "1.0.0"
+                               },
+                      "expected":  "valid"
+                  },
+                  {
+                      "name":  "invalid_wrong_schema_version",
+                      "description":  "Tests shot with wrong schema version (should fail)",
+                      "schema":  "schemas/profiles/draft.schema.json",
+                      "data":  {
+                                   "id":  "sv01-ss01",
+                                   "index":  0,
+                                   "scene":  1,
+                                   "durationSec":  10,
+                                   "voice":  {
+                                                 "lang":  "en",
+                                                 "text":  "Testing wrong schema version"
+                                             },
+                                   "screenZone":  "full_dome",
+                                   "primaryTechnique":  "3d_render",
+                                   "softwarePipeline":  [
+                                                            "Maya",
+                                                            "Nuke"
+                                                        ],
+                                   "schemaVersion":  "0.0.0"
+                               },
+                      "expected":  "invalid"
+                  }
+              ]
+}

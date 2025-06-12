@@ -1,6 +1,6 @@
 {
   "name": "immerschema",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Comprehensive JSON Schema suite for  CG pipeline",
   "type": "module",
   "main": "./index.cjs",
@@ -20,11 +20,13 @@
     "schemas/",
     "taxonomy/",
     "docs/",
+    "dist/",
     "index.js",
     "index.cjs",
     "README.md"
   ],
   "scripts": {
+    "build": "node scripts/build.js",
     "test": "node scripts/test_runner.js",
     "validate-examples": "npm run test",
     "validate-shot": "ajv validate -s schemas/core.schema.json -d",
@@ -53,5 +55,8 @@
   "bugs": {
     "url": "https://github.com/yiii/immerschema/issues"
   },
-  "homepage": "https://github.com/yiii/immerschema#readme"
+  "homepage": "https://github.com/yiii/immerschema#readme",
+  "dependencies": {
+    "immerschema": "file:.yalc/immerschema"
+  }
 }

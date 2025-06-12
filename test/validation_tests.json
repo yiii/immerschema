@@ -1,368 +1,433 @@
 {
-  "description": "Comprehensive validation test cases for the Fulldome Schema Suite",
-  "tests": [
-    {
-      "name": "minimal_valid_project",
-      "description": "Tests the absolute minimum required fields for a valid project",
-      "schema": "schemas/project.draft.schema.json",
-      "data": {
-        "projectId": "min-001",
-        "title": "Minimal Project",
-        "shots": [
-          {
-            "schemaVersion": "1.0.0",
-            "id": "sc01-ss01",
-            "index": 0,
-            "scene": 1,
-            "durationSec": 10,
-            "voice": {
-              "lang": "en",
-              "text": "Test"
-            },
-            "screenZone": "full_dome",
-            "primaryTechnique": "cgi_3d_pre_render"
-          }
-        ]
-      },
-      "expected": "valid"
-    },
-    {
-      "name": "invalid_shot_id_pattern",
-      "description": "Tests invalid shot ID pattern (should fail)",
-      "schema": "schemas/profiles/draft.schema.json",
-      "data": {
-        "schemaVersion": "1.0.0",
-        "id": "@invalid-id",
-        "index": 0,
-        "scene": 1,
-        "durationSec": 10,
-        "voice": {
-          "lang": "en",
-          "text": "Test"
-        },
-        "screenZone": "full_dome",
-        "primaryTechnique": "cgi_3d_pre_render"
-      },
-      "expected": "invalid",
-      "error": "Shot ID must start with alphanumeric and can only contain alphanumeric, dots, underscores, and hyphens"
-    },
-    {
-      "name": "invalid_language_code",
-      "description": "Tests invalid language code in voice (should fail)",
-      "schema": "schemas/profiles/draft.schema.json", 
-      "data": {
-        "schemaVersion": "1.0.0",
-        "id": "sc01-ss01",
-        "index": 0,
-        "scene": 1,
-        "durationSec": 10,
-        "voice": {
-          "lang": "english",
-          "text": "Test"
-        },
-        "screenZone": "full_dome",
-        "primaryTechnique": "cgi_3d_pre_render"
-      },
-      "expected": "invalid",
-      "error": "Language code must be exactly 2 lowercase letters"
-    },
-    {
-      "name": "all_screen_zones_valid",
-      "description": "Tests all valid screen zone values",
-      "schema": "schemas/profiles/draft.schema.json",
-      "data": {
-        "schemaVersion": "1.0.0",
-        "id": "sz01-ss01",
-        "index": 0,
-        "scene": 1,
-        "durationSec": 10,
-        "voice": {
-          "lang": "en",
-          "text": "Testing screen zones"
-        },
-        "screenZone": "zenith",
-        "primaryTechnique": "cgi_3d_pre_render"
-      },
-      "expected": "valid",
-      "variations": [
-        "zenith", "upper_band", "horizon_band", "lower_band", "nadir",
-        "front", "rear", "left", "right", "north", "east", "south", "west",
-        "upper_front_left", "upper_front_right", "upper_rear_left", "upper_rear_right",
-        "lower_front_left", "lower_front_right", "lower_rear_left", "lower_rear_right",
-        "full_dome"
-      ]
-    },
-    {
-      "name": "all_techniques_valid",
-      "description": "Tests all valid technique values",
-      "schema": "schemas/profiles/draft.schema.json",
-      "data": {
-        "schemaVersion": "1.0.0",
-        "id": "tc01-ss01",
-        "index": 0,
-        "scene": 1,
-        "durationSec": 10,
-        "voice": {
-          "lang": "en",
-          "text": "Testing techniques"
-        },
-        "screenZone": "full_dome",
-        "primaryTechnique": "cgi_3d_pre_render"
-      },
-      "expected": "valid",
-      "variations": [
-        "cgi_3d_pre_render", "cgi_3d_realtime", "volumetric_capture", "photogrammetry",
-        "hand_drawn_2d", "vector_2d", "cutout_animation", "motion_graphics", "info_graphics",
-        "procedural_geometry", "particle_system", "fractal_render", "data_driven_visual",
-        "fluid_sim", "smoke_fire_sim", "cloth_softbody_sim",
-        "ai_image", "ai_video", "style_transfer",
-        "live_action_plate", "macro_photography", "timelapse", "stereo_3d_capture", "mixed_media_collage",
-        "cel_shaded", "toon_shader", "stop_motion",
-        "audio_reactive", "music_visualizer"
-      ]
-    },
-    {
-      "name": "task_priority_validation",
-      "description": "Tests task priority field validation",
-      "schema": "schemas/profiles/assign.schema.json",
-      "data": {
-        "schemaVersion": "1.0.0",
-        "id": "tp01-ss01",
-        "index": 0,
-        "scene": 1,
-        "durationSec": 10,
-        "voice": {
-          "lang": "en",
-          "text": "Testing task priorities"
-        },
-        "screenZone": "full_dome",
-        "primaryTechnique": "cgi_3d_pre_render",
-        "softwarePipeline": ["Maya", "Nuke"],
-        "assets": [
-          {
-            "path": "./test/sample.png",
-            "kind": "image",
-            "role": "reference"
-          }
-        ],
-        "tasks": [
-          {
-            "id": 1,
-            "task": "High priority task",
-            "dept": "VFX",
-            "prio": "high",
-            "status": "todo"
-          }
-        ],
-        "people": [
-          {
-            "role": "Director",
-            "name": "Jane Smith"
-          }
-        ]
-      },
-      "expected": "valid",
-      "priority_variations": ["low", "med", "high"]
-    },
-    {
-      "name": "task_status_validation",
-      "description": "Tests task status field validation",
-      "schema": "schemas/profiles/assign.schema.json",
-      "data": {
-        "schemaVersion": "1.0.0",
-        "id": "ts01-ss01",
-        "index": 0,
-        "scene": 1,
-        "durationSec": 10,
-        "voice": {
-          "lang": "en",
-          "text": "Testing task status"
-        },
-        "screenZone": "full_dome",
-        "primaryTechnique": "cgi_3d_pre_render",
-        "softwarePipeline": ["Maya", "Nuke"],
-        "assets": [
-          {
-            "path": "./test/sample.png",
-            "kind": "image",
-            "role": "reference"
-          }
-        ],
-        "tasks": [
-          {
-            "id": 1,
-            "task": "Test task",
-            "dept": "VFX",
-            "prio": "med",
-            "status": "todo"
-          }
-        ],
-        "people": [
-          {
-            "role": "Director",
-            "name": "Jane Smith"
-          }
-        ]
-      },
-      "expected": "valid",
-      "status_variations": ["todo", "in_progress", "done", "blocked"]
-    },
-    {
-      "name": "maximum_people_complexity",
-      "description": "Tests maximum people complexity",
-      "schema": "schemas/profiles/review.schema.json",
-      "data": {
-        "schemaVersion": "1.0.0",
-        "id": "mp01-ss01",
-        "index": 0,
-        "scene": 1,
-        "durationSec": 10,
-        "voice": {
-          "lang": "en",
-          "text": "Testing maximum people complexity"
-        },
-        "screenZone": "full_dome",
-        "primaryTechnique": "cgi_3d_pre_render",
-        "softwarePipeline": ["Maya", "Nuke"],
-        "assets": [
-          {
-            "path": "./renders/mp01-ss01-complex_people.exr",
-            "kind": "image",
-            "role": "reference"
-          }
-        ],
-        "tasks": [
-          {
-            "id": 1,
-            "task": "Test task",
-            "dept": "VFX",
-            "prio": "med",
-            "status": "todo"
-          }
-        ],
-        "people": [
-          {
-            "role": "Director",
-            "name": "Jane Smith",
-            "email": "jane@example.com",
-            "phone": "+1-555-0123",
-            "department": "Direction",
-            "notes": "Lead director"
-          }
-        ]
-      },
-      "expected": "valid"
-    },
-    {
-      "name": "all_risk_flags",
-      "description": "Tests shot with all possible risk flags",
-      "schema": "schemas/profiles/review.schema.json",
-      "data": {
-        "schemaVersion": "1.0.0",
-        "id": "rf01-ss01",
-        "index": 0,
-        "scene": 1,
-        "durationSec": 60,
-        "voice": {
-          "lang": "en",
-          "text": "Testing all risk flags"
-        },
-        "screenZone": "full_dome",
-        "primaryTechnique": "cgi_3d_realtime",
-        "softwarePipeline": ["Maya", "Nuke"],
-        "assets": [
-          {
-            "path": "./renders/rf01-ss01-risk_flags.exr",
-            "kind": "image",
-            "role": "reference"
-          }
-        ],
-        "tasks": [
-          {
-            "id": 1,
-            "task": "Basic task",
-            "dept": "VFX",
-            "prio": "high",
-            "status": "in_progress"
-          }
-        ],
-        "people": [
-          {
-            "role": "Director",
-            "name": "Jane Smith",
-            "email": "jane@example.com",
-            "phone": "+1-555-0123",
-            "department": "Direction",
-            "notes": "Lead director"
-          }
-        ],
-        "riskFlags": [
-          "photosensitive_seizure",
-          "motion_sickness",
-          "vertigo_trigger",
-          "loud_volume",
-          "render_time_overrun"
-        ]
-      },
-      "expected": "valid"
-    },
-    {
-      "name": "custom_role_usage",
-      "description": "Tests usage of custom roles with 'other' enum value",
-      "schema": "schemas/profiles/assign.schema.json",
-      "data": {
-        "schemaVersion": "1.0.0",
-        "id": "cr01-ss01",
-        "index": 0,
-        "scene": 1,
-        "durationSec": 30,
-        "voice": {
-          "lang": "en",
-          "text": "Testing custom roles"
-        },
-        "screenZone": "full_dome",
-        "primaryTechnique": "ai_image",
-        "softwarePipeline": ["Maya", "Nuke"],
-        "assets": [
-          {
-            "path": "./test/sample.png",
-            "kind": "image",
-            "role": "reference"
-          }
-        ],
-        "tasks": [
-          {
-            "id": 1,
-            "task": "Basic task",
-            "dept": "VFX",
-            "prio": "high",
-            "status": "in_progress"
-          }
-        ],
-        "people": [
-          {
-            "role": "other",
-            "customRole": "AI Prompt Engineer",
-            "name": "Custom Person",
-            "contacts": {
-              "email": "custom@example.com"
-            }
-          }
-        ]
-      },
-      "expected": "valid"
-    },
-    {
-      "name": "missing_required_fields",
-      "description": "Tests validation failure when required fields are missing",
-      "schema": "schemas/profiles/draft.schema.json",
-      "data": {
-        "id": "mr01-ss01",
-        "index": 0,
-        "scene": 1
-      },
-      "expected": "invalid",
-      "error": "Missing required fields: schemaVersion, durationSec, voice, screenZone, primaryTechnique"
-    }
-  ]
-} 
+    "description":  "Comprehensive validation test cases for the Fulldome Schema Suite",
+    "tests":  [
+                  {
+                      "name":  "minimal_valid_project",
+                      "description":  "Tests the absolute minimum required fields for a valid project",
+                      "schema":  "node_modules/immerschema/schemas/project.draft.schema.json",
+                      "data":  {
+                                   "projectId":  "min-001",
+                                   "title":  "Minimal Project",
+                                   "shots":  [
+                                                 {
+                                                     "schemaVersion":  "1.0.0",
+                                                     "id":  "sc01-ss01",
+                                                     "index":  0,
+                                                     "scene":  1,
+                                                     "durationSec":  10,
+                                                     "voice":  {
+                                                                   "lang":  "en",
+                                                                   "text":  "Test"
+                                                               },
+                                                     "screenZone":  "full_dome",
+                                                     "primaryTechnique":  "3d_render"
+                                                 }
+                                             ]
+                               },
+                      "expected":  "valid"
+                  },
+                  {
+                      "name":  "invalid_shot_id_pattern",
+                      "description":  "Tests invalid shot ID pattern (should fail)",
+                      "schema":  "node_modules/immerschema/schemas/profiles/draft.schema.json",
+                      "data":  {
+                                   "schemaVersion":  "1.0.0",
+                                   "id":  "@invalid-id",
+                                   "index":  0,
+                                   "scene":  1,
+                                   "durationSec":  10,
+                                   "voice":  {
+                                                 "lang":  "en",
+                                                 "text":  "Test"
+                                             },
+                                   "screenZone":  "full_dome",
+                                   "primaryTechnique":  "3d_render"
+                               },
+                      "expected":  "invalid",
+                      "error":  "Shot ID must start with alphanumeric and can only contain alphanumeric, dots, underscores, and hyphens"
+                  },
+                  {
+                      "name":  "invalid_language_code",
+                      "description":  "Tests invalid language code in voice (should fail)",
+                      "schema":  "node_modules/immerschema/schemas/profiles/draft.schema.json",
+                      "data":  {
+                                   "schemaVersion":  "1.0.0",
+                                   "id":  "sc01-ss01",
+                                   "index":  0,
+                                   "scene":  1,
+                                   "durationSec":  10,
+                                   "voice":  {
+                                                 "lang":  "english",
+                                                 "text":  "Test"
+                                             },
+                                   "screenZone":  "full_dome",
+                                   "primaryTechnique":  "3d_render"
+                               },
+                      "expected":  "invalid",
+                      "error":  "Language code must be exactly 2 lowercase letters"
+                  },
+                  {
+                      "name":  "all_screen_zones_valid",
+                      "description":  "Tests all valid screen zone values",
+                      "schema":  "node_modules/immerschema/schemas/profiles/draft.schema.json",
+                      "data":  {
+                                   "schemaVersion":  "1.0.0",
+                                   "id":  "sz01-ss01",
+                                   "index":  0,
+                                   "scene":  1,
+                                   "durationSec":  10,
+                                   "voice":  {
+                                                 "lang":  "en",
+                                                 "text":  "Testing screen zones"
+                                             },
+                                   "screenZone":  "zenith",
+                                   "primaryTechnique":  "3d_render"
+                               },
+                      "expected":  "valid",
+                      "variations":  [
+                                         "zenith",
+                                         "upper_band",
+                                         "horizon_band",
+                                         "lower_band",
+                                         "nadir",
+                                         "front",
+                                         "rear",
+                                         "left",
+                                         "right",
+                                         "north",
+                                         "east",
+                                         "south",
+                                         "west",
+                                         "upper_front_left",
+                                         "upper_front_right",
+                                         "upper_rear_left",
+                                         "upper_rear_right",
+                                         "lower_front_left",
+                                         "lower_front_right",
+                                         "lower_rear_left",
+                                         "lower_rear_right",
+                                         "full_dome"
+                                     ]
+                  },
+                  {
+                      "name":  "all_techniques_valid",
+                      "description":  "Tests all valid technique values",
+                      "schema":  "node_modules/immerschema/schemas/profiles/draft.schema.json",
+                      "data":  {
+                                   "schemaVersion":  "1.0.0",
+                                   "id":  "tc01-ss01",
+                                   "index":  0,
+                                   "scene":  1,
+                                   "durationSec":  10,
+                                   "voice":  {
+                                                 "lang":  "en",
+                                                 "text":  "Testing techniques"
+                                             },
+                                   "screenZone":  "full_dome",
+                                   "primaryTechnique":  "3d_render",
+                                   "techGroup":  "3D",
+                                   "description":  "A test shot for validating techniques"
+                               },
+                      "expected":  "valid",
+                      "variations":  [
+                                         "3d_render",
+                                         "3d_realtime",
+                                         "capture_video",
+                                         "capture_volumetric",
+                                         "capture_photogrammetry",
+                                         "capture_360",
+                                         "capture_stock",
+                                         "rig_animation",
+                                         "mocap_performance",
+                                         "2d_montage",
+                                         "2d_multiscreen",
+                                         "2d_video_collage",
+                                         "2d_hand_drawn",
+                                         "2d_shape_animation",
+                                         "2d_info_graphics",
+                                         "2d_typography",
+                                         "gen_procedural",
+                                         "gen_particle",
+                                         "gen_data_viz",
+                                         "gen_audio_reactive",
+                                         "gen_generative_art",
+                                         "sim_fluid",
+                                         "sim_smoke_fire",
+                                         "sim_cloth_softbody",
+                                         "ai_generate",
+                                         "ai_style_transfer",
+                                         "ai_avatar",
+                                         "ai_face_swap"
+                                     ]
+                  },
+                  {
+                      "name":  "task_priority_validation",
+                      "description":  "Tests task priority field validation",
+                      "schema":  "node_modules/immerschema/schemas/profiles/assign.schema.json",
+                      "data":  {
+                                   "schemaVersion":  "1.0.0",
+                                   "id":  "tp01-ss01",
+                                   "index":  0,
+                                   "scene":  1,
+                                   "durationSec":  10,
+                                   "voice":  {
+                                                 "lang":  "en",
+                                                 "text":  "Testing task priorities"
+                                             },
+                                   "screenZone":  "full_dome",
+                                   "primaryTechnique":  "3d_render",
+                                   "softwarePipeline":  [
+                                                            "Maya",
+                                                            "Nuke"
+                                                        ],
+                                   "assets":  [
+                                                  {
+                                                      "path":  "./test/sample.png",
+                                                      "kind":  "image",
+                                                      "role":  "reference"
+                                                  }
+                                              ],
+                                   "tasks":  [
+                                                 {
+                                                     "id":  1,
+                                                     "task":  "High priority task",
+                                                     "dept":  "VFX",
+                                                     "prio":  "high",
+                                                     "status":  "todo"
+                                                 }
+                                             ],
+                                   "people":  [
+                                                  {
+                                                      "role":  "Director",
+                                                      "name":  "Jane Smith"
+                                                  }
+                                              ]
+                               },
+                      "expected":  "valid",
+                      "priority_variations":  [
+                                                  "low",
+                                                  "med",
+                                                  "high"
+                                              ]
+                  },
+                  {
+                      "name":  "task_status_validation",
+                      "description":  "Tests task status field validation",
+                      "schema":  "node_modules/immerschema/schemas/profiles/assign.schema.json",
+                      "data":  {
+                                   "schemaVersion":  "1.0.0",
+                                   "id":  "ts01-ss01",
+                                   "index":  0,
+                                   "scene":  1,
+                                   "durationSec":  10,
+                                   "voice":  {
+                                                 "lang":  "en",
+                                                 "text":  "Testing task status"
+                                             },
+                                   "screenZone":  "full_dome",
+                                   "primaryTechnique":  "3d_render",
+                                   "softwarePipeline":  [
+                                                            "Maya",
+                                                            "Nuke"
+                                                        ],
+                                   "assets":  [
+                                                  {
+                                                      "path":  "./test/sample.png",
+                                                      "kind":  "image",
+                                                      "role":  "reference"
+                                                  }
+                                              ],
+                                   "tasks":  [
+                                                 {
+                                                     "id":  1,
+                                                     "task":  "Test task",
+                                                     "dept":  "VFX",
+                                                     "prio":  "med",
+                                                     "status":  "todo"
+                                                 }
+                                             ],
+                                   "people":  [
+                                                  {
+                                                      "role":  "Director",
+                                                      "name":  "Jane Smith"
+                                                  }
+                                              ]
+                               },
+                      "expected":  "valid",
+                      "status_variations":  [
+                                                "todo",
+                                                "in_progress",
+                                                "done",
+                                                "blocked"
+                                            ]
+                  },
+                  {
+                      "name":  "maximum_people_complexity",
+                      "description":  "Tests maximum people complexity",
+                      "schema":  "node_modules/immerschema/schemas/profiles/review.schema.json",
+                      "data":  {
+                                   "schemaVersion":  "1.0.0",
+                                   "id":  "mp01-ss01",
+                                   "index":  0,
+                                   "scene":  1,
+                                   "durationSec":  10,
+                                   "voice":  {
+                                                 "lang":  "en",
+                                                 "text":  "Testing maximum people complexity"
+                                             },
+                                   "screenZone":  "full_dome",
+                                   "primaryTechnique":  "3d_render",
+                                   "softwarePipeline":  [
+                                                            "Maya",
+                                                            "Nuke"
+                                                        ],
+                                   "assets":  [
+                                                  {
+                                                      "path":  "./renders/mp01-ss01-complex_people.exr",
+                                                      "kind":  "image",
+                                                      "role":  "reference"
+                                                  }
+                                              ],
+                                   "tasks":  [
+                                                 {
+                                                     "id":  1,
+                                                     "task":  "Test task",
+                                                     "dept":  "VFX",
+                                                     "prio":  "med",
+                                                     "status":  "todo"
+                                                 }
+                                             ],
+                                   "people":  [
+                                                  {
+                                                      "role":  "Director",
+                                                      "name":  "Jane Smith",
+                                                      "email":  "jane@example.com",
+                                                      "phone":  "+1-555-0123",
+                                                      "department":  "Direction",
+                                                      "notes":  "Lead director"
+                                                  }
+                                              ]
+                               },
+                      "expected":  "valid"
+                  },
+                  {
+                      "name":  "all_risk_flags",
+                      "description":  "Tests shot with all possible risk flags",
+                      "schema":  "node_modules/immerschema/schemas/profiles/review.schema.json",
+                      "data":  {
+                                   "schemaVersion":  "1.0.0",
+                                   "id":  "rf01-ss01",
+                                   "index":  0,
+                                   "scene":  1,
+                                   "durationSec":  60,
+                                   "voice":  {
+                                                 "lang":  "en",
+                                                 "text":  "Testing all risk flags"
+                                             },
+                                   "screenZone":  "full_dome",
+                                   "primaryTechnique":  "3d_realtime",
+                                   "softwarePipeline":  [
+                                                            "Maya",
+                                                            "Nuke"
+                                                        ],
+                                   "assets":  [
+                                                  {
+                                                      "path":  "./renders/rf01-ss01-risk_flags.exr",
+                                                      "kind":  "image",
+                                                      "role":  "reference"
+                                                  }
+                                              ],
+                                   "tasks":  [
+                                                 {
+                                                     "id":  1,
+                                                     "task":  "Basic task",
+                                                     "dept":  "VFX",
+                                                     "prio":  "high",
+                                                     "status":  "in_progress"
+                                                 }
+                                             ],
+                                   "people":  [
+                                                  {
+                                                      "role":  "Director",
+                                                      "name":  "Jane Smith",
+                                                      "email":  "jane@example.com",
+                                                      "phone":  "+1-555-0123",
+                                                      "department":  "Direction",
+                                                      "notes":  "Lead director"
+                                                  }
+                                              ],
+                                   "riskFlags":  [
+                                                     "photosensitive_seizure",
+                                                     "motion_sickness",
+                                                     "vertigo_trigger",
+                                                     "loud_volume",
+                                                     "render_time_overrun"
+                                                 ],
+                                   "techGroup":  "3D"
+                               },
+                      "expected":  "valid"
+                  },
+                  {
+                      "name":  "custom_role_usage",
+                      "description":  "Tests usage of custom roles with \u0027other\u0027 enum value",
+                      "schema":  "node_modules/immerschema/schemas/profiles/assign.schema.json",
+                      "data":  {
+                                   "schemaVersion":  "1.0.0",
+                                   "id":  "cr01-ss01",
+                                   "index":  0,
+                                   "scene":  1,
+                                   "durationSec":  30,
+                                   "voice":  {
+                                                 "lang":  "en",
+                                                 "text":  "Testing custom roles"
+                                             },
+                                   "screenZone":  "full_dome",
+                                   "primaryTechnique":  "ai_generate",
+                                   "softwarePipeline":  [
+                                                            "Maya",
+                                                            "Nuke"
+                                                        ],
+                                   "assets":  [
+                                                  {
+                                                      "path":  "./test/sample.png",
+                                                      "kind":  "image",
+                                                      "role":  "reference"
+                                                  }
+                                              ],
+                                   "tasks":  [
+                                                 {
+                                                     "id":  1,
+                                                     "task":  "Basic task",
+                                                     "dept":  "VFX",
+                                                     "prio":  "high",
+                                                     "status":  "in_progress"
+                                                 }
+                                             ],
+                                   "people":  [
+                                                  {
+                                                      "role":  "other",
+                                                      "customRole":  "AI Prompt Engineer",
+                                                      "name":  "Custom Person",
+                                                      "contacts":  {
+                                                                       "email":  "custom@example.com"
+                                                                   }
+                                                  }
+                                              ],
+                                   "techGroup":  "AI"
+                               },
+                      "expected":  "valid"
+                  },
+                  {
+                      "name":  "missing_required_fields",
+                      "description":  "Tests validation failure when required fields are missing",
+                      "schema":  "node_modules/immerschema/schemas/profiles/draft.schema.json",
+                      "data":  {
+                                   "id":  "mr01-ss01",
+                                   "index":  0,
+                                   "scene":  1
+                               },
+                      "expected":  "invalid",
+                      "error":  "Missing required fields: schemaVersion, durationSec, voice, screenZone, primaryTechnique"
+                  }
+              ]
+}

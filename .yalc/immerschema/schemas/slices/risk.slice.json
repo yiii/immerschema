@@ -1,0 +1,28 @@
+{
+  "$id": "immerschema/schemas/slices/risk.slice.json",
+  "title": "Risk flags & mitigations",
+  "type": "object",
+  "properties": {
+    "riskFlags": {
+      "type": "array",
+      "items": { "$ref": "../enum/riskflag.enum.json" },
+      "default": []
+    },
+    "riskMitigation": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["riskFlag","mitigation"],
+        "properties": {
+          "riskFlag":  { "$ref": "../enum/riskflag.enum.json" },
+          "mitigation":{ "type": "string" },
+          "owner":     { "type": "string" },
+          "status":    { "type": "string", "enum": ["planned","in_progress","done"], "default": "planned" }
+        },
+        "additionalProperties": false
+      },
+      "default": []
+    }
+  },
+  "additionalProperties": true
+} 

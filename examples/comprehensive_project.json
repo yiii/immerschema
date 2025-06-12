@@ -25,7 +25,7 @@
       "cameraMotion": ["orbital_movement", "zoom_out"],
       "screenZone": "full_dome",
       "immersiveCue": "Look up and witness the birth of the universe",
-      "primaryTechnique": "cgi_3d_pre_render",
+      "primaryTechnique": "3d_render",
       "otherTechniques": [
         "particle_system",
         "procedural_geometry",

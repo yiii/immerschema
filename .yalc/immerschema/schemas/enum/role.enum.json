@@ -1,0 +1,20 @@
+{
+  "$id": "immerschema/schemas/enum/role.enum.json",
+  "$comment": "ENUM – crew roles; update via governance workflow.",
+  "title": "Role enum",
+  "description": "Enumerates crew roles for project staffing. Use 'other' for unlisted or hybrid roles.",
+  "type": "string",
+  "enum": [
+    "Director", "Producer", "ProjectManager",
+    "Writer", "StoryboardArtist", "ConceptArtist",
+    "VFXSupervisor", "CGSupervisor", "PipelineTD", 
+    "Modeler", "TextureArtist", "Rigger", "LookDev", 
+    "Animator", "FXTD", "LightingTD", "Compositor", "HoudiniArtist", "MotionDesigner",
+    "UnrealArtist", "TouchDesignerArtist", "NotchArtist","TouchDesignerDeveloper",
+    "Composer", "SoundFXDesigner", "AudioEngineer", "VOActor",
+    "Editor", "Colorist", "MontageArtist", 
+    "CameraMan", 
+    "QA", "Researcher",
+    "other"
+  ]
+} 

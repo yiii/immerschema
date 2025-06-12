@@ -1,0 +1,22 @@
+{
+  "$id": "immerschema/schemas/slices/technique.slice.schema.json",
+  "title": "Technique slice",
+  "type": "object",
+  "allOf": [
+    { "$ref": "../slices/tech-group.slice.schema.json" }
+  ],
+  "properties": {
+    "primaryTechnique": {
+      "$ref": "../enum/technique.enum.json",
+      "description": "The main visual technique for this shot."
+    },
+    "otherTechniques": {
+      "type": "array",
+      "items": { "$ref": "../enum/technique.enum.json" },
+      "default": [],
+      "description": "Additional techniques in this shot."
+    }
+  },
+  "required": ["primaryTechnique"],
+  "additionalProperties": false
+}

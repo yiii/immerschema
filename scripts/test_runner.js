@@ -65,19 +65,25 @@ function setupAjv() {
   ];
   
   const sliceSchemas = [
-    'schemas/slices/id.schema.json',
-    'schemas/slices/note.schema.json',
-    'schemas/slices/timing.sec.schema.json',
-    'schemas/slices/timing.frames.schema.json',
-    'schemas/slices/technique.schema.json',
-    'schemas/slices/software.schema.json',
-    'schemas/slices/tasks.schema.json',
-    'schemas/slices/crew.schema.json',
-    'schemas/slices/safety.schema.json',
-    'schemas/slices/voice.schema.json',
-    'schemas/slices/meta.scene.schema.json',
-    'schemas/slices/screen.schema.json',
-    'schemas/slices/assets.schema.json'
+    'schemas/slices/id.slice.schema.json',
+    'schemas/slices/note.slice.schema.json',
+    'schemas/slices/timing-seconds.slice.schema.json',
+    'schemas/slices/timing-frames.slice.schema.json',
+    'schemas/slices/timing.slice.schema.json',
+    'schemas/slices/tech-group.slice.schema.json',
+    'schemas/slices/technique.slice.schema.json',
+    'schemas/slices/software.slice.schema.json',
+    'schemas/slices/tasks.slice.schema.json',
+    'schemas/slices/crew.slice.schema.json',
+    'schemas/slices/risk.slice.json',
+    'schemas/slices/voice.slice.schema.json',
+    'schemas/slices/meta-scene.slice.schema.json',
+    'schemas/slices/screen.slice.schema.json',
+    'schemas/slices/assets.slice.schema.json',
+    'schemas/slices/description.slice.schema.json',
+    'schemas/slices/workload.slice.json',
+    'schemas/slices/bottleneck.slice.json',
+    'schemas/slices/audio.slice.schema.json'
   ];
   
   const profileSchemas = [

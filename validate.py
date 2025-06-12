@@ -1,20 +1,27 @@
-
 import json
 import os
 import time
 from jsonschema import validate
 import copy
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Get the current directory
 current_dir = os.path.dirname(os.path.abspath(__file__))
 schemas_dir = os.path.join(current_dir, 'schemas')
+test_dir = os.path.join(current_dir, 'test')
 
 def load_json_file(filename):
+    """Load a JSON file from the test directory"""
     try:
-        with open(os.path.join(current_dir, filename), 'r', encoding='utf-8') as f:
+        filepath = os.path.join(test_dir, filename)
+        with open(filepath, 'r', encoding='utf-8') as f:
             return json.load(f)
     except Exception as e:
-        print(f"Error loading {filename}: {str(e)}")
+        logger.error(f"Error loading {filename}: {str(e)}")
         return None
 
 def load_schema_file(relative_path):
@@ -24,7 +31,7 @@ def load_schema_file(relative_path):
         with open(filepath, 'r', encoding='utf-8') as f:
             return json.load(f)
     except Exception as e:
-        print(f"Error loading schema {relative_path}: {str(e)}")
+        logger.error(f"Error loading schema {relative_path}: {str(e)}")
         return None
 
 def resolve_schema_refs(schema):
@@ -74,7 +81,7 @@ def resolve_schema_refs(schema):
                     # Handle internal references (leave as is for now)
                     return obj
                 else:
-                    print(f"Warning: Unresolved reference: {ref_path}")
+                    logger.warning(f"Unresolved reference: {ref_path}")
                     return obj
             else:
                 # Recursively process all values in the dictionary
@@ -127,36 +134,64 @@ def resolve_refs_in_schema(schema, enum_cache, ext_cache, core_cache):
     
     return resolve_refs_recursive(copy.deepcopy(schema))
 
-# Load schemas
-core_schema = load_json_file('schemas/core.schema.json')
-project_schema = load_json_file('schemas/project.schema.json')
+def validate_file(data, schema, description):
+    """Validate data against a schema"""
+    try:
+        validate(instance=data, schema=schema)
+        logger.info(f"✅ {description} validation: PASSED")
+        return True
+    except Exception as e:
+        logger.error(f"❌ {description} validation: FAILED")
+        logger.error(f"Error: {str(e)}")
+        return False
 
-# Load test data
-test_shot = load_json_file('test_shot.json')
-test_project = load_json_file('test_project.json')
+def main():
+    # Load test data
+    test_shot = load_json_file('test_shot.json')
+    test_project = load_json_file('test_project.json')
+    validation_tests = load_json_file('validation_tests.json')
+    edge_cases = load_json_file('edge_cases.json')
 
-if all([core_schema, project_schema, test_shot, test_project]):
+    # Load schemas
+    core_schema = load_schema_file('core.schema.json')
+    project_schema = load_schema_file('project.schema.json')
+
+    if not all([core_schema, project_schema]):
+        logger.error("Failed to load required schema files")
+        return
+
     # Resolve references in schemas
     resolved_core_schema = resolve_schema_refs(core_schema)
     resolved_project_schema = resolve_schema_refs(project_schema)
-    
-    # Validate shot
-    try:
-        validate(instance=test_shot, schema=resolved_core_schema)
-        print("Shot validation: PASSED")
-    except Exception as e:
-        print("Shot validation: FAILED")
-        print("Error:", str(e))
 
-    # Add a small delay to ensure output is visible
-    time.sleep(0.1)
+    # Initialize results
+    results = {
+        'passed': 0,
+        'failed': 0,
+        'total': 0
+    }
 
-    # Validate project
-    try:
-        validate(instance=test_project, schema=resolved_project_schema)
-        print("Project validation: PASSED")
-    except Exception as e:
-        print("Project validation: FAILED")
-        print("Error:", str(e))
-else:
-    print("Failed to load one or more required files") 
+    # Validate test files
+    if test_shot:
+        results['total'] += 1
+        if validate_file(test_shot, resolved_core_schema, "Shot"):
+            results['passed'] += 1
+        else:
+            results['failed'] += 1
+
+    if test_project:
+        results['total'] += 1
+        if validate_file(test_project, resolved_project_schema, "Project"):
+            results['passed'] += 1
+        else:
+            results['failed'] += 1
+
+    # Print summary
+    logger.info("\n📊 Final Results")
+    logger.info("=================")
+    logger.info(f"✅ Passed: {results['passed']}")
+    logger.info(f"❌ Failed: {results['failed']}")
+    logger.info(f"📈 Total: {results['total']}")
+
+if __name__ == "__main__":
+    main() 

@@ -1,0 +1,88 @@
+{
+  "$id": "immerschema/schemas/taxonomy/role.taxonomy.json",
+  "title": "Role taxonomy (UI helper)",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "Direction & Production": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["Director", "Producer", "ProjectManager"]
+      },
+      "minItems": 1
+    },
+    "Story & Art": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["Writer", "StoryboardArtist", "ConceptArtist"]
+      },
+      "minItems": 1
+    },
+    "Supervision": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["VFXSupervisor", "CGSupervisor", "PipelineTD"]
+      },
+      "minItems": 1
+    },
+    "Asset Creation": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["Modeler", "TextureArtist", "Rigger", "LookDev"]
+      },
+      "minItems": 1
+    },
+    "Shot Creation": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["Animator", "FXTD", "LightingTD", "Compositor", "HoudiniArtist", "MotionDesigner"]
+      },
+      "minItems": 1
+    },
+    "Realtime & Interactive": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["UnrealArtist", "TouchDesignerArtist", "TouchDesignerDeveloper", "NotchArtist"]
+      },
+      "minItems": 1
+    },
+    "Audio": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["Composer", "SoundFXDesigner", "AudioEngineer", "VOActor"]
+      },
+      "minItems": 1
+    },
+    "Editorial": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["Editor", "Colorist", "MontageArtist"]
+      },
+      "minItems": 1
+    },
+    "Production Support": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["CameraMan", "QA", "Researcher"]
+      },
+      "minItems": 1
+    },
+    "Other": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["other"]
+      },
+      "minItems": 1
+    }
+  }
+} 

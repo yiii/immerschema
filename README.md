@@ -17,13 +17,13 @@ A JSON Schema designed to ensure consistent data structure across production pip
 
 ```bash
 # npm
-npm install immerschema@1.1.0
+npm install immerschema@1.2.0
 
 # pip
-pip install immerschema==1.1.0
+pip install immerschema==1.2.0
 ```
 
-## �� Project Structure
+## 📦 Project Structure
 
 ```
 immerschema/
@@ -95,7 +95,7 @@ npm test
       "durationSec": 15,
       "voice": { "lang": "en", "text": "Welcome to the universe" },
       "screenZone": "full_dome",
-      "primaryTechnique": "cgi_3d_pre_render"
+      "primaryTechnique": "3d_render"
     }
   ]
 }
@@ -113,7 +113,7 @@ See the `examples/` directory for complete implementations.
 ## 🎯 Available Techniques
 
 ### 3D & CGI
-- `cgi_3d_pre_render` - Traditional pre-rendered 3D
+- `3d_render` - Traditional pre-rendered 3D
 - `cgi_3d_realtime` - Real-time 3D rendering
 - `volumetric_capture` - Volume-based capture
 - `photogrammetry` - 3D reconstruction from photos
