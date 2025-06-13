@@ -5,7 +5,7 @@
     "scene":  1,
     "subScene":  1,
     "sceneName":  "Opening Scene",
-    "subSceneTitle":  "Welcome to the Dome",
+    "subSceneName":  "Welcome to the Dome",
     "durationSec":  30,
     "imageFile":  "scenes/sc01-ss01.jpg",
     "voice":  {

@@ -14,6 +14,125 @@ class SchemaCombiner {
     };
   }
 
+  // Get schema category and priority for sorting
+  getSchemaPriority(schemaPath) {
+    const categories = {
+      'slices': 1,    // Slices first (base components)
+      'enum': 2,      // Then enums (base data types)
+      'profiles': 3,  // Then profiles (workflow stages)
+      'project': 4,   // Then project schemas (top-level)
+      'taxonomy': 5,  // Then taxonomies (UI helpers)
+      'io': 6,        // Then I/O schemas (communication)
+      'ext': 7        // Extensions last (utility)
+    };
+
+    // Extract category from path
+    const category = Object.keys(categories).find(cat => 
+      schemaPath.toLowerCase().includes(`/${cat}/`) || 
+      schemaPath.toLowerCase().startsWith(`${cat}.`)
+    );
+
+    return {
+      category: category || 'other',
+      priority: categories[category] || 999,
+      name: path.basename(schemaPath, '.json')
+    };
+  }
+
+  // Get slice priority based on dependencies
+  getSlicePriority(sliceName) {
+    const sliceOrder = {
+      'id_slice': 1,           // Base identifier
+      'note_slice': 2,         // Basic notes
+      'timing_slice': 3,       // Base timing
+      'timing_seconds_slice': 4, // Timing details
+      'timing_frames_slice': 5,  // Frame timing
+      'meta_scene_slice': 6,    // Scene metadata
+      'technique_slice': 7,     // Technique info
+      'tech_group_slice': 8,    // Tech grouping
+      'screen_slice': 9,        // Screen zones
+      'software_slice': 10,     // Software pipeline
+      'tasks_slice': 11,        // Task tracking
+      'crew_slice': 12,         // Team assignments
+      'risk_slice': 13,         // Risk flags
+      'voice_slice': 14,        // Voice-over
+      'audio_slice': 15,        // Audio assets
+      'assets_slice': 16,       // Asset management
+      'description_slice': 17   // Shot descriptions
+    };
+
+    return sliceOrder[sliceName] || 999;
+  }
+
+  // Get profile priority based on workflow
+  getProfilePriority(profileName) {
+    const profileOrder = {
+      'draft': 1,    // Initial creative
+      'review': 2,   // Director review
+      'plan': 3,     // Technical planning
+      'assign': 4,   // Team setup
+      'lock': 5      // Production ready
+    };
+
+    return profileOrder[profileName] || 999;
+  }
+
+  // Get project priority based on workflow
+  getProjectPriority(projectName) {
+    const projectOrder = {
+      'draft': 1,    // Initial creative
+      'review': 2,   // Director review
+      'plan': 3,     // Technical planning
+      'assign': 4,   // Team setup
+      'lock': 5      // Production ready
+    };
+
+    return projectOrder[projectName] || 999;
+  }
+
+  // Sort definitions in a logical order
+  sortDefinitions(definitions) {
+    const sortedEntries = Object.entries(definitions).sort(([keyA, schemaA], [keyB, schemaB]) => {
+      // Use the full key for category extraction
+      const priorityA = this.getSchemaPriority(keyA);
+      const priorityB = this.getSchemaPriority(keyB);
+
+      // First sort by category priority
+      if (priorityA.priority !== priorityB.priority) {
+        return priorityA.priority - priorityB.priority;
+      }
+
+      // Then sort within category based on specific rules
+      if (priorityA.category === 'slices') {
+        const slicePriorityA = this.getSlicePriority(keyA.replace('slices_', '').replace('_slice', ''));
+        const slicePriorityB = this.getSlicePriority(keyB.replace('slices_', '').replace('_slice', ''));
+        if (slicePriorityA !== slicePriorityB) {
+          return slicePriorityA - slicePriorityB;
+        }
+      }
+      else if (priorityA.category === 'profiles') {
+        const profilePriorityA = this.getProfilePriority(keyA.replace('profiles_', ''));
+        const profilePriorityB = this.getProfilePriority(keyB.replace('profiles_', ''));
+        if (profilePriorityA !== profilePriorityB) {
+          return profilePriorityA - profilePriorityB;
+        }
+      }
+      else if (priorityA.category === 'project') {
+        const projectPriorityA = this.getProjectPriority(keyA.replace('project_', ''));
+        const projectPriorityB = this.getProjectPriority(keyB.replace('project_', ''));
+        if (projectPriorityA !== projectPriorityB) {
+          return projectPriorityA - projectPriorityB;
+        }
+      }
+
+      // Finally sort alphabetically within same priority
+      return keyA.localeCompare(keyB);
+    });
+
+    // Create new object with sorted entries
+    return Object.fromEntries(sortedEntries);
+  }
+
   // Recursively find all JSON schema files
   findSchemaFiles(dir = this.schemasDir) {
     const files = [];
@@ -132,6 +251,9 @@ class SchemaCombiner {
       
       console.log(`Added definition: ${defKey} (from ${relativePath})`);
     }
+
+    // Sort definitions
+    this.combinedSchema.definitions = this.sortDefinitions(this.combinedSchema.definitions);
 
     // Add main project schemas as top-level properties
     const projectSchemas = loadedSchemas.filter(s => s.relativePath.startsWith('project.'));

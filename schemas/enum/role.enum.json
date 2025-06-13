@@ -1,20 +1,34 @@
 {
   "$id": "immerschema/schemas/enum/role.enum.json",
-  "$comment": "ENUM – crew roles; update via governance workflow.",
-  "title": "Role enum",
-  "description": "Enumerates crew roles for project staffing. Use 'other' for unlisted or hybrid roles.",
+  "$schema": "http://json-schema.org/draft/2020-12/schema",
+  "title": "Role enum (focused)",
+  "description": "Key crew roles for immersive CG projects; realtime and FX specialists kept explicit.",
   "type": "string",
   "enum": [
-    "Director", "Producer", "ProjectManager",
-    "Writer", "StoryboardArtist", "ConceptArtist",
-    "VFXSupervisor", "CGSupervisor", "PipelineTD", 
-    "Modeler", "TextureArtist", "Rigger", "LookDev", 
-    "Animator", "FXTD", "LightingTD", "Compositor", "HoudiniArtist", "MotionDesigner",
-    "UnrealArtist", "TouchDesignerArtist", "NotchArtist","TouchDesignerDeveloper",
-    "Composer", "SoundFXDesigner", "AudioEngineer", "VOActor",
-    "Editor", "Colorist", "MontageArtist", 
-    "CameraMan", 
-    "QA", "Researcher",
+    "Director",
+    "Producer",
+    "ProjectManager",
+    "ArtLead",
+
+    "CGSupervisor",
+
+    "HoudiniArtist",
+    "MotionDesigner",
+    "UnrealArtist",
+    "TouchDesignerArtist",
+    "TouchDesignerDeveloper",
+    "NotchArtist",
+    "AIArtist",
+
+    "AudioLead",
+    "Composer",
+    "PostLead",
+    "MontageArtist",
+
+
+    "CameraOperator",
+    "TechSupport",
+
     "other"
   ]
-} 
+}

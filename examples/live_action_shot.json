@@ -5,7 +5,7 @@
   "scene": 1,
   "subScene": 1,
   "sceneName": "Natural Wonders",
-  "subSceneTitle": "Macro World Discovery",
+  "subSceneName": "Macro World Discovery",
   "durationSec": 75,
   "imageFile": "footage/la01-ss01-macro_flowers.mov",
   "voice": {

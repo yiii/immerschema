@@ -5,7 +5,7 @@
   "scene": 1,
   "subScene": 1,
   "sceneName": "Sonic Landscape",
-  "subSceneTitle": "Music Made Visible",
+  "subSceneName": "Music Made Visible",
   "durationSec": 120,
   "imageFile": "renders/ar01-ss01-audio_reactive.exr",
   "voice": {

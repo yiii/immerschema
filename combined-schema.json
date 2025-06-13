@@ -5,99 +5,65 @@
   "description": "Complete schema combining all slices, enums, profiles, and project schemas",
   "definitions": {
     "enum_riskflag": {
-      "title": "Risk flag enum",
+      "$schema": "http://json-schema.org/draft/2020-12/schema",
+      "title": "Risk flag enum (simplified)",
       "type": "string",
       "enum": [
-        "photosensitive_seizure",
-        "motion_sickness",
-        "vertigo_trigger",
-        "claustrophobia_trigger",
-        "fear_of_heights_trigger",
-        "loud_volume",
-        "low_frequency_rumble",
-        "laser_hazard",
-        "strobe_light",
-        "heavy_fog",
-        "scent_allergy",
-        "graphic_medical_content",
-        "body_horror",
-        "religious_sensitivity",
-        "political_sensitivity",
-        "mature_themes",
-        "copyright_unverified",
-        "ai_copyright_unclear",
-        "talent_release_missing",
-        "render_time_overrun",
-        "asset_backlog",
-        "hardware_failure",
-        "creative_deadlock",
-        "hardware_overheat",
-        "projector_alignment_risk",
-        "sync_drift",
-        "frame_drop_risk",
-        "narrative_confusion",
-        "translation_required"
+        "render_overrun",
+        "asset_block",
+        "software_failure",
+        "infrastructure_issue",
+        "realtime_sync",
+        "schedule_scope",
+        "creative_alignment",
+        "compliance_delay",
+        "talent_gap",
+        "data_breach"
       ]
     },
     "enum_role": {
-      "$comment": "ENUM – crew roles; update via governance workflow.",
-      "title": "Role enum",
-      "description": "Enumerates crew roles for project staffing. Use 'other' for unlisted or hybrid roles.",
+      "$schema": "http://json-schema.org/draft/2020-12/schema",
+      "title": "Role enum (focused)",
+      "description": "Key crew roles for immersive CG projects; realtime and FX specialists kept explicit.",
       "type": "string",
       "enum": [
         "Director",
         "Producer",
         "ProjectManager",
-        "Writer",
-        "StoryboardArtist",
-        "ConceptArtist",
-        "VFXSupervisor",
+        "ArtLead",
         "CGSupervisor",
-        "PipelineTD",
-        "Modeler",
-        "TextureArtist",
-        "Rigger",
-        "LookDev",
-        "Animator",
-        "FXTD",
-        "LightingTD",
-        "Compositor",
         "HoudiniArtist",
         "MotionDesigner",
         "UnrealArtist",
         "TouchDesignerArtist",
-        "NotchArtist",
         "TouchDesignerDeveloper",
+        "NotchArtist",
+        "AIArtist",
+        "AudioLead",
         "Composer",
-        "SoundFXDesigner",
-        "AudioEngineer",
-        "VOActor",
-        "Editor",
-        "Colorist",
+        "PostLead",
         "MontageArtist",
-        "CameraMan",
-        "QA",
-        "Researcher",
+        "CameraOperator",
+        "TechSupport",
         "other"
       ]
     },
     "enum_screenzone": {
+      "$schema": "http://json-schema.org/draft/2020-12/schema",
       "title": "Screen zone enum",
+      "description": "18 canonical zones for fulldome blocking.",
       "type": "string",
       "enum": [
+        "full_dome",
         "zenith",
-        "upper_band",
-        "horizon_band",
-        "lower_band",
+        "upper",
+        "horizon",
+        "lower",
         "nadir",
         "front",
         "rear",
         "left",
         "right",
-        "north",
-        "east",
-        "south",
-        "west",
         "upper_front_left",
         "upper_front_right",
         "upper_rear_left",
@@ -105,8 +71,27 @@
         "lower_front_left",
         "lower_front_right",
         "lower_rear_left",
+        "lower_rear_right"
+      ],
+      "enumOrder": [
+        "full_dome",
+        "zenith",
+        "upper",
+        "horizon",
+        "lower",
+        "nadir",
+        "upper_front_left",
+        "upper_front_right",
+        "upper_rear_right",
+        "upper_rear_left",
+        "front",
+        "right",
+        "rear",
+        "left",
+        "lower_front_left",
+        "lower_front_right",
         "lower_rear_right",
-        "full_dome"
+        "lower_rear_left"
       ]
     },
     "enum_software": {
@@ -314,7 +299,8 @@
         "people",
         "voice",
         "music",
-        "soundFx"
+        "soundFx",
+        "description"
       ]
     },
     "profiles_draft": {
@@ -342,6 +328,9 @@
         },
         {
           "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_audio_slice"
+        },
+        {
+          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_description_slice"
         }
       ],
       "required": [
@@ -365,12 +354,7 @@
         },
         {
           "required": [
-            "durationSec"
-          ]
-        },
-        {
-          "required": [
-            "durationFrames"
+            "timing"
           ]
         },
         {
@@ -392,6 +376,11 @@
           "required": [
             "soundFx"
           ]
+        },
+        {
+          "required": [
+            "description"
+          ]
         }
       ]
     },
@@ -409,7 +398,8 @@
       ],
       "required": [
         "voice",
-        "riskFlags"
+        "riskFlags",
+        "description"
       ]
     },
     "profiles_plan": {
@@ -436,7 +426,8 @@
         "primaryTechnique",
         "voice",
         "workloadBreakdown",
-        "riskFlags"
+        "riskFlags",
+        "description"
       ]
     },
     "profiles_review": {
@@ -458,11 +449,12 @@
         }
       ],
       "required": [
-        "durationSec",
+        "timing",
         "primaryTechnique",
         "techGroup",
         "voice",
-        "assets"
+        "assets",
+        "description"
       ],
       "anyOf": [
         {
@@ -847,8 +839,7 @@
           "items": {
             "type": "object",
             "required": [
-              "role",
-              "name"
+              "role"
             ],
             "properties": {
               "role": {
@@ -878,6 +869,26 @@
           "default": []
         }
       },
+      "additionalProperties": true
+    },
+    "slices_description_slice": {
+      "title": "Narrative description slice",
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "One-paragraph narrative of what the viewer sees/hears. Markdown allowed."
+        },
+        "descriptionLang": {
+          "type": "string",
+          "pattern": "^[a-z]{2}$",
+          "default": "en",
+          "description": "ISO-639-1 language code of the description text."
+        }
+      },
+      "required": [
+        "description"
+      ],
       "additionalProperties": true
     },
     "slices_id_slice": {
@@ -933,7 +944,7 @@
         "sceneName": {
           "type": "string"
         },
-        "subSceneTitle": {
+        "subSceneName": {
           "type": "string"
         }
       },
@@ -1109,40 +1120,57 @@
       "title": "Timing slice – frames",
       "type": "object",
       "properties": {
-        "durationFrames": {
-          "type": "integer",
-          "minimum": 1
-        },
-        "fps": {
-          "type": "number",
-          "minimum": 1
-        }
-      },
-      "allOf": [
-        {
-          "if": {
-            "required": [
-              "durationFrames"
-            ]
+        "timing": {
+          "type": "object",
+          "properties": {
+            "durationFrames": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "fps": {
+              "type": "number",
+              "minimum": 1,
+              "default": 30
+            }
           },
-          "then": {
-            "properties": {
-              "durationFrames": {
-                "minimum": 1
+          "required": [
+            "durationFrames"
+          ],
+          "allOf": [
+            {
+              "if": {
+                "required": [
+                  "durationFrames"
+                ]
+              },
+              "then": {
+                "properties": {
+                  "durationFrames": {
+                    "minimum": 1
+                  }
+                }
               }
             }
-          }
+          ]
         }
-      ],
+      },
       "additionalProperties": true
     },
     "slices_timing_seconds_slice": {
       "title": "Timing slice – seconds",
       "type": "object",
       "properties": {
-        "durationSec": {
-          "type": "number",
-          "minimum": 0.01
+        "timing": {
+          "type": "object",
+          "properties": {
+            "durationSec": {
+              "type": "number",
+              "minimum": 0.01
+            }
+          },
+          "required": [
+            "durationSec"
+          ]
         }
       },
       "additionalProperties": true
@@ -1151,6 +1179,12 @@
       "title": "Timing slice",
       "type": "object",
       "description": "Base timing schema that can be extended by timing.sec and timing.frames",
+      "properties": {
+        "timing": {
+          "type": "object",
+          "description": "Timing information for the shot"
+        }
+      },
       "additionalProperties": true
     },
     "slices_voice_slice": {
@@ -1191,100 +1225,40 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "Viewer Health": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "photosensitive_seizure",
-              "motion_sickness",
-              "vertigo_trigger",
-              "claustrophobia_trigger",
-              "fear_of_heights_trigger"
-            ]
-          },
-          "minItems": 1
-        },
-        "Audio SPL": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "loud_volume",
-              "low_frequency_rumble"
-            ]
-          },
-          "minItems": 1
-        },
-        "Environmental FX": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "laser_hazard",
-              "strobe_light",
-              "heavy_fog",
-              "scent_allergy"
-            ]
-          },
-          "minItems": 1
-        },
-        "Content Sensitivity": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "graphic_medical_content",
-              "body_horror",
-              "religious_sensitivity",
-              "political_sensitivity",
-              "mature_themes"
-            ]
-          },
-          "minItems": 1
-        },
-        "IP / Legal": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "copyright_unverified",
-              "ai_copyright_unclear",
-              "talent_release_missing"
-            ]
-          },
-          "minItems": 1
-        },
         "Technical": {
           "type": "array",
           "items": {
             "type": "string",
             "enum": [
-              "render_time_overrun",
-              "hardware_overheat",
-              "projector_alignment_risk",
-              "sync_drift",
-              "frame_drop_risk"
+              "render_overrun",
+              "software_failure",
+              "infrastructure_issue",
+              "realtime_sync"
             ]
           },
           "minItems": 1
         },
-        "Narrative / UX": {
+        "Production": {
           "type": "array",
           "items": {
             "type": "string",
             "enum": [
-              "narrative_confusion",
-              "translation_required"
+              "asset_block",
+              "schedule_scope",
+              "creative_alignment",
+              "talent_gap"
             ]
           },
           "minItems": 1
         },
-        "Other": {
+        "Compliance": {
           "type": "array",
           "items": {
             "type": "string",
-            "enum": []
+            "enum": [
+              "compliance_delay",
+              "data_breach"
+            ]
           },
           "minItems": 1
         }
@@ -1307,67 +1281,29 @@
           },
           "minItems": 1
         },
-        "Story & Art": {
+        "Art & Supervision": {
           "type": "array",
           "items": {
             "type": "string",
             "enum": [
-              "Writer",
-              "StoryboardArtist",
-              "ConceptArtist"
+              "ArtLead",
+              "CGSupervisor"
             ]
           },
           "minItems": 1
         },
-        "Supervision": {
+        "Realtime & FX": {
           "type": "array",
           "items": {
             "type": "string",
             "enum": [
-              "VFXSupervisor",
-              "CGSupervisor",
-              "PipelineTD"
-            ]
-          },
-          "minItems": 1
-        },
-        "Asset Creation": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "Modeler",
-              "TextureArtist",
-              "Rigger",
-              "LookDev"
-            ]
-          },
-          "minItems": 1
-        },
-        "Shot Creation": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "Animator",
-              "FXTD",
-              "LightingTD",
-              "Compositor",
               "HoudiniArtist",
-              "MotionDesigner"
-            ]
-          },
-          "minItems": 1
-        },
-        "Realtime & Interactive": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
+              "MotionDesigner",
               "UnrealArtist",
               "TouchDesignerArtist",
               "TouchDesignerDeveloper",
-              "NotchArtist"
+              "NotchArtist",
+              "AIArtist"
             ]
           },
           "minItems": 1
@@ -1377,34 +1313,30 @@
           "items": {
             "type": "string",
             "enum": [
-              "Composer",
-              "SoundFXDesigner",
-              "AudioEngineer",
-              "VOActor"
+              "AudioLead",
+              "Composer"
             ]
           },
           "minItems": 1
         },
-        "Editorial": {
+        "Post Production": {
           "type": "array",
           "items": {
             "type": "string",
             "enum": [
-              "Editor",
-              "Colorist",
+              "PostLead",
               "MontageArtist"
             ]
           },
           "minItems": 1
         },
-        "Production Support": {
+        "Support": {
           "type": "array",
           "items": {
             "type": "string",
             "enum": [
-              "CameraMan",
-              "QA",
-              "Researcher"
+              "CameraOperator",
+              "TechSupport"
             ]
           },
           "minItems": 1
@@ -1432,9 +1364,9 @@
             "type": "string",
             "enum": [
               "zenith",
-              "upper_band",
-              "horizon_band",
-              "lower_band",
+              "upper",
+              "horizon",
+              "lower",
               "nadir"
             ]
           },
@@ -1448,11 +1380,7 @@
               "front",
               "rear",
               "left",
-              "right",
-              "north",
-              "east",
-              "south",
-              "west"
+              "right"
             ]
           },
           "minItems": 1

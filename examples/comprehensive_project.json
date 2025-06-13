@@ -12,7 +12,7 @@
       "scene": 1,
       "subScene": 1,
       "sceneName": "Cosmic Opening",
-      "subSceneTitle": "Birth of Stars",
+      "subSceneName": "Birth of Stars",
       "durationSec": 45,
       "imageFile": "renders/sc01-ss01-stellar_birth.exr",
       "voice": {
@@ -107,7 +107,7 @@
       "scene": 2,
       "subScene": 1,
       "sceneName": "Planetary Dance",
-      "subSceneTitle": "Solar System Formation",
+      "subSceneName": "Solar System Formation",
       "durationSec": 60,
       "imageFile": "renders/sc02-ss01-planetary_dance.exr",
       "voice": {
@@ -178,7 +178,7 @@
       "scene": 3,
       "subScene": 1,
       "sceneName": "Life Emerges",
-      "subSceneTitle": "Earth's First Breath",
+      "subSceneName": "Earth's First Breath",
       "durationSec": 90,
       "imageFile": "renders/sc03-ss01-life_emerges.exr",
       "voice": {
@@ -266,7 +266,7 @@
       "scene": 4,
       "subScene": 1,
       "sceneName": "Cosmic Evolution",
-      "subSceneTitle": "The Journey of Life",
+      "subSceneName": "The Journey of Life",
       "durationSec": 120,
       "imageFile": "renders/sc04-ss01-cosmic_evolution.exr",
       "voice": {

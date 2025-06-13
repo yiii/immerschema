@@ -30,7 +30,8 @@ function Resolve-References {
     param(
         [object]$Object,
         [string]$BasePath = "",
-        [hashtable]$PathMap
+        [hashtable]$PathMap,
+        [hashtable]$ProcessedRefs = @{}
     )
     
     if ($null -eq $Object -or $Object -is [string] -or $Object -is [int] -or $Object -is [bool]) {
@@ -40,7 +41,7 @@ function Resolve-References {
     if ($Object -is [array]) {
         $resolved = @()
         foreach ($item in $Object) {
-            $resolved += Resolve-References -Object $item -BasePath $BasePath -PathMap $PathMap
+            $resolved += Resolve-References -Object $item -BasePath $BasePath -PathMap $PathMap -ProcessedRefs $ProcessedRefs
         }
         return $resolved
     }
@@ -49,6 +50,13 @@ function Resolve-References {
     foreach ($key in $Object.Keys) {
         if ($key -eq '$ref' -and $Object[$key] -is [string]) {
             $refPath = $Object[$key]
+            
+            # Skip if we've already processed this reference to avoid circular refs
+            if ($ProcessedRefs.ContainsKey($refPath)) {
+                $resolved[$key] = $ProcessedRefs[$refPath]
+                continue
+            }
+            
             if ($refPath.StartsWith('../') -or $refPath.StartsWith('./')) {
                 # Resolve relative path
                 $baseDir = Split-Path $BasePath -Parent
@@ -57,9 +65,11 @@ function Resolve-References {
                 if ($relativePath) {
                     $defKey = ConvertTo-DefinitionKey -FilePath $relativePath
                     $resolved[$key] = "#/definitions/$defKey"
+                    $ProcessedRefs[$refPath] = "#/definitions/$defKey"
                 } else {
                     $defKey = ConvertTo-DefinitionKey -FilePath $refPath
                     $resolved[$key] = "#/definitions/$defKey"
+                    $ProcessedRefs[$refPath] = "#/definitions/$defKey"
                 }
             } elseif ($refPath.Contains('#/')) {
                 # Handle fragment references
@@ -67,16 +77,19 @@ function Resolve-References {
                 if ($parts[0]) {
                     $defKey = ConvertTo-DefinitionKey -FilePath $parts[0]
                     $resolved[$key] = "#/definitions/$defKey/$($parts[1])"
+                    $ProcessedRefs[$refPath] = "#/definitions/$defKey/$($parts[1])"
                 } else {
                     $resolved[$key] = "#/$($parts[1])"
+                    $ProcessedRefs[$refPath] = "#/$($parts[1])"
                 }
             } else {
                 # Direct file reference
                 $defKey = ConvertTo-DefinitionKey -FilePath $refPath
                 $resolved[$key] = "#/definitions/$defKey"
+                $ProcessedRefs[$refPath] = "#/definitions/$defKey"
             }
         } else {
-            $resolved[$key] = Resolve-References -Object $Object[$key] -BasePath $BasePath -PathMap $PathMap
+            $resolved[$key] = Resolve-References -Object $Object[$key] -BasePath $BasePath -PathMap $PathMap -ProcessedRefs $ProcessedRefs
         }
     }
     return $resolved
@@ -104,6 +117,7 @@ try {
     # Load all schemas
     $loadedSchemas = @()
     $pathMap = @{}
+    $schemaCache = @{}
     
     foreach ($file in $schemaFiles) {
         try {
@@ -120,6 +134,7 @@ try {
             
             $loadedSchemas += $schemaData
             $pathMap[$file.FullName] = $relativePath
+            $schemaCache[$relativePath] = $content
             
         } catch {
             Write-Warning "Error loading schema $($file.FullName): $($_.Exception.Message)"
@@ -141,7 +156,8 @@ try {
         # Resolve references
         $resolvedSchema = Resolve-References -Object $cleanSchema -BasePath $schemaData.RelativePath -PathMap $pathMap
         
-        $combinedSchema.definitions[$defKey] = $resolvedSchema
+        # Add the full schema content to definitions
+        $combinedSchema.definitions[$defKey] = $resolvedSchema | ConvertTo-Json -Depth 50 | ConvertFrom-Json
         Write-Host "Added definition: $defKey" -ForegroundColor Green
     }
     

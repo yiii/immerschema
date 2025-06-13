@@ -1,6 +1,6 @@
 {
   "name": "immerschema",
-  "version": "1.1.1",
+  "version": "1.2.3",
   "description": "Comprehensive JSON Schema suite for  CG pipeline",
   "type": "module",
   "main": "./index.cjs",

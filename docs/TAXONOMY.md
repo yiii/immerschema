@@ -15,51 +15,54 @@ The taxonomy system provides **human-friendly categorization** for UI components
 ## Current Taxonomies
 
 ### 🚨 Risk Flags (`riskflag.taxonomy.json`)
-Categorizes safety and compliance warnings for immersive content:
+Categorizes project risks and issues:
 
-- **Viewer Health**: `photosensitive_seizure`, `motion_sickness`, `vertigo_trigger`, `claustrophobia_trigger`, `fear_of_heights_trigger`
-- **Audio SPL**: `loud_volume`, `low_frequency_rumble`
-- **Environmental FX**: `laser_hazard`, `strobe_light`, `heavy_fog`, `scent_allergy`
-- **Content Sensitivity**: `graphic_medical_content`, `body_horror`, `religious_sensitivity`, `political_sensitivity`, `mature_themes`
-- **IP / Legal**: `copyright_unverified`, `ai_copyright_unclear`, `talent_release_missing`
-- **Technical**: `render_time_overrun`, `hardware_overheat`, `projector_alignment_risk`, `sync_drift`, `frame_drop_risk`
-- **Narrative / UX**: `narrative_confusion`, `translation_required`
+- **Technical**: `render_overrun`, `software_failure`, `infrastructure_issue`, `realtime_sync`
+- **Production**: `asset_block`, `schedule_scope`, `creative_alignment`, `talent_gap`
+- **Compliance**: `compliance_delay`, `data_breach`
 
 ### 💻 Software (`software.taxonomy.json`)
 Organizes production tools by workflow category:
 
-- **3-D DCC**: `Houdini`, `Blender`, `Maya`, `Cinema4D`
-- **Engines / Realtime**: `Unreal`, `Unity`, `Notch`, `TouchDesigner`
-- **Compositing**: `AfterEffects`, `Nuke`, `DaVinciResolve`
-- **Renderers**: `Redshift`, `Octane`, `Arnold`, `VRay`
-- **AI / Gen**: `StableDiffusion`, `Midjourney`, `RunwayGen2`, `Veo`
-- **Audio DAW**: `Ableton`, `ProTools`, `Reaper`
-- **Pipeline / Tracking**: `ShotGrid`, `FTrack`, `git`
+- **3-D DCC**: `Houdini`, `Blender`, `Cinema4D`
+- **Engines / Realtime**: `Unreal`, `Notch`, `TouchDesigner`
+- **Compositing**: `AfterEffects`
+- **Renderers**: `Redshift`, `Octane`
+- **AI / Gen**: `Midjourney`, `RunwayGen2`, `Veo`, `ElevenLabs`
+- **Audio DAW**: `Ableton`, `VCV`
+- **Pipeline / Tracking**: `git`
+- **Other**: `other`
 
 ### 🎨 Techniques (`technique.taxonomy.json`)
 Groups production techniques by artistic approach:
 
-- **3D CGI**: `3d_render`, `cgi_3d_realtime`, `volumetric_capture`, `photogrammetry`
-- **2D & Motion-Graphics**: `hand_drawn_2d`, `vector_2d`, `cutout_animation`, `motion_graphics`, `info_graphics`
-- **Procedural / Generative**: `procedural_geometry`, `particle_system`, `fractal_render`, `data_driven_visual`
-- **Simulation**: `fluid_sim`, `smoke_fire_sim`, `cloth_softbody_sim`
-- **AI / ML**: `ai_image`, `ai_video`, `style_transfer`
-- **Live-action & Hybrid**: `live_action_plate`, `macro_photography`, `timelapse`, `stereo_3d_capture`, `mixed_media_collage`
-- **Stylised**: `cel_shaded`, `toon_shader`, `stop_motion`
-- **Audio-Reactive**: `audio_reactive`, `music_visualizer`
+- **3D Rendering & Realtime**: `3d_render`, `3d_realtime`
+- **Capture & Scanning**: `capture_video`, `capture_volumetric`, `capture_photogrammetry`, `capture_360`, `capture_stock`
+- **Character Animation**: `rig_animation`, `mocap_performance`
+- **2D / Motion-Graphics**: `2d_montage`, `2d_multiscreen`, `2d_video_collage`, `2d_hand_drawn`, `2d_shape_animation`, `2d_info_graphics`, `2d_typography`
+- **Generative & Procedural**: `gen_procedural`, `gen_particle`, `gen_data_viz`, `gen_audio_reactive`, `gen_generative_art`
+- **Simulation (Physics)**: `sim_fluid`, `sim_smoke_fire`, `sim_cloth_softbody`
+- **AI / ML**: `ai_generate`, `ai_style_transfer`, `ai_avatar`, `ai_face_swap`
 
 ### 📺 Screen Zones (`screenzone.taxonomy.json`)
 Spatial organization for multi-screen installations:
 
-- **Physical Layout**: Standard screen positioning and arrangement categories
-- **Content Zones**: Logical content areas within the display space
+- **Vertical**: `zenith`, `upper`, `horizon`, `lower`, `nadir`
+- **Cardinal**: `front`, `rear`, `left`, `right`
+- **Quadrants-Upper**: `upper_front_left`, `upper_front_right`, `upper_rear_left`, `upper_rear_right`
+- **Quadrants-Lower**: `lower_front_left`, `lower_front_right`, `lower_rear_left`, `lower_rear_right`
+- **Full**: `full_dome`
 
 ### 👤 Roles (`role.taxonomy.json`)
 Production team organization by department and responsibility:
 
-- **Creative Leadership**: Director, producer, creative director roles
-- **Technical Teams**: Engineering, pipeline, and technical artist roles
-- **Content Creation**: Artists, designers, and content specialist roles
+- **Direction & Production**: `Director`, `Producer`, `ProjectManager`
+- **Art & Supervision**: `ArtLead`, `CGSupervisor`
+- **Realtime & FX**: `HoudiniArtist`, `MotionDesigner`, `UnrealArtist`, `TouchDesignerArtist`, `TouchDesignerDeveloper`, `NotchArtist`, `AIArtist`
+- **Audio**: `AudioLead`, `Composer`
+- **Post Production**: `PostLead`, `MontageArtist`
+- **Support**: `CameraOperator`, `TechSupport`
+- **Other**: `other`
 
 ## Taxonomy Structure
 
@@ -67,7 +70,7 @@ Each taxonomy file follows this JSON Schema pattern:
 
 ```json
 {
-  "$id": "https://example.com/schemas/taxonomy/[name].taxonomy.json",
+  "$id": "immerschema/schemas/taxonomy/[name].taxonomy.json",
   "title": "[Name] taxonomy (UI helper)",
   "type": "object",
   "additionalProperties": false,
@@ -75,10 +78,10 @@ Each taxonomy file follows this JSON Schema pattern:
     "Category Name": {
       "type": "array",
       "items": {
-        "$ref": "../enum/[name].enum.json"
+        "type": "string",
+        "enum": ["value1", "value2", "value3"]
       },
-      "minItems": 1,
-      "enum": ["value1", "value2", "value3"]
+      "minItems": 1
     }
   }
 }
@@ -97,7 +100,7 @@ Each taxonomy file follows this JSON Schema pattern:
 - **Creating new categories** → Edit taxonomy only (MINOR version bump)
 
 ### Deprecation
-- **Deprecate value** → Move to "Deprecated" category (NO version bump)
+- **Deprecate value** → Move to "Other" category (NO version bump)
 - **Remove value** → Delete from both enum and taxonomy (MAJOR version bump)
 
 ### Category Design Principles
@@ -119,7 +122,7 @@ Each taxonomy file follows this JSON Schema pattern:
   </OptGroup>
   <OptGroup label="Engines / Realtime">
     <Option value="Unreal">Unreal</Option>
-    <Option value="Unity">Unity</Option>
+    <Option value="Notch">Notch</Option>
   </OptGroup>
 </Select>
 ```
@@ -128,8 +131,8 @@ Each taxonomy file follows this JSON Schema pattern:
 ```javascript
 // Taxonomy powers faceted search
 const filters = {
-  "3D CGI": ["3d_render", "cgi_3d_realtime"],
-  "AI / ML": ["ai_image", "ai_video"]
+  "3D Rendering & Realtime": ["3d_render", "3d_realtime"],
+  "AI / ML": ["ai_generate", "ai_style_transfer"]
 }
 ```
 

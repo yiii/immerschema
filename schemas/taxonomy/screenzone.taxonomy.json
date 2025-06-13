@@ -8,7 +8,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["zenith", "upper_band", "horizon_band", "lower_band", "nadir"]
+        "enum": ["zenith", "upper", "horizon", "lower", "nadir"]
       },
       "minItems": 1
     },
@@ -16,7 +16,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["front", "rear", "left", "right", "north", "east", "south", "west"]
+        "enum": ["front", "rear", "left", "right"]
       },
       "minItems": 1
     },

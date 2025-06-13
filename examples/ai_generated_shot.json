@@ -5,7 +5,7 @@
   "scene": 1,
   "subScene": 1,
   "sceneName": "AI Dreamscape",
-  "subSceneTitle": "Neural Network Visions",
+  "subSceneName": "Neural Network Visions",
   "durationSec": 45,
   "imageFile": "renders/ai01-ss01-neural_visions.jpg",
   "voice": {

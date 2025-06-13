@@ -7,7 +7,7 @@
     "scene":    { "type": "integer", "minimum": 1 },
     "subScene": { "type": "integer", "minimum": 0 },
     "sceneName":     { "type": "string" },
-    "subSceneTitle": { "type": "string" }
+    "subSceneName": { "type": "string" }
   },
   "additionalProperties": true
 } 
