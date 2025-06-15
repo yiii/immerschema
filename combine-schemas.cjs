@@ -157,7 +157,12 @@ class SchemaCombiner {
     try {
       const content = fs.readFileSync(filePath, 'utf8');
       const schema = JSON.parse(content);
-      const relativePath = path.relative(this.schemasDir, filePath).replace(/\\/g, '/');
+      let relativePath = path.relative(this.schemasDir, filePath).replace(/\\/g, '/');
+      
+      // Ensure relative path doesn't start with ../
+      if (relativePath.startsWith('../')) {
+        relativePath = path.basename(filePath);
+      }
       
       return {
         filePath,
@@ -173,10 +178,24 @@ class SchemaCombiner {
 
   // Convert file path to definition key
   pathToDefinitionKey(filePath) {
-    return filePath
+    // Ensure we're working with a clean relative path
+    let cleanPath = filePath;
+    
+    // If it's an absolute path, make it relative to schemas directory
+    if (path.isAbsolute(cleanPath)) {
+      cleanPath = path.relative(this.schemasDir, cleanPath);
+    }
+    
+    // Normalize path separators and create clean definition key
+    return cleanPath
       .replace(/\\/g, '/')
+      .replace(/^schemas\//, '') // Remove leading schemas/ if present
       .replace(/\.schema\.json$|\.enum\.json$|\.taxonomy\.json$|\.json$/, '')
-      .replace(/[^a-zA-Z0-9]/g, '_');
+      .replace(/\.slice$/, '_slice') // Handle .slice in filename
+      .replace(/[\/\-\.]/g, '_')
+      .replace(/[^a-zA-Z0-9_]/g, '')
+      .replace(/^_+|_+$/g, '') // Remove leading/trailing underscores
+      .replace(/_+/g, '_'); // Collapse multiple underscores
   }
 
   // Resolve $ref references within the combined schema

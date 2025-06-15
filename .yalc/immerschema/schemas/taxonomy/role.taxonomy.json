@@ -12,43 +12,19 @@
       },
       "minItems": 1
     },
-    "Story & Art": {
+    "Art & Supervision": {
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["Writer", "StoryboardArtist", "ConceptArtist"]
+        "enum": ["ArtLead", "CGSupervisor"]
       },
       "minItems": 1
     },
-    "Supervision": {
+    "Realtime & FX": {
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["VFXSupervisor", "CGSupervisor", "PipelineTD"]
-      },
-      "minItems": 1
-    },
-    "Asset Creation": {
-      "type": "array",
-      "items": {
-        "type": "string",
-        "enum": ["Modeler", "TextureArtist", "Rigger", "LookDev"]
-      },
-      "minItems": 1
-    },
-    "Shot Creation": {
-      "type": "array",
-      "items": {
-        "type": "string",
-        "enum": ["Animator", "FXTD", "LightingTD", "Compositor", "HoudiniArtist", "MotionDesigner"]
-      },
-      "minItems": 1
-    },
-    "Realtime & Interactive": {
-      "type": "array",
-      "items": {
-        "type": "string",
-        "enum": ["UnrealArtist", "TouchDesignerArtist", "TouchDesignerDeveloper", "NotchArtist"]
+        "enum": ["HoudiniArtist", "MotionDesigner", "UnrealArtist", "TouchDesignerArtist", "TouchDesignerDeveloper", "NotchArtist", "AIArtist"]
       },
       "minItems": 1
     },
@@ -56,23 +32,23 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["Composer", "SoundFXDesigner", "AudioEngineer", "VOActor"]
+        "enum": ["AudioLead", "Composer"]
       },
       "minItems": 1
     },
-    "Editorial": {
+    "Post Production": {
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["Editor", "Colorist", "MontageArtist"]
+        "enum": ["PostLead", "MontageArtist"]
       },
       "minItems": 1
     },
-    "Production Support": {
+    "Support": {
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["CameraMan", "QA", "Researcher"]
+        "enum": ["CameraOperator", "TechSupport"]
       },
       "minItems": 1
     },

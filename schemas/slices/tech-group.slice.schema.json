@@ -13,7 +13,7 @@
           "SIM",
           "GEN",
           "AI",
-          "CAP"
+          "CAM"
         ]
       },
       "minItems": 1,

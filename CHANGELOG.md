@@ -52,7 +52,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Empty array and string handling
   - Large numeric values testing
   - Schema version validation
-  - Complex task and people management scenarios
+  - Complex task and crew management scenarios
 
 #### Automated Test Infrastructure
 - **Test Runner Script** (`scripts/test_runner.js`)

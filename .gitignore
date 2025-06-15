@@ -1,4 +1,5 @@
 adjust/
+.yalc/
 
 # Dependencies
 node_modules/

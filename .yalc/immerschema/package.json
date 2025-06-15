@@ -1,6 +1,6 @@
 {
   "name": "immerschema",
-  "version": "1.1.1",
+  "version": "1.2.5",
   "description": "Comprehensive JSON Schema suite for  CG pipeline",
   "type": "module",
   "main": "./index.cjs",
@@ -54,5 +54,5 @@
   "dependencies": {
     "immerschema": "file:.yalc/immerschema"
   },
-  "yalcSig": "ecdd621ade0de7b4aa4d32dc7e8a267b"
+  "yalcSig": "0a6eb12f11dd63f8755051da6a14ddae"
 }

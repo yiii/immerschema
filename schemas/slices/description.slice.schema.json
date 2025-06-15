@@ -6,12 +6,6 @@
     "description": {
       "type": "string",
       "description": "One-paragraph narrative of what the viewer sees/hears. Markdown allowed."
-    },
-    "descriptionLang": {
-      "type": "string",
-      "pattern": "^[a-z]{2}$",
-      "default": "en",
-      "description": "ISO-639-1 language code of the description text."
     }
   },
   "required": ["description"],

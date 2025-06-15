@@ -57,7 +57,10 @@ function setupAjv() {
     'schemas/enum/screenzone.enum.json', 
     'schemas/enum/riskflag.enum.json',
     'schemas/enum/role.enum.json',
-    'schemas/enum/software.enum.json'
+    'schemas/enum/software.enum.json',
+    'schemas/enum/assetkind.enum.json',
+    'schemas/enum/assetrole.enum.json',
+    'schemas/enum/dept.enum.json'
   ];
   
   const extSchemas = [

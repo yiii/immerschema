@@ -44,7 +44,11 @@ schemas/
   "scene": 3,
   "subScene": 1,
   "action": "Stars swirl into a brain.",
-  "durationSec": 7.5
+  "timing": {
+    "durationSec": 7.5,
+    "durationFrames": 180,
+    "fps": 24
+  }
 }
 
 // Lock (shots/lock/shot42.json)
@@ -52,7 +56,11 @@ schemas/
   "id": "shot42",
   "scene": 3,
   "subScene": 1,
-  "durationSec": 7.5,
+  "timing": {
+    "durationSec": 7.5,
+    "durationFrames": 180,
+    "fps": 24
+  },
   "primaryTechnique": "particle_system",
   "voice": { 
     "lang": "ru", 
@@ -121,37 +129,50 @@ This lets you start a shot with two lines of JSON, then progressively enrich it 
 ```
 schemas/
 ├─ slices/            # LEGO bricks - reusable schema components
-│   id.slice.schema.json    # Unique identifiers, scene/subscene structure, versioning
-│   note.slice.schema.json  # Action descriptions, user notes, LLM-generated notes
-│   timing.slice.schema.json    # Base timing schema
+│   id.slice.schema.json           # Unique identifiers, scene/subscene structure, versioning
+│   note.slice.schema.json         # Action descriptions, user notes, LLM-generated notes
+│   timing.slice.schema.json       # Base timing schema
 │   timing-seconds.slice.schema.json    # Duration in seconds (for creative/drafting phase)
-│   timing-frames.slice.schema.json # Frame-accurate timing with FPS (for production)
-│   meta-scene.slice.schema.json    # Scene metadata, grouping, and organization
-│   technique.slice.schema.json     # Primary and secondary techniques for the shot
-│   screen.slice.schema.json        # Screen zones and display configuration
-│   software.slice.schema.json      # Software pipeline and tool requirements
-│   tasks.slice.schema.json         # Task tracking, assignments, and status
-│   crew.slice.schema.json          # Team assignments and responsibilities
-│   risk.slice.json        # Risk flags and safety considerations
-│   voice.slice.schema.json         # Voice-over with language and text (inherits projectLang)
-│   audio.slice.schema.json         # Music and sound effects management
-│   assets.slice.schema.json        # Asset management with paths, types, and roles
-│   description.slice.schema.json   # Detailed shot descriptions
-│   workload.slice.json             # Workload tracking and management
-│   bottleneck.slice.json           # Production bottleneck identification
-│   tech-group.slice.schema.json    # Technical group assignments
+│   timing-frames.slice.schema.json     # Frame-accurate timing with FPS (for production)
+│   meta-scene.slice.schema.json   # Scene metadata, grouping, and organization
+│   technique.slice.schema.json    # Primary and secondary techniques for the shot
+│   screen.slice.schema.json       # Screen zones and display configuration
+│   software.slice.schema.json     # Software pipeline and tool requirements
+│   tasks.slice.schema.json        # Task tracking, assignments, and status
+│   crew.slice.schema.json         # Team assignments and responsibilities
+│   risk.slice.json               # Risk flags and safety considerations
+│   voice.slice.schema.json        # Voice-over with language and text (inherits projectLang)
+│   audio.slice.schema.json        # Music and sound effects management
+│   assets.slice.schema.json       # Asset management with paths, types, and roles
+│   description.slice.schema.json  # Detailed shot descriptions
+│   workload.slice.json           # Workload tracking and management
+│   bottleneck.slice.json         # Production bottleneck identification
+│   tech-group.slice.schema.json  # Technical group assignments
 ├─ enum/              # Controlled vocabularies - single source of truth
 │   technique.enum.json   # Allowed techniques (CG, live-action, etc.)
 │   software.enum.json    # Supported software tools
 │   role.enum.json        # Team roles and responsibilities
 │   riskflag.enum.json    # Safety and risk identifiers
 │   screenzone.enum.json  # Screen placement zones
-└─ profiles/          # Milestone bundles - validation stages
-    draft.schema.json      # Initial creative validation (minimal requirements)
-    review.schema.json     # Director review (timing + technique + assets)
-    plan.schema.json       # Technical planning and resource allocation
-    assign.schema.json     # Team and task assignments
-    lock.schema.json       # Final production lock (safety + VO + assets)
+├─ taxonomy/          # Human-friendly categorization for UI
+│   technique.taxonomy.json
+│   software.taxonomy.json
+│   role.taxonomy.json
+│   riskflag.taxonomy.json
+│   screenzone.taxonomy.json
+├─ profiles/          # Milestone bundles - validation stages
+│   draft.schema.json      # Initial creative validation
+│   review.schema.json     # Director review
+│   plan.schema.json       # Technical planning
+│   assign.schema.json     # Team assignments
+│   lock.schema.json       # Final production lock
+├─ io/                # LLM I/O contracts
+│   prompt_envelope.schema.json
+│   response_envelope.schema.json
+│   patch.schema.json
+└─ ext/              # Optional extensions
+    debug.schema.json
+    alt-takes.schema.json
 ```
 
 ### 3. Key slices at a glance
@@ -160,12 +181,13 @@ schemas/
 |------------|----------------|----------------------|
 | id.slice | id, schemaVersion | none (profile enforces id) |
 | note.slice | action, userNote | none |
-| timing-seconds.slice | durationSec | durationSec |
-| timing-frames.slice | durationFrames, fps | durationFrames |
+| timing.slice | timing | none |
+| timing-seconds.slice | timing | timing.durationSec |
+| timing-frames.slice | timing | timing.durationFrames |
 | technique.slice | primaryTechnique, otherTechniques | none (profile enforces primary) |
 | software.slice | softwarePipeline | none (profile decides) |
 | tasks.slice | tasks[] | id, task, dept, prio, status inside each item |
-| crew.slice | people[] | role, name inside each item |
+| crew.slice | crew[] | role, name inside each item |
 | risk.slice | riskFlags[] | none (profile enforces) |
 | voice.slice | voice | voice required (nested object with lang, text) |
 | assets.slice | assets[] | path, kind inside each item |
@@ -237,7 +259,15 @@ Minimal fields plus an array of shots that must validate against one chosen prof
   "fps": 24,
   "projectLang": "ru",  // default language for voice
   "shots": [
-    { "id": "sc-01", "action": "Stars swirl…" }  // Draft
+    { 
+      "id": "sc-01", 
+      "action": "Stars swirl…",
+      "timing": {
+        "durationSec": 7.5,
+        "durationFrames": 180,
+        "fps": 24
+      }
+    }  // Draft
   ]
 }
 ```
@@ -280,7 +310,17 @@ Slices are additive; removing a slice or moving a requirement to a higher tier i
 ### 8. FAQ
 
 **Q: Can I put timing inside a timing object?**  
-A: Yes—wrap the slice properties in a "timing" sub-object and update profiles' required lists accordingly.
+A: Yes—all timing fields are now nested under a "timing" object. This provides better organization and consistency:
+```json
+{
+  "id": "scene-04",
+  "timing": {
+    "durationSec": 7.5,
+    "durationFrames": 180,
+    "fps": 24
+  }
+}
+```
 
 **Q: What if a shot needs both RU and EN voice?**  
 A: Use the alias pattern:
@@ -317,12 +357,12 @@ A: When you have a heavy asset (like a 4K video) and need a lighter preview vers
 {
   "assets": [
     {
-      "path": "./renders/scene_01_4k.mp4",
+      "path": "./renders/sc07_4k.mp4",
       "kind": "video",
-      "role": "reference"
+      "role": "final"
     },
     {
-      "path": "./previews/scene_01_720p.mp4",
+      "path": "./renders/sc07_preview.mp4",
       "kind": "video",
       "role": "preview",
       "sourcePath": "./renders/scene_01_4k.mp4"
@@ -330,7 +370,6 @@ A: When you have a heavy asset (like a 4K video) and need a lighter preview vers
   ]
 }
 ```
-The sourcePath field is required when role is "preview" and must point to the original asset.
 
 **Q: How do I generate TS/Python types?**  
 A: Use quicktype (TS) or datamodel-code-generator (Python) on the profile schema you care about; it will inline the referenced slices.

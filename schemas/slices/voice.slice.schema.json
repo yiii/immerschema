@@ -1,6 +1,6 @@
 {
   "$id": "immerschema/schemas/slices/voice.slice.schema.json",
-  "title": "Voice slice (nested)",
+  "title": "Voice slice",
   "type": "object",
   "required": ["voice"],
   "properties": {
@@ -20,9 +20,9 @@
         }
       }
     },
-    "llmNote": {
+    "voiceLinesNotes": {
       "type": "string",
-      "description": "Private note from LLM about the voice line"
+      "description": "note about the voice lines"
     }
   },
   "additionalProperties": true

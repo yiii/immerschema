@@ -4,24 +4,26 @@
   "type": "object",
   "additionalProperties": true,
 
-  "allOf": [
-    { "$ref": "./draft.schema.json"            },  
-    { "$ref": "../slices/meta-scene.slice.schema.json" },
-    { "$ref": "../slices/screen.slice.schema.json"     },
-    { "$ref": "../slices/assets.slice.schema.json"     }
-  ],
-
   "required": [
     "timing",
-    "primaryTechnique",
-    "techGroup",  
+    "technique",
     "voice",
     "assets",
     "description"
   ],
 
-  "anyOf": [
-    { "required": ["screenZone"] },
-    { "required": ["cameraMotion"] }
+  "allOf": [
+    { "$ref": "./draft.schema.json" },
+    { "$ref": "../slices/meta-scene.slice.schema.json" },
+    { "$ref": "../slices/screen.slice.schema.json" },
+    { "$ref": "../slices/assets.prop.slice.json" },
+
+
+    {
+      "anyOf": [
+        { "properties": { "screen": { "required": ["screenZone"] } } },
+        { "properties": { "screen": { "required": ["cameraMotion"] } } }
+      ]
+    }
   ]
 }

@@ -196,7 +196,7 @@
                                                      "status":  "todo"
                                                  }
                                              ],
-                                   "people":  [
+                                   "crew":  [
                                                   {
                                                       "role":  "Director",
                                                       "name":  "Jane Smith"
@@ -246,7 +246,7 @@
                                                      "status":  "todo"
                                                  }
                                              ],
-                                   "people":  [
+                                   "crew":  [
                                                   {
                                                       "role":  "Director",
                                                       "name":  "Jane Smith"
@@ -262,8 +262,8 @@
                                             ]
                   },
                   {
-                      "name":  "maximum_people_complexity",
-                      "description":  "Tests maximum people complexity",
+                      "name":  "maximum_crew_complexity",
+                      "description":  "Tests maximum crew complexity",
                       "schema":  "node_modules/immerschema/schemas/profiles/review.schema.json",
                       "data":  {
                                    "schemaVersion":  "1.0.0",
@@ -273,7 +273,7 @@
                                    "durationSec":  10,
                                    "voice":  {
                                                  "lang":  "en",
-                                                 "text":  "Testing maximum people complexity"
+                                                 "text":  "Testing maximum crew complexity"
                                              },
                                    "screenZone":  "full_dome",
                                    "primaryTechnique":  "3d_render",
@@ -283,7 +283,7 @@
                                                         ],
                                    "assets":  [
                                                   {
-                                                      "path":  "./renders/mp01-ss01-complex_people.exr",
+                                                      "path":  "./renders/mp01-ss01-complex_crew.exr",
                                                       "kind":  "image",
                                                       "role":  "reference"
                                                   }
@@ -297,7 +297,7 @@
                                                      "status":  "todo"
                                                  }
                                              ],
-                                   "people":  [
+                                   "crew":  [
                                                   {
                                                       "role":  "Director",
                                                       "name":  "Jane Smith",
@@ -346,7 +346,7 @@
                                                      "status":  "in_progress"
                                                  }
                                              ],
-                                   "people":  [
+                                   "crew":  [
                                                   {
                                                       "role":  "Director",
                                                       "name":  "Jane Smith",
@@ -403,7 +403,7 @@
                                                      "status":  "in_progress"
                                                  }
                                              ],
-                                   "people":  [
+                                   "crew":  [
                                                   {
                                                       "role":  "other",
                                                       "customRole":  "AI Prompt Engineer",

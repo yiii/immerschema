@@ -5,7 +5,7 @@
 | **SIM** | Physics-based or solver-driven simulations     | `sim_fluid`, `sim_smoke_fire`, `sim_cloth_softbody`                             |
 | **GEN** | Generative or procedural (rule/data-driven)    | `gen_procedural`, `gen_particle`, `gen_data_viz`, `gen_generative_art`          |
 | **AI**  | Machine-learning / neural media                | `ai_generate`, `ai_style_transfer`, `ai_avatar`, `ai_face_swap`                 |
-| **CAP** | Any camera-capture: video, timelapse, macro    | `capture_video`, `capture_macro`, `capture_timelapse`, `capture_photogrammetry` |
+| **CAM** | Any camera-capture: video, timelapse, macro    | `capture_video`, `capture_macro`, `capture_timelapse`, `capture_photogrammetry` |
 
 
 **Code Naming Pattern**

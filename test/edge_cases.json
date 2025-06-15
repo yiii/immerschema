@@ -193,7 +193,7 @@
                                    "tasks":  [
 
                                              ],
-                                   "people":  [
+                                   "crew":  [
 
                                               ],
                                    "schemaVersion":  "1.0.0"
@@ -244,7 +244,7 @@
                                                      "actualHours":  35
                                                  }
                                              ],
-                                   "people":  [
+                                   "crew":  [
                                                   {
                                                       "role":  "Director",
                                                       "name":  "Jane Smith",
@@ -259,8 +259,8 @@
                       "expected":  "valid"
                   },
                   {
-                      "name":  "maximum_people_complexity",
-                      "description":  "Tests complex people entries with all optional fields",
+                      "name":  "maximum_crew_complexity",
+                      "description":  "Tests complex crew entries with all optional fields",
                       "schema":  "schemas/profiles/review.schema.json",
                       "data":  {
                                    "id":  "mp01-ss01",
@@ -269,7 +269,7 @@
                                    "durationSec":  10,
                                    "voice":  {
                                                  "lang":  "en",
-                                                 "text":  "Testing complex people"
+                                                 "text":  "Testing complex crew"
                                              },
                                    "screenZone":  "full_dome",
                                    "primaryTechnique":  "3d_render",
@@ -279,7 +279,7 @@
                                                         ],
                                    "assets":  [
                                                   {
-                                                      "path":  "./renders/mp01-ss01-complex_people.exr",
+                                                      "path":  "./renders/mp01-ss01-complex_crew.exr",
                                                       "kind":  "image",
                                                       "role":  "reference"
                                                   }
@@ -293,7 +293,7 @@
                                                      "status":  "in_progress"
                                                  }
                                              ],
-                                   "people":  [
+                                   "crew":  [
                                                   {
                                                       "role":  "Director",
                                                       "name":  "Jane Smith",
@@ -340,7 +340,7 @@
                                                      "status":  "in_progress"
                                                  }
                                              ],
-                                   "people":  [
+                                   "crew":  [
                                                   {
                                                       "role":  "Director",
                                                       "name":  "Jane Smith",

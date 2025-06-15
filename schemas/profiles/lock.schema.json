@@ -6,12 +6,12 @@
 
   "allOf": [
     { "$ref": "./assign.schema.json" },
-    { "$ref": "../slices/risk.slice.json" }
+    { "$ref": "../slices/risks.prop.slice.json" }
   ],
 
   "required": [
     "voice",
-    "riskFlags",
+    "risks",
     "description"
   ]
 }

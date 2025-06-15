@@ -1,3 +1,12 @@
+## 1.2.0  –  2024-03-21
+* Version bump to 1.2.0
+* Added new schema combination system
+* Enhanced validation pipeline
+* Added bottleneck tracking
+* Added risk management system
+* Added workload monitoring
+* Improved audio support
+
 ## 1.1.0  –  2024-12-19
 * Version bump to 1.1.0
 

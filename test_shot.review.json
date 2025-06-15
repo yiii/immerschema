@@ -1,35 +1,162 @@
 {
-  "id": "test_shot_001",
-  "notes": "Test shot for review stage",
-  "timing": {
-    "start": 0,
-    "end": 100,
-    "unit": "frames"
-  },
-  "technique": {
-    "name": "test_technique",
-    "group": "test_group"
-  },
-  "description": "A test shot for validating the review schema",
-  "voice": {
-    "script": "Test voice script",
-    "notes": "Test voice notes"
-  },
-  "audio": {
-    "description": "Test audio description",
-    "notes": "Test audio notes"
-  },
-  "meta_scene": {
-    "description": "Test meta scene description",
-    "notes": "Test meta scene notes"
-  },
+  "id": "sc-07",
+  "schemaVersion": "1.0.0",
+  "scene": 2,
+  "subScene": 1,
+  "index": 7,
+  "sceneName": "Neural Emergence",
+  "subSceneName": "Particle Formation",
+
+  "description": "A delicate choreography of particles converges into a neural lattice, evoking the birth of thought.",
+
+  "userNote": "Consider shifting the palette to cooler hues",
+  "llmNote": "Generated from draft; check lighting and contrast",
+
   "screen": {
-    "zone": "center",
-    "description": "Test screen description",
-    "notes": "Test screen notes"
+    "screenZone": "zenith",
+    "cameraMotion": "Slow pan motion",
+    "transitionIn": "Partciles are spawned from previos scene",
+    "action": "Particles begin to drift upward, slowly forming a glowing neural web.",
+    "transitionOut": "cut",
+    "immersiveCue": "soft_music"
   },
-  "assets": {
-    "description": "Test assets description",
-    "notes": "Test assets notes"
-  }
-} 
+
+  "technique": {
+    "techGroup": ["3D"],
+    "primaryTechnique": "3d_render",
+    "otherTechniques": ["gen_particle"],
+    "note": "Uses GPU instanced particles for performance"
+  },
+  
+  "softwarePipeline": [
+    "Houdini",
+    "AfterEffects"
+  ],
+
+  "timing": {
+    "durationSec": 5.2,
+    "durationFrames": 125,
+    "fps": 24
+  },
+
+  "voice": {
+    "lang": "en",
+    "text": "Particles coalesce into the neural sculpture."
+  },
+  "voiceLinesNotes": "Double‐check voice lip-sync at 24fps",
+
+  "assets": [
+    {
+      "path": "./boards/sc-07_key.png",
+      "kind": "image",
+      "role": "storyboard",
+      "visualDescription": "Sketch of drifting particles",
+      "motionDescription": "Smooth upward drift",
+      "lang": "en",
+      "note": "Approved by art director"
+    },
+    {
+      "path": "./renders/sc-07_preview.gif",
+      "kind": "video",
+      "role": "preview",
+      "sourcePath": "./renders/sc-07_full.mp4"
+    }
+  ],
+
+  "audio": {
+    "music": [
+      {
+        "path": "./audio/ambient_drift.mp3",
+        "genre": "ambient",
+        "bpm": 60,
+        "key": "C#m",
+        "note": "Seamless loop"
+      }
+    ],
+    "soundFx": [
+      {
+        "path": "./audio/particles_whirl.wav",
+        "note": "Whirl sound as particles begin to spin"
+      },
+      {
+        "note": "Low boom underlayer (to be created)"
+      }
+    ]
+  },
+
+  "tasks": [
+    {
+      "id": "task-07a",
+      "task": "Finalize particle shader",
+      "dept": "FX",
+      "prio": "high",
+      "assignedTo": "Alice",
+      "status": "in_progress",
+      "note": "Watch for artifacts near edges",
+      "hoursPlanned": 8,
+      "hoursActual": 2.5,
+      "timestamps": {
+        "created": "2025-06-14T10:00:00Z",
+        "started": "2025-06-15T09:30:00Z",
+        "due": "2025-06-20T17:00:00Z",
+        "updated": "2025-06-15T14:45:00Z"
+      }
+    }
+  ],
+
+  "workloadBreakdown": {
+    "generatedFromTasksAt": "2025-06-15T15:00:00Z",
+    "deptHours": {
+      "FX": 8
+    },
+    "roleHours": {
+      "HoudiniArtist": 8
+    },
+    "totalPlanned": 8,
+    "bufferPct": 15,
+    "totalWithBuffer": 9.2
+  },
+
+  "crew": [
+    {
+      "role": "CGSupervisor",
+      "name": "Bob",
+      "contacts": { "email": "bob@example.com" },
+      "availability": "full_time",
+      "note": "Oversees render passes"
+    },
+    {
+      "role": "HoudiniArtist",
+      "name": "Charlie",
+      "note": "Sets up particle emitters"
+    }
+  ],
+
+  "bottlenecks": [
+    {
+      "id": "bn-01",
+      "description": "High poly-count in volumetric mesh",
+      "cause": "Particle count exceeds GPU instancing budget",
+      "kpiTrigger": "frameTime > 40ms",
+      "assignedTo": "Tech Lead"
+    }
+  ],
+
+  "risks": [
+    {
+      "flag": "render_overrun",
+      "assignedTo": "Render Lead",
+      "status": "planned",
+      "mitigation": "Spin up 2 extra render nodes",
+      "raisedBy": "FX TD",
+      "raisedOn": "2025-06-15",
+      "note": "High poly count may require subframe sampling"
+    },
+    {
+      "flag": "asset_block",
+      "assignedTo": "Art Lead",
+      "status": "in_progress",
+      "mitigation": "Use placeholder textures until final art asset arrives"
+    }
+  ]
+}

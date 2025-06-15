@@ -4,6 +4,59 @@
   "title": "Combined Immerschema - All Schemas",
   "description": "Complete schema combining all slices, enums, profiles, and project schemas",
   "definitions": {
+    "enum_assetkind": {
+      "$schema": "http://json-schema.org/draft/2020-12/schema",
+      "title": "Asset kind enum",
+      "description": "Top-level media types accepted by the pipeline.",
+      "type": "string",
+      "enum": [
+        "image",
+        "video",
+        "audio",
+        "3d",
+        "pdf",
+        "other"
+      ]
+    },
+    "enum_assetrole": {
+      "$schema": "http://json-schema.org/draft/2020-12/schema",
+      "title": "Asset role enum",
+      "description": "Purpose of each asset inside the production workflow.",
+      "type": "string",
+      "enum": [
+        "reference",
+        "plate",
+        "texture",
+        "hdr",
+        "preview",
+        "storyboard",
+        "animatic",
+        "legal",
+        "other"
+      ]
+    },
+    "enum_dept": {
+      "$schema": "http://json-schema.org/draft/2020-12/schema",
+      "title": "Department enum (pipeline buckets)",
+      "description": "High-level production departments; short tokens match techGroup style.",
+      "type": "string",
+      "enum": [
+        "DIR",
+        "PROD",
+        "CG",
+        "FX",
+        "2D",
+        "GEN",
+        "AI",
+        "CAM",
+        "AUDIO",
+        "EDIT",
+        "COMP",
+        "PIPE",
+        "SUPPORT",
+        "OTHER"
+      ]
+    },
     "enum_riskflag": {
       "$schema": "http://json-schema.org/draft/2020-12/schema",
       "title": "Risk flag enum (simplified)",
@@ -234,7 +287,7 @@
           "description": "Human instruction or question sent to the model."
         },
         {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_core",
+          "$ref": "#/definitions/core",
           "title": "CURRENT_ITEM",
           "description": "The scene (or sub-scene) JSON the user is editing."
         },
@@ -243,7 +296,7 @@
           "title": "FULL_PIPELINE (optional)",
           "description": "If present, every scene in the project—used for global checks.",
           "items": {
-            "$ref": "#/definitions/_git_Brain_Scenario_immerschema_core"
+            "$ref": "#/definitions/core"
           }
         }
       ],
@@ -272,7 +325,7 @@
           "title": "ITEMS_UPDATE",
           "description": "List of RFC-6902 patches to apply (may be empty).",
           "items": {
-            "$ref": "#/definitions/_git_Brain_Scenario_immerschema_io_patch"
+            "$ref": "#/definitions/io_patch"
           }
         }
       ],
@@ -280,26 +333,27 @@
     },
     "profiles_assign": {
       "title": "Profile – Assign (crew & tasks)",
+      "type": "object",
+      "additionalProperties": true,
       "allOf": [
         {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_profiles_plan"
+          "$ref": "#/definitions/profiles_plan"
         },
         {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_tasks_slice"
+          "$ref": "#/definitions/slices_tasks_prop_slice"
         },
         {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_crew_slice"
+          "$ref": "#/definitions/slices_crew_prop_slice"
         },
         {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_audio_slice"
+          "$ref": "#/definitions/slices_audio_slice"
         }
       ],
       "required": [
         "tasks",
-        "people",
+        "crew",
         "voice",
-        "music",
-        "soundFx",
+        "audio",
         "description"
       ]
     },
@@ -309,28 +363,31 @@
       "additionalProperties": true,
       "allOf": [
         {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_id_slice"
+          "$ref": "#/definitions/slices_id_slice"
         },
         {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_note_slice"
+          "$ref": "#/definitions/slices_note_slice"
         },
         {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_timing_seconds_slice"
+          "$ref": "#/definitions/slices_timing_seconds_slice"
         },
         {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_timing_frames_slice"
+          "$ref": "#/definitions/slices_timing_frames_slice"
         },
         {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_technique_slice"
+          "$ref": "#/definitions/slices_technique_slice"
         },
         {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_voice_slice"
+          "$ref": "#/definitions/slices_voice_slice"
         },
         {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_audio_slice"
+          "$ref": "#/definitions/slices_audio_slice"
         },
         {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_description_slice"
+          "$ref": "#/definitions/slices_description_slice"
+        },
+        {
+          "$ref": "#/definitions/slices_screen_slice"
         }
       ],
       "required": [
@@ -359,7 +416,7 @@
         },
         {
           "required": [
-            "primaryTechnique"
+            "technique"
           ]
         },
         {
@@ -369,17 +426,17 @@
         },
         {
           "required": [
-            "music"
-          ]
-        },
-        {
-          "required": [
-            "soundFx"
+            "audio"
           ]
         },
         {
           "required": [
             "description"
+          ]
+        },
+        {
+          "required": [
+            "screen"
           ]
         }
       ]
@@ -390,43 +447,45 @@
       "additionalProperties": true,
       "allOf": [
         {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_profiles_assign"
+          "$ref": "#/definitions/profiles_assign"
         },
         {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_risk_slice"
+          "$ref": "#/definitions/slices_risks_prop_slice"
         }
       ],
       "required": [
         "voice",
-        "riskFlags",
+        "risks",
         "description"
       ]
     },
     "profiles_plan": {
       "title": "Profile – Plan (tech lock)",
+      "type": "object",
+      "additionalProperties": true,
       "allOf": [
         {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_profiles_review"
+          "$ref": "#/definitions/profiles_review"
         },
         {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_software_slice"
+          "$ref": "#/definitions/slices_software_slice"
         },
         {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_bottleneck_slice"
+          "$ref": "#/definitions/slices_bottleneck_slice"
         },
         {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_workload_slice"
+          "$ref": "#/definitions/slices_workload_slice"
         },
         {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_risk_slice"
+          "$ref": "#/definitions/slices_risks_prop_slice"
         }
       ],
       "required": [
         "softwarePipeline",
-        "primaryTechnique",
+        "technique",
         "voice",
         "workloadBreakdown",
-        "riskFlags",
+        "risks",
         "description"
       ]
     },
@@ -434,37 +493,46 @@
       "title": "Profile – Review (creative + timing)",
       "type": "object",
       "additionalProperties": true,
-      "allOf": [
-        {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_profiles_draft"
-        },
-        {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_meta_scene_slice"
-        },
-        {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_screen_slice"
-        },
-        {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_assets_slice"
-        }
-      ],
       "required": [
         "timing",
-        "primaryTechnique",
-        "techGroup",
+        "technique",
         "voice",
         "assets",
         "description"
       ],
-      "anyOf": [
+      "allOf": [
         {
-          "required": [
-            "screenZone"
-          ]
+          "$ref": "#/definitions/profiles_draft"
         },
         {
-          "required": [
-            "cameraMotion"
+          "$ref": "#/definitions/slices_meta_scene_slice"
+        },
+        {
+          "$ref": "#/definitions/slices_screen_slice"
+        },
+        {
+          "$ref": "#/definitions/slices_assets_prop_slice"
+        },
+        {
+          "anyOf": [
+            {
+              "properties": {
+                "screen": {
+                  "required": [
+                    "screenZone"
+                  ]
+                }
+              }
+            },
+            {
+              "properties": {
+                "screen": {
+                  "required": [
+                    "cameraMotion"
+                  ]
+                }
+              }
+            }
           ]
         }
       ]
@@ -493,14 +561,14 @@
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "#/definitions/_git_Brain_Scenario_immerschema_profiles_assign"
+            "$ref": "#/definitions/profiles_assign"
           },
           "description": "Shot documents validated against the Assign profile."
         },
         "globalSoftware": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/_git_Brain_Scenario_immerschema_enum_software"
+            "$ref": "#/definitions/enum_software"
           },
           "default": []
         },
@@ -508,7 +576,7 @@
           "type": "string"
         },
         "debug": {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_ext_debug_schema_json__properties_debug"
+          "$ref": "#/definitions/ext_debug_schema_json_properties_debug"
         }
       }
     },
@@ -536,14 +604,14 @@
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "#/definitions/_git_Brain_Scenario_immerschema_profiles_draft"
+            "$ref": "#/definitions/profiles_draft"
           },
           "description": "Shot documents validated against the Draft profile."
         },
         "globalSoftware": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/_git_Brain_Scenario_immerschema_enum_software"
+            "$ref": "#/definitions/enum_software"
           },
           "default": []
         },
@@ -551,7 +619,7 @@
           "type": "string"
         },
         "debug": {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_ext_debug_schema_json__properties_debug"
+          "$ref": "#/definitions/ext_debug_schema_json_properties_debug"
         }
       }
     },
@@ -579,14 +647,14 @@
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "#/definitions/_git_Brain_Scenario_immerschema_profiles_lock"
+            "$ref": "#/definitions/profiles_lock"
           },
           "description": "Shot documents validated against the Lock profile."
         },
         "globalSoftware": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/_git_Brain_Scenario_immerschema_enum_software"
+            "$ref": "#/definitions/enum_software"
           },
           "default": []
         },
@@ -594,7 +662,7 @@
           "type": "string"
         },
         "debug": {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_ext_debug_schema_json__properties_debug"
+          "$ref": "#/definitions/ext_debug_schema_json_properties_debug"
         }
       }
     },
@@ -622,14 +690,14 @@
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "#/definitions/_git_Brain_Scenario_immerschema_profiles_plan"
+            "$ref": "#/definitions/profiles_plan"
           },
           "description": "Shot documents validated against the Plan profile."
         },
         "globalSoftware": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/_git_Brain_Scenario_immerschema_enum_software"
+            "$ref": "#/definitions/enum_software"
           },
           "default": []
         },
@@ -637,7 +705,7 @@
           "type": "string"
         },
         "debug": {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_ext_debug_schema_json__properties_debug"
+          "$ref": "#/definitions/ext_debug_schema_json_properties_debug"
         }
       }
     },
@@ -665,14 +733,14 @@
           "type": "array",
           "minItems": 1,
           "items": {
-            "$ref": "#/definitions/_git_Brain_Scenario_immerschema_profiles_review"
+            "$ref": "#/definitions/profiles_review"
           },
           "description": "Shot documents validated against the Review profile."
         },
         "globalSoftware": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/_git_Brain_Scenario_immerschema_enum_software"
+            "$ref": "#/definitions/enum_software"
           },
           "default": []
         },
@@ -680,196 +748,218 @@
           "type": "string"
         },
         "debug": {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_ext_debug_schema_json__properties_debug"
+          "$ref": "#/definitions/ext_debug_schema_json_properties_debug"
         }
       }
     },
     "slices_assets_slice": {
-      "title": "Asset list slice (flat rows)",
-      "description": "Schema for managing project assets including images, videos, audio, 3D models, and other media types. Each asset must specify its path, kind (type), and role (purpose) in the project. Optional fields allow for additional metadata like descriptions, language, and notes. Preview assets must reference their source asset.",
-      "type": "object",
-      "properties": {
-        "assets": {
-          "type": "array",
-          "minItems": 1,
-          "items": {
-            "type": "object",
-            "required": [
-              "path",
-              "kind",
-              "role"
-            ],
-            "additionalProperties": false,
-            "properties": {
-              "path": {
-                "type": "string",
-                "pattern": "^(https?://|/|\\./).+"
-              },
-              "kind": {
-                "enum": [
-                  "image",
-                  "video",
-                  "audio",
-                  "3d",
-                  "pdf",
-                  "other"
-                ]
-              },
-              "role": {
-                "enum": [
-                  "reference",
-                  "plate",
-                  "texture",
-                  "hdr",
-                  "preview",
-                  "storyboard",
-                  "animatic",
-                  "legal",
-                  "other"
-                ]
-              },
-              "sourcePath": {
-                "type": "string",
-                "pattern": "^(https?://|/|\\./).+",
-                "description": "Path of the heavy asset this preview belongs to."
-              },
-              "visualDescription": {
-                "type": "string"
-              },
-              "motionDescription": {
-                "type": "string"
-              },
-              "audioDescription": {
-                "type": "string"
-              },
-              "lang": {
-                "type": "string",
-                "pattern": "^[a-z]{2}$"
-              },
-              "note": {
-                "type": "string"
-              }
-            },
-            "allOf": [
-              {
-                "if": {
-                  "properties": {
-                    "role": {
-                      "const": "preview"
-                    }
-                  }
-                },
-                "then": {
-                  "required": [
-                    "sourcePath"
-                  ]
+      "title": "Assets array slice",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "kind",
+          "role"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string",
+            "pattern": "^(https?://|/|\\./).+"
+          },
+          "kind": {
+            "$ref": "#/definitions/enum_assetkind"
+          },
+          "role": {
+            "$ref": "#/definitions/enum_assetrole"
+          },
+          "sourcePath": {
+            "type": "string",
+            "pattern": "^(https?://|/|\\./).+"
+          },
+          "visualDescription": {
+            "type": "string"
+          },
+          "motionDescription": {
+            "type": "string"
+          },
+          "audioDescription": {
+            "type": "string"
+          },
+          "lang": {
+            "type": "string",
+            "pattern": "^[a-z]{2}$"
+          },
+          "note": {
+            "type": "string"
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "role": {
+                  "const": "preview"
                 }
               }
-            ]
+            },
+            "then": {
+              "required": [
+                "sourcePath"
+              ]
+            }
           }
-        }
+        ]
       },
-      "additionalProperties": true
+      "default": []
     },
     "slices_audio_slice": {
-      "title": "Audio slice",
+      "title": "Audio slice (nested)",
       "type": "object",
       "properties": {
-        "music": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "required": [
-              "path"
-            ],
-            "properties": {
-              "path": {
-                "type": "string",
-                "pattern": "^(https?://|/|\\./).+"
+        "audio": {
+          "type": "object",
+          "properties": {
+            "music": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string",
+                    "pattern": "^(https?://|/|\\./).+"
+                  },
+                  "genre": {
+                    "type": "string"
+                  },
+                  "bpm": {
+                    "type": "number",
+                    "minimum": 20,
+                    "maximum": 300
+                  },
+                  "key": {
+                    "type": "string",
+                    "pattern": "^[A-G][b#]?(?:m|M)?$"
+                  },
+                  "note": {
+                    "type": "string"
+                  }
+                },
+                "anyOf": [
+                  {
+                    "required": [
+                      "path"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "bpm"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "key"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "note"
+                    ]
+                  }
+                ],
+                "additionalProperties": false
               },
-              "genre": {
-                "type": "string"
-              },
-              "bpm": {
-                "type": "number",
-                "minimum": 20,
-                "maximum": 300
-              },
-              "key": {
-                "type": "string",
-                "pattern": "^[A-G][b#]?(?:m|M)?$"
-              },
-              "note": {
-                "type": "string"
-              }
+              "default": []
             },
-            "additionalProperties": false
-          },
-          "default": []
-        },
-        "soundFx": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "required": [
-              "path"
-            ],
-            "properties": {
-              "path": {
-                "type": "string",
-                "pattern": "^(https?://|/|\\./).+"
+            "soundFx": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string",
+                    "pattern": "^(https?://|/|\\./).+"
+                  },
+                  "note": {
+                    "type": "string"
+                  }
+                },
+                "anyOf": [
+                  {
+                    "required": [
+                      "path"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "note"
+                    ]
+                  }
+                ],
+                "additionalProperties": false
               },
-              "note": {
-                "type": "string"
-              }
-            },
-            "additionalProperties": false
+              "default": []
+            }
           },
-          "default": []
+          "additionalProperties": false
         }
       },
+      "required": [
+        "audio"
+      ],
       "additionalProperties": true
     },
     "slices_crew_slice": {
       "title": "Crew slice",
-      "type": "object",
-      "properties": {
-        "people": {
-          "type": "array",
-          "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "role": {
+            "$ref": "#/definitions/enum_role"
+          },
+          "customRole": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "contacts": {
             "type": "object",
-            "required": [
-              "role"
-            ],
-            "properties": {
-              "role": {
-                "$ref": "#/definitions/_git_Brain_Scenario_immerschema_enum_role"
-              },
-              "customRole": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "contacts": {
-                "type": "object",
-                "additionalProperties": {
-                  "type": "string"
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "availability": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "role"
+        ],
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "role": {
+                  "const": "other"
                 }
-              },
-              "note": {
-                "type": "string"
-              },
-              "availability": {
-                "type": "string"
               }
             },
-            "additionalProperties": true
-          },
-          "default": []
-        }
+            "then": {
+              "required": [
+                "customRole"
+              ]
+            }
+          }
+        ]
       },
-      "additionalProperties": true
+      "default": []
     },
     "slices_description_slice": {
       "title": "Narrative description slice",
@@ -878,12 +968,6 @@
         "description": {
           "type": "string",
           "description": "One-paragraph narrative of what the viewer sees/hears. Markdown allowed."
-        },
-        "descriptionLang": {
-          "type": "string",
-          "pattern": "^[a-z]{2}$",
-          "default": "en",
-          "description": "ISO-639-1 language code of the description text."
         }
       },
       "required": [
@@ -967,37 +1051,40 @@
       "title": "Screen zone & motion slice",
       "type": "object",
       "properties": {
-        "screenZone": {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_enum_screenzone"
-        },
-        "cameraMotion": {
-          "type": "array",
-          "items": {
-            "type": "string"
+        "screen": {
+          "type": "object",
+          "properties": {
+            "screenZone": {
+              "$ref": "#/definitions/enum_screenzone",
+              "description": "Defines the screen zone where the content will be displayed"
+            },
+            "cameraMotion": {
+              "type": "string",
+              "description": "Camera motion description during the scene"
+            },
+            "transitionIn": {
+              "type": "string",
+              "description": "Transition effects to be applied when entering the scene"
+            },
+            "action": {
+              "type": "string",
+              "description": "Specifies the action or interaction to be performed in this scene"
+            },
+            "transitionOut": {
+              "type": "string",
+              "description": "Transition effects to be applied when exiting the scene"
+            },
+            "immersiveCue": {
+              "type": "string",
+              "description": "Audio or visual cue to enhance the immersive experience"
+            }
           },
-          "default": []
-        },
-        "transitionIn": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "minItems": 1
-        },
-        "action": {
-          "type": "string"
-        },
-        "transitionOut": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "minItems": 1
-        },
-        "immersiveCue": {
-          "type": "string"
+          "additionalProperties": false
         }
       },
+      "required": [
+        "screen"
+      ],
       "additionalProperties": true
     },
     "slices_software_slice": {
@@ -1007,7 +1094,7 @@
         "softwarePipeline": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/_git_Brain_Scenario_immerschema_enum_software"
+            "$ref": "#/definitions/enum_software"
           },
           "default": []
         }
@@ -1015,55 +1102,111 @@
       "additionalProperties": true
     },
     "slices_tasks_slice": {
-      "title": "Tasks slice",
-      "type": "object",
-      "properties": {
-        "tasks": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "required": [
-              "id",
-              "task",
-              "dept",
-              "prio",
-              "status"
-            ],
-            "properties": {
-              "id": {
-                "type": "integer"
-              },
-              "task": {
-                "type": "string"
-              },
-              "dept": {
-                "type": "string"
-              },
-              "prio": {
-                "enum": [
-                  "low",
-                  "med",
-                  "high"
-                ]
-              },
-              "owner": {
-                "type": "string"
-              },
-              "status": {
-                "enum": [
-                  "todo",
-                  "in_progress",
-                  "done",
-                  "blocked"
-                ]
-              }
-            },
-            "additionalProperties": true
+      "$schema": "http://json-schema.org/draft/2020-12/schema",
+      "title": "Tasks array slice",
+      "description": "Production tasks with hour tracking and lifecycle timestamps.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "task",
+          "dept",
+          "prio",
+          "assignedTo",
+          "status",
+          "hoursPlanned",
+          "timestamps"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique task identifier."
           },
-          "default": []
+          "task": {
+            "type": "string",
+            "description": "Human-readable summary of the work."
+          },
+          "dept": {
+            "$ref": "#/definitions/enum_dept",
+            "description": "High-level department (e.g., CG, FX, EDIT)."
+          },
+          "prio": {
+            "type": "string",
+            "enum": [
+              "low",
+              "med",
+              "high"
+            ],
+            "description": "Priority."
+          },
+          "assignedTo": {
+            "type": "string",
+            "description": "Name or role responsible."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "todo",
+              "in_progress",
+              "blocked",
+              "done"
+            ],
+            "description": "Pipeline state."
+          },
+          "note": {
+            "type": "string",
+            "description": "Supplementary notes."
+          },
+          "hoursPlanned": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Estimated person-hours."
+          },
+          "hoursActual": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Logged person-hours."
+          },
+          "timestamps": {
+            "type": "object",
+            "description": "Lifecycle markers (ISO-8601 with timezone).",
+            "required": [
+              "created"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "created": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Task created."
+              },
+              "started": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Work started."
+              },
+              "due": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Deadline."
+              },
+              "completed": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Work finished."
+              },
+              "updated": {
+                "type": "string",
+                "format": "date-time",
+                "description": "Last field change."
+              }
+            }
+          }
         }
       },
-      "additionalProperties": true
+      "default": []
     },
     "slices_tech_group_slice": {
       "title": "Top-level technique group (UI tokens)",
@@ -1079,7 +1222,7 @@
               "SIM",
               "GEN",
               "AI",
-              "CAP"
+              "CAM"
             ]
           },
           "minItems": 1,
@@ -1090,31 +1233,43 @@
       "additionalProperties": true
     },
     "slices_technique_slice": {
-      "title": "Technique slice",
+      "title": "Technique slice (nested)",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_slices_tech_group_slice"
-        }
-      ],
       "properties": {
-        "primaryTechnique": {
-          "$ref": "#/definitions/_git_Brain_Scenario_immerschema_enum_technique",
-          "description": "The main visual technique for this shot."
-        },
-        "otherTechniques": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/_git_Brain_Scenario_immerschema_enum_technique"
+        "technique": {
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/slices_tech_group_slice"
+            }
+          ],
+          "properties": {
+            "primaryTechnique": {
+              "$ref": "#/definitions/enum_technique",
+              "description": "The main visual technique for this shot."
+            },
+            "otherTechniques": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/enum_technique"
+              },
+              "description": "Additional techniques in this shot."
+            },
+            "note": {
+              "type": "string",
+              "description": "Additional context or notes about the technique."
+            }
           },
-          "default": [],
-          "description": "Additional techniques in this shot."
+          "required": [
+            "primaryTechnique"
+          ],
+          "additionalProperties": true
         }
       },
       "required": [
-        "primaryTechnique"
+        "technique"
       ],
-      "additionalProperties": false
+      "additionalProperties": true
     },
     "slices_timing_frames_slice": {
       "title": "Timing slice – frames",
@@ -1188,7 +1343,7 @@
       "additionalProperties": true
     },
     "slices_voice_slice": {
-      "title": "Voice slice (nested)",
+      "title": "Voice slice",
       "type": "object",
       "required": [
         "voice"
@@ -1213,9 +1368,9 @@
             }
           }
         },
-        "llmNote": {
+        "voiceLinesNotes": {
           "type": "string",
-          "description": "Private note from LLM about the voice line"
+          "description": "note about the voice lines"
         }
       },
       "additionalProperties": true

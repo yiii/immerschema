@@ -26,7 +26,7 @@
 
 ```jsonc
 {
-  "people": [
+  "crew": [
     {
       "role": "HoudiniArtist",
       "name": "Ada Lovelace",

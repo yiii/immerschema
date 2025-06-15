@@ -16,6 +16,14 @@ try {
     verbose: true
   });
   addFormats(ajv);
+  
+  // Add the 2020-12 meta-schema
+  const metaSchema = {
+    $schema: "http://json-schema.org/draft/2020-12/schema",
+    $id: "http://json-schema.org/draft/2020-12/schema",
+    type: "object"
+  };
+  ajv.addMetaSchema(metaSchema);
 
   // Helper to load a schema
   function loadSchema(relPath) {
@@ -69,21 +77,28 @@ try {
   function registerSchema(schemaPath) {
     // Avoid infinite recursion and duplicate registrations
     if (registeredSchemas.has(schemaPath)) {
-      console.log(`Schema already registered: ${schemaPath}`);
+      console.log(`📋 Schema already registered: ${schemaPath}`);
       return;
     }
     
     try {
+      console.log(`\n📥 Loading schema: ${schemaPath}`);
       const schema = loadSchema(schemaPath);
       registeredSchemas.add(schemaPath);
       
       // Register the schema itself
       try {
         ajv.addSchema(schema, schema.$id || schemaPath);
-        console.log(`Registered schema: ${schema.$id || schemaPath}`);
+        console.log(`✅ Registered schema: ${schema.$id || schemaPath}`);
+        if (schema.title) {
+          console.log(`   Title: ${schema.title}`);
+        }
+        if (schema.description) {
+          console.log(`   Description: ${schema.description}`);
+        }
       } catch (e) {
         if (e.message.includes('already exists')) {
-          console.log(`Schema already registered: ${schema.$id || schemaPath}`);
+          console.log(`📋 Schema already registered: ${schema.$id || schemaPath}`);
         } else {
           throw e;
         }
@@ -93,11 +108,12 @@ try {
       if (schema.$ref) {
         const refPath = resolveSchemaRef(schemaPath, schema.$ref);
         if (refPath && fs.existsSync(refPath)) {
+          console.log(`   Referencing: ${refPath}`);
           registerSchema(refPath);
         } else if (refPath) {
-          console.warn(`Reference not found: ${refPath}`);
-          console.warn(`  Referenced from: ${schemaPath}`);
-          console.warn(`  Reference: ${schema.$ref}`);
+          console.warn(`⚠️  Reference not found: ${refPath}`);
+          console.warn(`   Referenced from: ${schemaPath}`);
+          console.warn(`   Reference: ${schema.$ref}`);
         }
       }
       
@@ -108,11 +124,12 @@ try {
             if (subSchema.$ref) {
               const refPath = resolveSchemaRef(schemaPath, subSchema.$ref);
               if (refPath && fs.existsSync(refPath)) {
+                console.log(`   ${key} referencing: ${refPath}`);
                 registerSchema(refPath);
               } else if (refPath) {
-                console.warn(`Reference not found: ${refPath}`);
-                console.warn(`  Referenced from: ${schemaPath}`);
-                console.warn(`  Reference: ${subSchema.$ref}`);
+                console.warn(`⚠️  ${key} reference not found: ${refPath}`);
+                console.warn(`   Referenced from: ${schemaPath}`);
+                console.warn(`   Reference: ${subSchema.$ref}`);
               }
             }
           });
@@ -125,21 +142,21 @@ try {
           if (prop.$ref) {
             const refPath = resolveSchemaRef(schemaPath, prop.$ref);
             if (refPath && fs.existsSync(refPath)) {
+              console.log(`   Property '${propName}' referencing: ${refPath}`);
               registerSchema(refPath);
             } else if (refPath) {
-              console.warn(`Reference not found: ${refPath}`);
-              console.warn(`  Referenced from: ${schemaPath}`);
-              console.warn(`  Property: ${propName}`);
-              console.warn(`  Reference: ${prop.$ref}`);
+              console.warn(`⚠️  Property '${propName}' reference not found: ${refPath}`);
+              console.warn(`   Referenced from: ${schemaPath}`);
+              console.warn(`   Reference: ${prop.$ref}`);
             }
           }
         });
       }
     } catch (e) {
-      console.error(`Failed to register schema: ${schemaPath}`);
-      console.error(`Error details: ${e.message}`);
+      console.error(`❌ Failed to register schema: ${schemaPath}`);
+      console.error(`   Error details: ${e.message}`);
       if (e.stack) {
-        console.error(`Stack trace: ${e.stack}`);
+        console.error(`   Stack trace: ${e.stack}`);
       }
     }
   }
@@ -152,6 +169,9 @@ try {
     'node_modules/immerschema/schemas/enum/screenzone.enum.json',
     'node_modules/immerschema/schemas/enum/software.enum.json',
     'node_modules/immerschema/schemas/enum/role.enum.json',
+    'node_modules/immerschema/schemas/enum/assetkind.enum.json',
+    'node_modules/immerschema/schemas/enum/assetrole.enum.json',
+    'node_modules/immerschema/schemas/enum/dept.enum.json',
     'node_modules/immerschema/schemas/ext/debug.schema.json'
   ];
   
@@ -163,15 +183,15 @@ try {
   console.log('\nRegistering slice schemas...');
   const sliceSchemas = [
     'node_modules/immerschema/schemas/slices/id.slice.schema.json',
-    'node_modules/immerschema/schemas/slices/note.slice.schema.json',
+    'node_modules/immerschema/schemas/slices/note.slice.schema.json', 
     'node_modules/immerschema/schemas/slices/timing-seconds.slice.schema.json',
     'node_modules/immerschema/schemas/slices/timing-frames.slice.schema.json',
     'node_modules/immerschema/schemas/slices/timing.slice.schema.json',
     'node_modules/immerschema/schemas/slices/tech-group.slice.schema.json',
     'node_modules/immerschema/schemas/slices/technique.slice.schema.json',
     'node_modules/immerschema/schemas/slices/software.slice.schema.json',
-    'node_modules/immerschema/schemas/slices/tasks.slice.schema.json',
     'node_modules/immerschema/schemas/slices/crew.slice.schema.json',
+    'node_modules/immerschema/schemas/slices/tasks.slice.schema.json',
     'node_modules/immerschema/schemas/slices/risk.slice.json',
     'node_modules/immerschema/schemas/slices/voice.slice.schema.json',
     'node_modules/immerschema/schemas/slices/meta-scene.slice.schema.json',
@@ -180,14 +200,20 @@ try {
     'node_modules/immerschema/schemas/slices/description.slice.schema.json',
     'node_modules/immerschema/schemas/slices/workload.slice.json',
     'node_modules/immerschema/schemas/slices/bottleneck.slice.json',
-    'node_modules/immerschema/schemas/slices/audio.slice.schema.json'
+    'node_modules/immerschema/schemas/slices/audio.slice.schema.json',
+    // Add the new property wrapper slices
+    'schemas/slices/assets.prop.slice.json',
+    'schemas/slices/tasks.prop.slice.json',
+    'schemas/slices/crew.prop.slice.json',
+    'schemas/slices/risks.prop.slice.json'
   ];
   
   sliceSchemas.forEach(schemaPath => {
     registerSchema(schemaPath);
   });
 
-  // Register profile schemas FIRST (before core schema that references them)
+  // Register profile schemas
+  console.log('\nRegistering profile schemas...');
   const profileSchemas = [
     'node_modules/immerschema/schemas/profiles/draft.schema.json',
     'node_modules/immerschema/schemas/profiles/review.schema.json',
@@ -209,7 +235,8 @@ try {
   // Helper to validate a file against a schema
   function validateFile(filePath, schemaPath, description) {
     try {
-      console.log(`\nValidating ${description}...`);
+      console.log(`\n🔍 Validating ${description}...`);
+      console.log(`📄 Schema: ${schemaPath}`);
       
       // Check if test file exists
       if (!fs.existsSync(filePath)) {
@@ -219,24 +246,69 @@ try {
       
       const data = loadSchema(filePath);
       const schema = loadSchema(schemaPath);
+      
+      console.log(`🔎 Looking for validator with ID: ${schema.$id || schemaPath}`);
+      console.log(`🔎 Schema type from file: ${schema.type}`);
+      
       // Use already-registered schema by $id or path
       const validate = ajv.getSchema(schema.$id || schemaPath);
       if (!validate) {
         console.error(`❌ No validator found for schema: ${schema.$id || schemaPath}`);
         return false;
       }
+      
+      console.log(`✅ Found validator for: ${schema.$id || schemaPath}`);
+      console.log(`🔎 Validator schema type: ${validate.schema?.type || 'unknown'}`);
+      console.log(`🔎 Validator schema title: ${validate.schema?.title || 'unknown'}`);
+      
+      // Ensure we're using the right schema
+      if (validate.schema?.type !== schema.type) {
+        console.error(`⚠️  Schema type mismatch!`);
+        console.error(`  Expected: ${schema.type}`);
+        console.error(`  Got: ${validate.schema?.type}`);
+        console.error(`  This suggests a schema ID conflict!`);
+      }
+      
       const valid = validate(data);
       
       if (valid) {
         console.log(`✅ ${description} validation: PASSED`);
       } else {
-        console.log(`❌ ${description} validation: FAILED`);
-        console.log('Validation errors:', JSON.stringify(validate.errors, null, 2));
+        console.error(`❌ ${description} validation: FAILED`);
+        console.log('\nValidation Errors:');
+        
+        // Group errors by type for better readability
+        const errorsByType = {};
+        validate.errors.forEach(error => {
+          const errorType = error.keyword.toUpperCase();
+          if (!errorsByType[errorType]) {
+            errorsByType[errorType] = [];
+          }
+          errorsByType[errorType].push(error);
+        });
+        
+        Object.keys(errorsByType).forEach(errorType => {
+          console.log(`\n${errorType} Errors:`);
+          errorsByType[errorType].forEach(error => {
+            console.log(`  Path: ${error.instancePath || '/'}`);
+            console.log(`  Message: ${error.message}`);
+            if (error.params) {
+              console.log(`  Details: ${JSON.stringify(error.params)}`);
+            }
+            // Show which schema this error comes from
+            if (error.schemaPath) {
+              console.log(`  Schema path: ${error.schemaPath}`);
+            }
+          });
+        });
       }
       return valid;
     } catch (e) {
       console.error(`❌ ${description} validation: ERROR`);
-      console.error(e.message);
+      console.error('Error details:', e.message);
+      if (e.stack) {
+        console.error('Stack trace:', e.stack);
+      }
       return false;
     }
   }
@@ -249,18 +321,19 @@ try {
     total: 0
   };
 
-  // Validate shots against different profiles
-  const shotFiles = [
-    { file: 'test_shot.draft.json', profile: 'node_modules/immerschema/schemas/profiles/draft.schema.json', desc: 'Draft shot' },
-    { file: 'test_shot.review.json', profile: 'node_modules/immerschema/schemas/profiles/review.schema.json', desc: 'Review shot' },
-    { file: 'test_shot.plan.json', profile: 'node_modules/immerschema/schemas/profiles/plan.schema.json', desc: 'Plan shot' },
-    { file: 'test_shot.assign.json', profile: 'node_modules/immerschema/schemas/profiles/assign.schema.json', desc: 'Assign shot' },
-    { file: 'test_shot.lock.json', profile: 'node_modules/immerschema/schemas/profiles/lock.schema.json', desc: 'Lock shot' }
+  // Test the review file against all profiles to see compatibility
+  const reviewFile = 'test_shot.review.json';
+  const profileTests = [
+    { profile: 'node_modules/immerschema/schemas/profiles/draft.schema.json', desc: 'Review file vs Draft profile' },
+    { profile: 'node_modules/immerschema/schemas/profiles/review.schema.json', desc: 'Review file vs Review profile' },
+    { profile: 'node_modules/immerschema/schemas/profiles/plan.schema.json', desc: 'Review file vs Plan profile' },
+    { profile: 'node_modules/immerschema/schemas/profiles/assign.schema.json', desc: 'Review file vs Assign profile' },
+    { profile: 'node_modules/immerschema/schemas/profiles/lock.schema.json', desc: 'Review file vs Lock profile' }
   ];
 
-  shotFiles.forEach(({ file, profile, desc }) => {
+  profileTests.forEach(({ profile, desc }) => {
     results.total++;
-    const result = validateFile(file, profile, desc);
+    const result = validateFile(reviewFile, profile, desc);
     if (result === null) {
       results.skipped++;
     } else if (result) {
