@@ -1,3 +1,13 @@
+## 1.3.0  –  2024-12-30
+* Version bump to 1.3.0
+* Major schema refactoring and enhancements
+* Enhanced task management system with hour tracking and lifecycle timestamps
+* Improved asset and workload management
+* Enhanced risk flag system and bottleneck tracking
+* Updated audio support and timing schemas
+* Comprehensive documentation updates
+* New schema validation pipeline and testing framework
+
 ## 1.2.0  –  2024-03-21
 * Version bump to 1.2.0
 * Added new schema combination system
