@@ -1,5 +1,5 @@
-## 1.3.0  –  2024-12-30
-* Version bump to 1.3.0
+## 1.3.1  –  2024-12-30
+* Version bump to 1.3.1
 * Major schema refactoring and enhancements
 * Enhanced task management system with hour tracking and lifecycle timestamps
 * Improved asset and workload management

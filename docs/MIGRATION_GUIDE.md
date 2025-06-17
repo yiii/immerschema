@@ -1,6 +1,6 @@
-# Migration Guide: Immerschema 1.3.0
+# Migration Guide: Immerschema 1.3.1
 
-This guide will help you migrate your existing Immerschema projects to version 1.3.0, which introduces significant improvements in schema organization, validation, and testing.
+This guide will help you migrate your existing Immerschema projects to version 1.3.1, which introduces significant improvements in schema organization, validation, and testing.
 
 ## Table of Contents
 1. [Prerequisites](#prerequisites)
@@ -50,7 +50,7 @@ Copy-Item -Path "your-project" -Destination "your-project-backup" -Recurse
 ### 2. Update Dependencies
 ```powershell
 # Update package.json dependencies
-npm install immerschema@1.3.0 --save
+npm install immerschema@1.3.1 --save
 ```
 
 ### 3. Schema File Migration

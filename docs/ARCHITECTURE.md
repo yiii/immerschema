@@ -1,4 +1,4 @@
-# 📐 Immerschema Architecture (v1.1)
+# 📐 Immerschema Architecture (v1.3)
 
 A modular JSON-Schema suite for fulldome / CG pipelines – now with **property-wrapped array slices**.
 
