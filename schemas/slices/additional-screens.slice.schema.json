@@ -1,0 +1,16 @@
+{
+  "$id": "immerschema/schemas/slices/additional-screens.slice.schema.json",
+  "title": "Additional screens slice",
+  "type": "object",
+  "properties": {
+    "floorAction": {
+      "type": "string",
+      "description": "Action or instruction for the floor screen"
+    },
+    "rausAction": {
+      "type": "string",
+      "description": "Action or instruction for the raus screen"
+    }
+  },
+  "additionalProperties": true
+}

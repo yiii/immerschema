@@ -511,6 +511,9 @@
           "$ref": "#/definitions/slices_screen_slice"
         },
         {
+          "$ref": "#/definitions/slices_additional_screens_slice"
+        },
+        {
           "$ref": "#/definitions/slices_assets_prop_slice"
         },
         {
@@ -751,6 +754,21 @@
           "$ref": "#/definitions/ext_debug_schema_json_properties_debug"
         }
       }
+    },
+    "slices_additional_screens_slice": {
+      "title": "Additional screens slice",
+      "type": "object",
+      "properties": {
+        "floorAction": {
+          "type": "string",
+          "description": "Action or instruction for the floor screen"
+        },
+        "rausAction": {
+          "type": "string",
+          "description": "Action or instruction for the raus screen"
+        }
+      },
+      "additionalProperties": true
     },
     "slices_assets_slice": {
       "title": "Assets array slice",
