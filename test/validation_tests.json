@@ -1,5 +1,5 @@
 {
-    "description":  "Comprehensive validation test cases for the Fulldome Schema Suite",
+    "description":  "Comprehensive validation test cases for the Fulldome Schema Suite (updated for v1.3 task structure)",
     "tests":  [
                   {
                       "name":  "minimal_valid_project",
@@ -189,11 +189,17 @@
                                               ],
                                    "tasks":  [
                                                  {
-                                                     "id":  1,
+                                                     "id":  "t-001",
                                                      "task":  "High priority task",
                                                      "dept":  "VFX",
                                                      "prio":  "high",
-                                                     "status":  "todo"
+                                                     "assignedTo": "Jane Smith",
+                                                     "status":  "todo",
+                                                     "hoursPlanned":  8,
+                                                     "timestamps": {
+                                                         "created": "2024-12-01T09:00:00Z",
+                                                         "due": "2024-12-31T18:00:00Z"
+                                                     }
                                                  }
                                              ],
                                    "crew":  [
@@ -239,11 +245,17 @@
                                               ],
                                    "tasks":  [
                                                  {
-                                                     "id":  1,
+                                                     "id":  "t-001",
                                                      "task":  "Test task",
                                                      "dept":  "VFX",
                                                      "prio":  "med",
-                                                     "status":  "todo"
+                                                     "assignedTo": "Jane Smith",
+                                                     "status":  "todo",
+                                                     "hoursPlanned":  8,
+                                                     "timestamps": {
+                                                         "created": "2024-12-01T09:00:00Z",
+                                                         "due": "2024-12-31T18:00:00Z"
+                                                     }
                                                  }
                                              ],
                                    "crew":  [
@@ -290,11 +302,17 @@
                                               ],
                                    "tasks":  [
                                                  {
-                                                     "id":  1,
+                                                     "id":  "t-001",
                                                      "task":  "Test task",
                                                      "dept":  "VFX",
                                                      "prio":  "med",
-                                                     "status":  "todo"
+                                                     "assignedTo": "Jane Smith",
+                                                     "status":  "todo",
+                                                     "hoursPlanned":  8,
+                                                     "timestamps": {
+                                                         "created": "2024-12-01T09:00:00Z",
+                                                         "due": "2024-12-31T18:00:00Z"
+                                                     }
                                                  }
                                              ],
                                    "crew":  [
@@ -339,11 +357,17 @@
                                               ],
                                    "tasks":  [
                                                  {
-                                                     "id":  1,
+                                                     "id":  "t-001",
                                                      "task":  "Basic task",
                                                      "dept":  "VFX",
                                                      "prio":  "high",
-                                                     "status":  "in_progress"
+                                                     "assignedTo": "Jane Smith",
+                                                     "status":  "in_progress",
+                                                     "hoursPlanned":  8,
+                                                     "timestamps": {
+                                                         "created": "2024-12-01T09:00:00Z",
+                                                         "due": "2024-12-31T18:00:00Z"
+                                                     }
                                                  }
                                              ],
                                    "crew":  [
@@ -369,7 +393,7 @@
                   },
                   {
                       "name":  "custom_role_usage",
-                      "description":  "Tests usage of custom roles with \u0027other\u0027 enum value",
+                      "description":  "Tests usage of custom roles with 'other' enum value",
                       "schema":  "node_modules/immerschema/schemas/profiles/assign.schema.json",
                       "data":  {
                                    "schemaVersion":  "1.0.0",
@@ -396,11 +420,17 @@
                                               ],
                                    "tasks":  [
                                                  {
-                                                     "id":  1,
+                                                     "id":  "t-001",
                                                      "task":  "Basic task",
                                                      "dept":  "VFX",
                                                      "prio":  "high",
-                                                     "status":  "in_progress"
+                                                     "assignedTo": "Custom Person",
+                                                     "status":  "in_progress",
+                                                     "hoursPlanned":  8,
+                                                     "timestamps": {
+                                                         "created": "2024-12-01T09:00:00Z",
+                                                         "due": "2024-12-31T18:00:00Z"
+                                                     }
                                                  }
                                              ],
                                    "crew":  [

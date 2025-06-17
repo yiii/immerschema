@@ -1,5 +1,5 @@
 {
-    "description":  "Edge case tests for the Fulldome Schema Suite",
+    "description":  "Edge case tests for the Fulldome Schema Suite (updated for v1.3 task structure)",
     "tests":  [
                   {
                       "name":  "zero_duration_shot",
@@ -202,7 +202,7 @@
                   },
                   {
                       "name":  "maximum_task_complexity",
-                      "description":  "Tests complex task with all optional fields",
+                      "description":  "Tests complex task with all optional fields (now must use new structure)",
                       "schema":  "schemas/profiles/assign.schema.json",
                       "data":  {
                                    "id":  "mt01-ss01",
@@ -228,20 +228,30 @@
                                               ],
                                    "tasks":  [
                                                  {
-                                                     "id":  1,
+                                                     "id":  "t-001",
                                                      "task":  "Complex task with all fields",
                                                      "dept":  "VFX",
                                                      "prio":  "high",
+                                                     "assignedTo": "John Doe",
                                                      "status":  "in_progress",
-                                                     "assignee":  "John Doe",
-                                                     "dueDate":  "2024-12-31",
-                                                     "notes":  "Complex task notes",
-                                                     "dependencies":  [
-                                                                          2,
-                                                                          3
-                                                                      ],
-                                                     "estimatedHours":  40,
-                                                     "actualHours":  35
+                                                     "note":  "Complex task notes",
+                                                     "hoursPlanned":  40,
+                                                     "hoursActual":  35,
+                                                     "timestamps": {
+                                                         "created": "2024-12-01T09:00:00Z",
+                                                         "started": "2024-12-10T09:00:00Z",
+                                                         "due": "2024-12-31T18:00:00Z",
+                                                         "completed": "2024-12-31T19:00:00Z",
+                                                         "updated": "2024-12-31T19:05:00Z"
+                                                     },
+                                                     "dependsOn": ["t-002", "t-003"],
+                                                     "parentId": "phase-1",
+                                                     "progress": 90,
+                                                     "baseline": {
+                                                         "start": "2024-12-01T09:00:00Z",
+                                                         "end": "2024-12-31T18:00:00Z"
+                                                     },
+                                                     "milestone": false
                                                  }
                                              ],
                                    "crew":  [
@@ -286,11 +296,17 @@
                                               ],
                                    "tasks":  [
                                                  {
-                                                     "id":  1,
+                                                     "id":  "t-001",
                                                      "task":  "Basic task",
                                                      "dept":  "VFX",
                                                      "prio":  "high",
-                                                     "status":  "in_progress"
+                                                     "assignedTo": "John Doe",
+                                                     "status":  "in_progress",
+                                                     "hoursPlanned":  10,
+                                                     "timestamps": {
+                                                         "created": "2024-12-01T09:00:00Z",
+                                                         "due": "2024-12-31T18:00:00Z"
+                                                     }
                                                  }
                                              ],
                                    "crew":  [
@@ -333,11 +349,17 @@
                                               ],
                                    "tasks":  [
                                                  {
-                                                     "id":  1,
+                                                     "id":  "t-001",
                                                      "task":  "Basic task",
                                                      "dept":  "VFX",
                                                      "prio":  "high",
-                                                     "status":  "in_progress"
+                                                     "assignedTo": "John Doe",
+                                                     "status":  "in_progress",
+                                                     "hoursPlanned":  10,
+                                                     "timestamps": {
+                                                         "created": "2024-12-01T09:00:00Z",
+                                                         "due": "2024-12-31T18:00:00Z"
+                                                     }
                                                  }
                                              ],
                                    "crew":  [

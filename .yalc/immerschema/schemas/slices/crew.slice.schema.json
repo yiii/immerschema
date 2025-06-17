@@ -5,15 +5,30 @@
   "items": {
     "type": "object",
     "properties": {
-      "role":       { "$ref": "../enum/role.enum.json" },
-      "customRole": { "type": "string" },
-      "name":       { "type": "string" },
-      "contacts":   { "type": "object", "additionalProperties": { "type": "string" } },
-      "availability": { "type": "string" },
-      "note":       { "type": "string" }
+      "role":        { "$ref": "../enum/role.enum.json", 
+      "description": "Crew member's primary role, referencing a predefined set of roles. e.g. HoudiniArtist, CGSupervisor, etc." },
+      "customRole":  { "type": "string", 
+      "description": "Custom role name, required if 'role' is set to 'other'." },
+      "dept":        { "$ref": "../enum/dept.enum.json", 
+      "description": "Department or pipeline group the crew member belongs to, e.g., CG, FX, AUDIO." },          
+      "name":        { "type": "string", 
+      "description": "Full name of the crew member." },
+      "contacts":    { "type": "object", 
+      "additionalProperties": { "type": "string" }, 
+      "description": "Contact information for the crew member, such as email, phone, or messaging handles." },
+      "availability":{ "type": "string", 
+      "description": "Availability notes or schedule for the crew member. e.g. full_time, part_time, etc." },
+
+      "rate":       { "type": "number", "minimum": 0, 
+      "description": "Crew member's pay rate, as a number." },
+      "rateUnit":   { "type": "string", "enum": ["hour","day"], "default": "hour", 
+      "description": "Unit for the rate, either per hour or per day." },
+
+      "note":        { "type": "string", "description": "Additional notes about the crew member." }
     },
     "required": ["role"],
     "additionalProperties": false,
+
     "allOf": [
       {
         "if":   { "properties": { "role": { "const": "other" } } },

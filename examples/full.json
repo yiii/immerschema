@@ -1,120 +1,112 @@
 {
-    "id": "sc-07",
-    "schemaVersion": "1.0.0",
-    "scene": 2,
-    "subScene": 1,
-    "index": 7,
-    "sceneName": "Neural Emergence",
-    "subSceneName": "Particle Formation",
-  
-    "description": "A delicate choreography of particles converges into a neural lattice, evoking the birth of thought.",
-  
-    "userNote": "Consider shifting the palette to cooler hues",
-    "llmNote": "Generated from draft; check lighting and contrast",
-  
+  "id": "sc-01",
+  "schemaVersion": "1.0.0",
+  "scene": 2,
+  "subScene": 1,
+  "index": 7,
+  "sceneName": "Neural Emergence",
+  "subSceneName": "Particle Formation",
 
-    "screen": {
-      "screenZone": "zenith",
-      "cameraMotion": "Slow pan motion",
-      "transitionIn": "Partciles are spawned from previos scene",
-      "action": "Particles begin to drift upward, slowly forming a glowing neural web.",
-      "transitionOut": "cut",
-      "immersiveCue": "soft_music",
-      "floorAction":  "Action or instruction for the floor screen",
-      "rausAction":  "Action or instruction for the raus screen"
+  "description": "A delicate choreography of particles converges into a neural lattice, evoking the birth of thought.",
+  "userNote": "Consider shifting the palette to cooler hues",
+  "llmNote": "Generated from draft; check lighting and contrast",
 
-    },
-  
-    "technique": {
-        "techGroup": ["3D"],
-        "primaryTechnique": "3d_render",
-        "otherTechniques": ["gen_particle"],
-        "note": "Uses GPU instanced particles for performance"
-      },
-    
-      "softwarePipeline": [
-          "Houdini",
-          "AfterEffects"
-        ],
-       
+  "screen": {
+    "screenZone": "zenith",
+    "cameraMotion": "Slow pan motion",
+    "transitionIn": "Partciles are spawned from previos scene",
+    "action": "Particles begin to drift upward, slowly forming a glowing neural web.",
+    "transitionOut": "cut",
+    "immersiveCue": "soft_music",
+    "floorAction": "Action or instruction for the floor screen",
+    "rausAction": "Action or instruction for the raus screen"
+  },
 
+  "technique": {
+    "techGroup": ["3D"],
+    "primaryTechnique": "3d_render",
+    "otherTechniques": ["gen_particle"],
+    "note": "Uses GPU instanced particles for performance"
+  },
 
-    "timing": {
-      "durationSec": 5.2,
-      "durationFrames": 125,
-      "fps": 24
-    },
-  
-    "voice": {
+  "softwarePipeline": ["Houdini", "AfterEffects"],
+
+  "timing": {
+    "durationSec": 5.2,
+    "durationFrames": 125,
+    "fps": 24
+  },
+
+  "voice": {
+    "lang": "en",
+    "text": "Particles coalesce into the neural sculpture."
+  },
+  "voiceLinesNotes": "Double‐check voice lip-sync at 24fps",
+
+  "assets": [
+    {
+      "path": "./boards/sc-07_key.png",
+      "kind": "image",
+      "role": "storyboard",
+      "visualDescription": "Sketch of drifting particles",
+      "motionDescription": "Smooth upward drift",
       "lang": "en",
-      "text": "Particles coalesce into the neural sculpture."
+      "note": "Approved by art director"
     },
-    "voiceLinesNotes": "Double‐check voice lip-sync at 24fps",
-  
-    "assets": [
+    {
+      "path": "./renders/sc-07_preview.gif",
+      "kind": "video",
+      "role": "preview",
+      "sourcePath": "./renders/sc-07_full.mp4"
+    }
+  ],
+
+  "audio": {
+    "music": [
       {
-        "path": "./boards/sc-07_key.png",
-        "kind": "image",
-        "role": "storyboard",
-        "visualDescription": "Sketch of drifting particles",
-        "motionDescription": "Smooth upward drift",
-        "lang": "en",
-        "note": "Approved by art director"
-      },
-      {
-        "path": "./renders/sc-07_preview.gif",
-        "kind": "video",
-        "role": "preview",
-        "sourcePath": "./renders/sc-07_full.mp4"
+        "path": "./audio/ambient_drift.mp3",
+        "genre": "ambient",
+        "bpm": 60,
+        "key": "C#m",
+        "note": "Seamless loop"
       }
     ],
-  
-    "audio": {
-      "music": [
-        {
-          "path": "./audio/ambient_drift.mp3",
-          "genre": "ambient",
-          "bpm": 60,
-          "key": "C#m",
-          "note": "Seamless loop"
-        }
-      ],
-      "soundFx": [
-        {
-          "path": "./audio/particles_whirl.wav",
-          "note": "Whirl sound as particles begin to spin"
-        },
-        {
-          "note": "Low boom underlayer (to be created)"
-        }
-      ]
-    },
-  
-    "tasks": [
+    "soundFx": [
       {
-        "id": "t-001",
-        "task": "Import dome model",
-        "dept": "CG",
-        "prio": "high",
-        "assignedTo": "ArtLead",
-        "status": "in_progress",
-        "note": "UV layout required",
-        "hoursPlanned": 16,
-        "hoursActual": 4,
-        "timestamps": {
-          "created": "2025-06-17T10:00:00+07:00",
-          "started": "2025-06-18T09:00:00+07:00",
-          "due": "2025-06-20T18:00:00+07:00"
-        },
-        "dependsOn": ["t-000"],
-        "parentId": "phase-preprod",
-        "progress": 25,
-        "baseline": {
-          "start": "2025-06-17T09:00:00+07:00",
-          "end": "2025-06-19T18:00:00+07:00"
-        },
-        "milestone": false
+        "path": "./audio/particles_whirl.wav",
+        "note": "Whirl sound as particles begin to spin"
+      },
+      {
+        "note": "Low boom underlayer (to be created)"
       }
+    ]
+  },
+
+  "tasks": [
+    {
+      "id": "t-002",
+      "task": "Import dome model",
+      "dept": "CG",
+      "prio": "high",
+      "assignedTo": "ArtLead",
+      "status": "in_progress",
+      "note": "UV layout required",
+      "hoursPlanned": 16,
+      "hoursActual": 4,
+      "timestamps": {
+        "created": "2025-06-17T10:00:00+07:00",
+        "started": "2025-06-18T09:00:00+07:00",
+        "due": "2025-06-20T18:00:00+07:00"
+      },
+      "dependsOn": ["t-001"],
+      "parentId": "phase-preprod",
+      "progress": 25,
+      "baseline": {
+        "start": "2025-06-17T09:00:00+07:00",
+        "end": "2025-06-19T18:00:00+07:00"
+      },
+      "milestone": false
+    }
   ],
 
   "workloadBreakdown": {
@@ -130,51 +122,52 @@
     "totalWithBuffer": 9.2
   },
 
-  
-    "crew": [
-      {
-        "role": "CGSupervisor",
-        "name": "Bob",
-        "contacts": { "email": "bob@example.com" },
-        "availability": "full_time",
-        "note": "Oversees render passes"
-      },
-      {
-        "role": "HoudiniArtist",
-        "name": "Charlie",
-        "note": "Sets up particle emitters"
-      }
-    ],
-  
+  "crew": [
+    {
+      "role": "CGSupervisor",
+      "dept": "CG",
+      "name": "Bob",
+      "contacts": { "email": "bob@example.com" },
+      "availability": "full_time",
+      "rate": 80,
+      "rateUnit": "hour",
+      "note": "Oversees render passes"
+    },
+    {
+      "role": "HoudiniArtist",
+      "dept": "FX",
+      "name": "Charlie",
+      "rate": 65,
+      "rateUnit": "hour",
+      "note": "Sets up particle emitters"
+    }
+  ],
 
+  "bottlenecks": [
+    {
+      "id": "bn-01",
+      "description": "High poly-count in volumetric mesh",
+      "cause": "Particle count exceeds GPU instancing budget",
+      "kpiTrigger": "frameTime > 40ms",
+      "assignedTo": "Tech Lead"
+    }
+  ],
 
-    "bottlenecks": [
-      {
-        "id": "bn-01",
-        "description": "High poly-count in volumetric mesh",
-        "cause": "Particle count exceeds GPU instancing budget",
-        "kpiTrigger": "frameTime > 40ms",
-        "assignedTo": "Tech Lead"
-      }
-    ],
-  
-
-    "risks": [
-      {
-        "flag": "render_overrun",
-        "assignedTo": "Render Lead",
-        "status": "planned",
-        "mitigation": "Spin up 2 extra render nodes",
-        "raisedBy": "FX TD",
-        "raisedOn": "2025-06-15",
-        "note": "High poly count may require subframe sampling"
-      },
-      {
-        "flag": "asset_block",
-        "assignedTo": "Art Lead",
-        "status": "in_progress",
-        "mitigation": "Use placeholder textures until final art asset arrives"
-      }
-    ]
-  }
-  
+  "risks": [
+    {
+      "flag": "render_overrun",
+      "assignedTo": "Render Lead",
+      "status": "planned",
+      "mitigation": "Spin up 2 extra render nodes",
+      "raisedBy": "FX TD",
+      "raisedOn": "2025-06-15",
+      "note": "High poly count may require subframe sampling"
+    },
+    {
+      "flag": "asset_block",
+      "assignedTo": "Art Lead",
+      "status": "in_progress",
+      "mitigation": "Use placeholder textures until final art asset arrives"
+    }
+  ]
+}

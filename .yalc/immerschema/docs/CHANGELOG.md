@@ -1,5 +1,5 @@
-## 1.3.1  –  2024-12-30
-* Version bump to 1.3.1
+## 1.3.2  –  2024-12-30
+* Version bump to 1.3.2
 * Minor fixes and improvements
 * Package build optimizations
 * Enhanced Python build configuration

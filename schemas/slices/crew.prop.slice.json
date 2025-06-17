@@ -3,8 +3,25 @@
   "title": "Crew property slice",
   "type": "object",
   "properties": {
-    "crew": { "$ref": "./crew.slice.schema.json" }
+    "crew": { "$ref": "./crew.slice.schema.json" },
+
+    "projectCrew": {
+      "allOf": [
+        { "$ref": "./crew.slice.schema.json" },
+        {
+          "items": {
+            "properties": {
+              "shotIds": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Optional linkage to shots this crew member touches"
+              }
+            }
+          }
+        }
+      ]
+    }
   },
   "required": ["crew"],
   "additionalProperties": true
-} 
+}
