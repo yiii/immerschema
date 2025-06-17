@@ -21,7 +21,7 @@ try {
     Write-Output ""
 
     Write-Output "3. Running validation..."
-    node validate.js
+    node validate_project.js
     if ($LASTEXITCODE -ne 0) {
         throw "node validate.js failed with exit code $LASTEXITCODE"
     }

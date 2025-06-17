@@ -5,6 +5,9 @@
   "properties": {
     "screen": {
       "type": "object",
+      "allOf": [
+        { "$ref": "./additional-screens.slice.schema.json" }
+      ],
       "properties": {
         "screenZone": { 
           "$ref": "../enum/screenzone.enum.json",
@@ -31,7 +34,7 @@
           "description": "Audio or visual cue to enhance the immersive experience"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": true
     }
   },
   "required": ["screen"],

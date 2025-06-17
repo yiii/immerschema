@@ -20,6 +20,10 @@
       "description": "Shot documents validated against the Plan profile."
     },
 
+    "projectTasks": {
+      "$ref": "./slices/tasks.prop.slice.json#/properties/projectTasks"
+    },
+
     "globalSoftware": {
       "type": "array",
       "items": { "$ref": "./enum/software.enum.json" },

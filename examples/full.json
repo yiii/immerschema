@@ -19,7 +19,9 @@
       "transitionIn": "Partciles are spawned from previos scene",
       "action": "Particles begin to drift upward, slowly forming a glowing neural web.",
       "transitionOut": "cut",
-      "immersiveCue": "soft_music"
+      "immersiveCue": "soft_music",
+      "floorAction":  "Action or instruction for the floor screen",
+      "rausAction":  "Action or instruction for the raus screen"
 
     },
   
@@ -89,26 +91,30 @@
     },
   
     "tasks": [
-    {
-      "id": "task-07a",
-      "task": "Finalize particle shader",
-      "dept": "FX",
-      "prio": "high",
-      "assignedTo": "Alice",
-      "status": "in_progress",
-      "note": "Watch for artifacts near edges",
-      
-
-      "hoursPlanned": 8,
-      "hoursActual": 2.5,
-      
-      "timestamps": {
-        "created":   "2025-06-14T10:00:00Z",
-        "started":   "2025-06-15T09:30:00Z",
-        "due":       "2025-06-20T17:00:00Z",
-        "updated":   "2025-06-15T14:45:00Z"
+      {
+        "id": "t-001",
+        "task": "Import dome model",
+        "dept": "CG",
+        "prio": "high",
+        "assignedTo": "ArtLead",
+        "status": "in_progress",
+        "note": "UV layout required",
+        "hoursPlanned": 16,
+        "hoursActual": 4,
+        "timestamps": {
+          "created": "2025-06-17T10:00:00+07:00",
+          "started": "2025-06-18T09:00:00+07:00",
+          "due": "2025-06-20T18:00:00+07:00"
+        },
+        "dependsOn": ["t-000"],
+        "parentId": "phase-preprod",
+        "progress": 25,
+        "baseline": {
+          "start": "2025-06-17T09:00:00+07:00",
+          "end": "2025-06-19T18:00:00+07:00"
+        },
+        "milestone": false
       }
-    }
   ],
 
   "workloadBreakdown": {

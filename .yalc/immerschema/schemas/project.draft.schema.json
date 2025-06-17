@@ -8,6 +8,7 @@
   "properties": {
     "projectId": { "type": "string" },
     "title":     { "type": "string" },
+    "description": { "type": "string" },
     "schemaVersion": {
       "type": "string",
       "default": "1.0.0"
@@ -18,6 +19,10 @@
       "minItems": 1,
       "items": { "$ref": "./profiles/draft.schema.json" },
       "description": "Shot documents validated against the Draft profile."
+    },
+
+    "projectTasks": {
+      "$ref": "./slices/tasks.prop.slice.json#/properties/projectTasks"
     },
 
     "globalSoftware": {

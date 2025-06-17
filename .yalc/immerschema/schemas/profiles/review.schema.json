@@ -16,6 +16,7 @@
     { "$ref": "./draft.schema.json" },
     { "$ref": "../slices/meta-scene.slice.schema.json" },
     { "$ref": "../slices/screen.slice.schema.json" },
+    { "$ref": "../slices/additional-screens.slice.schema.json" },
     { "$ref": "../slices/assets.prop.slice.json" },
 
 

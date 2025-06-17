@@ -1097,7 +1097,7 @@
               "description": "Audio or visual cue to enhance the immersive experience"
             }
           },
-          "additionalProperties": false
+          "additionalProperties": true
         }
       },
       "required": [
@@ -1191,7 +1191,8 @@
             "type": "object",
             "description": "Lifecycle markers (ISO-8601 with timezone).",
             "required": [
-              "created"
+              "created",
+              "due"
             ],
             "additionalProperties": false,
             "properties": {
@@ -1221,6 +1222,48 @@
                 "description": "Last field change."
               }
             }
+          },
+          "dependsOn": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Task IDs that must finish before this starts."
+          },
+          "parentId": {
+            "type": "string",
+            "description": "WBS roll-up ID."
+          },
+          "progress": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100,
+            "default": 0,
+            "description": "Percent complete; auto-calculated if omitted."
+          },
+          "baseline": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "start",
+              "end"
+            ],
+            "properties": {
+              "start": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "end": {
+                "type": "string",
+                "format": "date-time"
+              }
+            },
+            "description": "Original plan for slip tracking."
+          },
+          "milestone": {
+            "type": "boolean",
+            "default": false,
+            "description": "True if duration = 0 (diamond)."
           }
         }
       },

@@ -3,7 +3,25 @@
   "title": "Tasks property slice",
   "type": "object",
   "properties": {
-    "tasks": { "$ref": "./tasks.slice.schema.json" }
+    "tasks": { "$ref": "./tasks.slice.schema.json" },
+    "projectTasks": {
+      "allOf": [
+        { "$ref": "./tasks.slice.schema.json" },
+        {
+          "items": {
+            "properties": {
+              "shotId": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Optional links back to shot IDs for cross-shot tasks"
+              }
+            }
+          }
+        }
+      ]
+    }
   },
   "required": ["tasks"],
   "additionalProperties": true
