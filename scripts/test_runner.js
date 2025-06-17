@@ -82,6 +82,7 @@ function setupAjv() {
     'schemas/slices/voice.slice.schema.json',
     'schemas/slices/meta-scene.slice.schema.json',
     'schemas/slices/screen.slice.schema.json',
+    'schemas/slices/additional-screens.slice.schema.json',
     'schemas/slices/assets.slice.schema.json',
     'schemas/slices/description.slice.schema.json',
     'schemas/slices/workload.slice.json',
