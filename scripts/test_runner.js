@@ -276,7 +276,8 @@ async function main() {
   // Run test suites
   const testSuites = [
     'test/validation_tests.json',
-    'test/edge_cases.json'
+    'test/edge_cases.json',
+    'test/split_example_tests.json'
   ];
   
   for (const suite of testSuites) {

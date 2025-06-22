@@ -1,6 +1,6 @@
-# Migration Guide: Immerschema 1.3.2
+# Migration Guide: Immerschema 1.4.0
 
-This guide will help you migrate your existing Immerschema projects to version 1.3.2, which introduces significant improvements in schema organization, validation, and testing.
+This guide will help you migrate your existing Immerschema projects to version 1.4.0, which introduces Agile hierarchy fields and optional Gantt-chart overlays.
 
 ## Table of Contents
 1. [Prerequisites](#prerequisites)
@@ -50,7 +50,7 @@ Copy-Item -Path "your-project" -Destination "your-project-backup" -Recurse
 ### 2. Update Dependencies
 ```powershell
 # Update package.json dependencies
-npm install immerschema@1.3.2 --save
+npm install immerschema@1.4.0 --save
 ```
 
 ### 3. Schema File Migration
@@ -106,6 +106,39 @@ Ensure your state files follow the new structure:
 3. Plan state (resource allocation)
 4. Assign state (team assignments)
 5. Lock state (final validation)
+
+### 5. Split a Joined Project File
+Projects created prior to 1.4 often stored all scenes, tasks and crew in a single
+`project.json`. Version 1.4 favors a modular layout so that tasks and crew can be
+reused across scenes. To migrate:
+
+1. **Create folders** under your project root:
+   ```text
+   <project>/
+   ├─ project.json
+   ├─ features.json      # can start as []
+   ├─ scenes/
+   ├─ stories/
+   ├─ tasks/
+   └─ crew/
+   ```
+2. **Move scene objects** from the `shots` array into `scenes/<scene-id>.json`.
+   Keep the `id`, `scene`, `index`, `screen`, `technique`, `voice`, and `timing`
+   fields. Replace embedded `tasks` and `crew` arrays with `taskIds`/`crewIds`.
+3. **Extract tasks** from each scene into individual files in `tasks/` using their
+   existing `id` values (e.g. `tasks/t-002.json`). Remove them from the scene
+   file and list the IDs in the scene's `taskIds` array.
+4. **Extract crew** in the same manner into `crew/<name-or-id>.json` and list the
+   IDs in `crewIds`.
+5. **Create a story per scene** in `stories/<scene-id>.json` referencing the
+   `taskIds` you just extracted. When multiple scenes share the same story you
+   can move tasks under that story and list its `id` in each scene's `storyIds`.
+6. **Update project.json** so `shots` only contains lightweight scene references
+   (e.g. `{ "id": "sc-01" }`). Include `projectTasks` or `projectCrew` only for
+   truly global items. Bump `schemaVersion` to `1.4.0` and add optional Agile
+   fields such as `themeId`, `initiativeId` and `epicIds`.
+
+The `examples/project-split` folder demonstrates the target layout.
 
 ## Schema Updates
 

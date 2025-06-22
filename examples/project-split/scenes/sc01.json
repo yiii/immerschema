@@ -1,0 +1,44 @@
+{
+  "id": "sc01",
+  "schemaVersion": "1.0.0",
+  "scene": 1,
+  "index": 1,
+  "screen": { "screenZone": "front" },
+  "technique": { "primaryTechnique": "3d_render" },
+  "voice": { "lang": "en", "text": "Hands meet swirling fog." },
+  "timing": { "durationSec": 8 },
+  "tasks": [
+    {
+      "id": "t-001",
+      "task": "Calibrate RealSense",
+      "dept": "CAM",
+      "prio": "med",
+      "assignedTo": "TechLead",
+      "status": "todo",
+      "hoursPlanned": 8,
+      "timestamps": {
+        "created": "2025-06-18T09:00:00Z",
+        "due": "2025-06-19T18:00:00Z"
+      },
+      "baseline": {
+        "start": "2025-06-18T09:00:00Z",
+        "end": "2025-06-19T18:00:00Z"
+      },
+      "milestone": false,
+      "featureTag": "fog_interaction",
+      "rowId": "feat_fog_interaction",
+      "color": "#4C9AFF",
+      "type": "task",
+      "ganttFlags": { "critical": true }
+    }
+  ],
+  "crew": [
+    {
+      "role": "CGSupervisor",
+      "dept": "CG",
+      "name": "Bob",
+      "contacts": { "email": "bob@example.com" },
+      "availability": "full_time"
+    }
+  ]
+}
