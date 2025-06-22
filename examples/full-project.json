@@ -1,6 +1,9 @@
 {
   "projectId": "test-project-001",
   "title": "Test Immersive Experience",
+  "themeId": "th_visuals",
+  "initiativeId": "init_fulldome",
+  "epicIds": ["ep_scene4"],
   "description": "Project description",
   "schemaVersion": "1.0.0",
 
@@ -203,7 +206,12 @@
         "start": "2025-06-17T09:00:00+07:00",
         "end": "2025-06-19T18:00:00+07:00"
       },
-      "milestone": false
+      "milestone": false,
+      "featureTag": "fog",
+      "rowId": "feat_fog_interaction",
+      "color": "#4C9AFF",
+      "type": "task",
+      "ganttFlags": { "critical": true }
     }
   ],
 

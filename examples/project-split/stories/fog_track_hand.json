@@ -1,0 +1,8 @@
+{
+  "id": "fog_track_hand",
+  "title": "Track hand in RealSense",
+  "sceneIds": ["sc01"],
+  "featureTag": "fog_interaction",
+  "taskIds": ["t-001"],
+  "status": "todo"
+}

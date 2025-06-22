@@ -1,0 +1,10 @@
+[
+  {
+    "id": "feat_fog_interaction",
+    "title": "Fog Interactivity",
+    "description": "Hand-driven fog effect",
+    "initiativeId": "init_fulldome2025",
+    "epicIds": ["ep_scene1"],
+    "status": "planned"
+  }
+]

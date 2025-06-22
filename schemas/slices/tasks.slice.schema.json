@@ -121,6 +121,14 @@
         "type": "boolean",
         "default": false,
         "description": "True if duration = 0 (diamond)."
+      },
+      "featureTag": {
+        "type": "string",
+        "description": "Free-text feature grouping"
+      },
+      "featureId": {
+        "type": "string",
+        "description": "Optional reference to features.json"
       }
     }
   },

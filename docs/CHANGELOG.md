@@ -1,3 +1,9 @@
+## 1.4.0  –  2025-07-01
+* Agile hierarchy fields (`themeId`, `initiativeId`, `epicIds`)
+* Hybrid feature tagging (`featureTag`, optional `featureId`)
+* Optional Gantt overlay slices for tasks
+* Plan & Assign profiles updated to include overlay
+
 ## 1.3.2  –  2024-12-30
 * Version bump to 1.3.2
 * Minor fixes and improvements

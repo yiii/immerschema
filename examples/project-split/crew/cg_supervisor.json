@@ -1,0 +1,7 @@
+{
+  "role": "CGSupervisor",
+  "dept": "CG",
+  "name": "Bob",
+  "contacts": { "email": "bob@example.com" },
+  "availability": "full_time"
+}
