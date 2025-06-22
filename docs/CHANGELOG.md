@@ -1,3 +1,4 @@
+
 ## 1.4.0  –  2025-07-01
 * Agile hierarchy fields (`themeId`, `initiativeId`, `epicIds`)
 * Hybrid feature tagging (`featureTag`, optional `featureId`)
