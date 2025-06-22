@@ -8,6 +8,13 @@
   "properties": {
     "projectId": { "type": "string" },
     "title":     { "type": "string" },
+    "themeId":       { "type": "string" },
+    "initiativeId":  { "type": "string" },
+    "epicIds": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    },
     "description": { "type": "string" },
     "schemaVersion": {
       "type": "string",

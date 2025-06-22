@@ -1,0 +1,118 @@
+{
+  "description": "Validation tests for split project example",
+  "tests": [
+    {
+      "name": "split_project_project_json",
+      "description": "Validate split project.json",
+      "schema": "schemas/project.plan.schema.json",
+      "data": {
+        "projectId": "demo-split",
+        "title": "Split Project Example",
+        "themeId": "th_visuals",
+        "initiativeId": "init_fulldome2025",
+        "epicIds": ["ep_scene1"],
+        "schemaVersion": "1.4.0",
+        "shots": [
+          {
+            "id": "sc01",
+            "schemaVersion": "1.0.0",
+            "scene": 1,
+            "index": 1,
+            "screen": { "screenZone": "front" },
+            "technique": { "primaryTechnique": "3d_render" },
+            "voice": { "lang": "en", "text": "Hands meet swirling fog." },
+            "timing": { "durationSec": 8 },
+            "tasks": [
+              {
+                "id": "t-001",
+                "task": "Calibrate RealSense",
+                "dept": "CAM",
+                "prio": "med",
+                "assignedTo": "TechLead",
+                "status": "todo",
+                "hoursPlanned": 8,
+                "timestamps": {
+                  "created": "2025-06-18T09:00:00Z",
+                  "due": "2025-06-19T18:00:00Z"
+                },
+                "baseline": {
+                  "start": "2025-06-18T09:00:00Z",
+                  "end": "2025-06-19T18:00:00Z"
+                },
+                "milestone": false,
+                "featureTag": "fog_interaction",
+                "rowId": "feat_fog_interaction",
+                "color": "#4C9AFF",
+                "type": "task",
+                "ganttFlags": { "critical": true }
+              }
+            ],
+            "crew": [
+              {
+                "role": "CGSupervisor",
+                "dept": "CG",
+                "name": "Bob",
+                "contacts": { "email": "bob@example.com" },
+                "availability": "full_time"
+              }
+            ]
+          }
+        ],
+        "projectTasks": [],
+        "globalSoftware": ["Houdini"],
+        "globalMusic": "theme.mp3"
+      },
+      "expected": "valid"
+    },
+    {
+      "name": "split_project_tasks",
+      "description": "Validate tasks slice with Gantt overlay",
+      "schema": "schemas/slices/tasks-gantt.prop.slice.json",
+      "data": {
+        "tasks": [
+          {
+            "id": "t-001",
+            "task": "Calibrate RealSense",
+            "dept": "CAM",
+            "prio": "med",
+            "assignedTo": "TechLead",
+            "status": "todo",
+            "hoursPlanned": 8,
+            "timestamps": {
+              "created": "2025-06-18T09:00:00Z",
+              "due": "2025-06-19T18:00:00Z"
+            },
+            "baseline": {
+              "start": "2025-06-18T09:00:00Z",
+              "end": "2025-06-19T18:00:00Z"
+            },
+            "milestone": false,
+            "featureTag": "fog_interaction",
+            "rowId": "feat_fog_interaction",
+            "color": "#4C9AFF",
+            "type": "task",
+            "ganttFlags": { "critical": true }
+          }
+        ]
+      },
+      "expected": "valid"
+    },
+    {
+      "name": "split_project_crew",
+      "description": "Validate crew slice",
+      "schema": "schemas/slices/crew.prop.slice.json",
+      "data": {
+        "crew": [
+          {
+            "role": "CGSupervisor",
+            "dept": "CG",
+            "name": "Bob",
+            "contacts": { "email": "bob@example.com" },
+            "availability": "full_time"
+          }
+        ]
+      },
+      "expected": "valid"
+    }
+  ]
+}

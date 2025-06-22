@@ -1,0 +1,20 @@
+{
+  "$id": "immerschema/schemas/slices/tasks-gantt.slice.json",
+  "title": "Gantt UI overlay (optional)",
+  "type": "object",
+  "properties": {
+    "rowId":  { "type":"string", "description":"Gantt row grouping" },
+    "color":  { "type":"string", "pattern":"^#([0-9a-fA-F]{3,8})$" },
+    "type":   { "enum":["task","milestone","group"] },
+    "ganttFlags": {
+      "type": "object",
+      "properties": {
+        "collapsed":{ "type":"boolean" },
+        "critical": { "type":"boolean" },
+        "disabled": { "type":"boolean" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

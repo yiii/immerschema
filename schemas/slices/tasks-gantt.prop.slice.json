@@ -1,0 +1,19 @@
+{
+  "$id": "immerschema/schemas/slices/tasks-gantt.prop.slice.json",
+  "type": "object",
+  "properties": {
+    "tasks": {
+      "allOf": [
+        { "$ref": "./tasks.slice.schema.json" },
+        { "items": { "$ref": "./tasks-gantt.slice.json" } }
+      ]
+    },
+    "projectTasks": {
+      "allOf": [
+        { "$ref": "./tasks.slice.schema.json" },
+        { "items": { "$ref": "./tasks-gantt.slice.json" } }
+      ]
+    }
+  },
+  "additionalProperties": true
+}

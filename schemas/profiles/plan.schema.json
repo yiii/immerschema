@@ -5,6 +5,7 @@
   "additionalProperties": true,
   "allOf": [
     { "$ref": "./review.schema.json" },
+    { "$ref": "../slices/tasks-gantt.prop.slice.json" },
     { "$ref": "../slices/software.slice.schema.json" },
     { "$ref": "../slices/bottleneck.slice.json" },
     { "$ref": "../slices/workload.slice.json" },

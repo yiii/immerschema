@@ -1,6 +1,6 @@
-# 📐 Immerschema Architecture (v1.3)
+# 📐 Immerschema Architecture (v1.4)
 
-A modular JSON-Schema suite for fulldome / CG pipelines – now with **property-wrapped array slices**, **advanced task lifecycle management**, and unified crew/department logic.
+A modular JSON-Schema suite for fulldome / CG pipelines – now with **Agile hierarchy fields**, **feature tagging**, and an optional **Gantt UI overlay** on top of the core scheduling slices.
 
 ---
 
@@ -9,7 +9,7 @@ A modular JSON-Schema suite for fulldome / CG pipelines – now with **property-
 **Slices** are small reusable schema files; **profiles** are milestone bundles that `allOf` slices and decide what's mandatory.
 Array-root slices (e.g. `assets`, `tasks`) are now imported through *property-slice wrappers* (`…_prop_slice.json`) to avoid `type` collisions.
 
-**New in v1.3**: Enhanced task management with timestamps, dependencies, progress tracking, and project-level task coordination.
+**New in v1.4**: Themes→Initiatives→Epics fields, free-text `featureTag` with optional `featureId`, standalone crew & tasks collections, and non-breaking Gantt overlay properties for interactive timelines.
 
 **Crew/Dept update**: The `dept` property is now part of the core crew slice and available everywhere. The `projectCrew` overlay adds only `shotIds` for cross-shot linkage—no duplicate dept definition. Shot-level and global crew share identical validation logic, so dashboards can join them easily.
 
@@ -65,6 +65,7 @@ Draft ─▶ Review ─▶ Plan ─▶ Assign ─▶ Lock
 | `technique.slice.schema.json` | object    | technique.\*                | primaryTechnique + optional techGroup |
 | `assets.slice.schema.json`    | array     | —                           | Wrapped by assets\_prop\_slice        |
 | `tasks.slice.schema.json`     | array     | —                           | **Enhanced** with lifecycle tracking |
+| `tasks-gantt.slice.json`      | object    | rowId, color, type, ganttFlags | Optional overlay for Gantt UIs |
 | `crew.slice.schema.json`      | array     | —                           | Wrapped by crew_prop_slice; `dept` is core. |
 | `risk.slice.json`             | array     | —                           | Wrapped by risks\_prop\_slice         |
 | `voice.slice.schema.json`     | object    | voice                       | lang + text                           |
@@ -73,7 +74,7 @@ Draft ─▶ Review ─▶ Plan ─▶ Assign ─▶ Lock
 
 ---
 
-## 4 · Enhanced Task Management (v1.3)
+## 4 · Enhanced Task Management (v1.4)
 
 ### 4.1 Task Lifecycle Properties
 
@@ -115,6 +116,21 @@ Draft ─▶ Review ─▶ Plan ─▶ Assign ─▶ Lock
 | `baseline` | object | — | **NEW**: Original schedule for slip tracking |
 | `milestone` | boolean | — | **NEW**: Zero-duration milestone marker |
 | `parentId` | string | — | **NEW**: Work breakdown structure parent |
+
+### 4.3 Optional Gantt Overlay
+
+To support interactive timeline tools, tasks can include a lightweight UI overlay:
+
+```json
+{
+  "rowId": "feat_fog_interaction",
+  "color": "#4C9AFF",
+  "type": "task",
+  "ganttFlags": { "critical": true }
+}
+```
+
+The `tasks-gantt.slice.json` is an optional slice. Profiles **Plan** and **Assign** import `tasks-gantt.prop.slice.json`, adding these UI fields without affecting validation in Draft/Review or Lock.
 
 ### 4.3 Project-Level Task Management
 

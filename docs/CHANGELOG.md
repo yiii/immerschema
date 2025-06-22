@@ -1,3 +1,15 @@
+## 1.4.1  –  2025-07-02
+* Added contributor guidance in AGENTS.md
+* Documented agile folder layout and cheat sheet
+* Added split-project example with tests
+* Introduced optional tasks-gantt slice
+
+## 1.4.0  –  2025-07-01
+* Agile hierarchy fields (`themeId`, `initiativeId`, `epicIds`)
+* Hybrid feature tagging (`featureTag`, optional `featureId`)
+* Optional Gantt overlay slices for tasks
+* Plan & Assign profiles updated to include overlay
+
 ## 1.3.2  –  2024-12-30
 * Version bump to 1.3.2
 * Minor fixes and improvements
