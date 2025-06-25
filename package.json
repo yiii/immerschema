@@ -56,7 +56,5 @@
     "url": "https://github.com/yiii/immerschema/issues"
   },
   "homepage": "https://github.com/yiii/immerschema#readme",
-  "dependencies": {
-    "immerschema": "file:.yalc/immerschema"
-  }
+  "dependencies": {}
 }

@@ -1,1 +1,0 @@
-module.exports = require('./schemas/core.schema.json'); 
