@@ -4,27 +4,91 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
-    "Direction & Production": {
+    "Director": {
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["Director", "Producer", "ProjectManager"]
+        "enum": ["Director"]
       },
       "minItems": 1
     },
-    "Art & Supervision": {
+    "Producer": {
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["ArtLead", "CGSupervisor"]
+        "enum": ["Producer", "ProjectManager"]
       },
       "minItems": 1
     },
-    "Realtime & FX": {
+    "Finance": {
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["HoudiniArtist", "MotionDesigner", "UnrealArtist", "TouchDesignerArtist", "TouchDesignerDeveloper", "NotchArtist", "AIArtist"]
+        "enum": ["Producer"]
+      },
+      "minItems": 1
+    },
+    "3D": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["CGSupervisor"]
+      },
+      "minItems": 1
+    },
+    "FX": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["HoudiniArtist"]
+      },
+      "minItems": 1
+    },
+    "2D": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["ArtLead"]
+      },
+      "minItems": 1
+    },
+    "Design": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["ArtLead"]
+      },
+      "minItems": 1
+    },
+    "Motion": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["MotionDesigner"]
+      },
+      "minItems": 1
+    },
+    "Generative": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["NotchArtist"]
+      },
+      "minItems": 1
+    },
+    "AI": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["AIArtist"]
+      },
+      "minItems": 1
+    },
+    "Camera": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["CameraOperator"]
       },
       "minItems": 1
     },
@@ -32,11 +96,11 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["AudioLead", "Composer"]
+        "enum": ["AudioLead"]
       },
       "minItems": 1
     },
-    "Post Production": {
+    "Montage": {
       "type": "array",
       "items": {
         "type": "string",
@@ -44,11 +108,35 @@
       },
       "minItems": 1
     },
+    "Composer": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["Composer"]
+      },
+      "minItems": 1
+    },
+    "Pipeline": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["TechSupport"]
+      },
+      "minItems": 1
+    },
+    "Developer": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["TouchDesignerDeveloper", "UnrealArtist", "TouchDesignerArtist"]
+      },
+      "minItems": 1
+    },
     "Support": {
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["CameraOperator", "TechSupport"]
+        "enum": ["TechSupport"]
       },
       "minItems": 1
     },
