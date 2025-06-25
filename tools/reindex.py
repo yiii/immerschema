@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Rewrites `index` so shots play in (scene, subScene) order.
+Rewrites `index` so shots play in (scene, shoot) order.
 Usage:  python tools/reindex.py shots/*.json
 """
 import json, sys, pathlib, itertools as it
@@ -10,7 +10,7 @@ shots = []
 for p in file_paths:
     data = json.load(p.open())
     shots.append((data.get("scene", 0),
-                  str(data.get("subScene", "")),
+                  str(data.get("shoot", "")),
                   data, p))
 
 shots.sort(key=lambda t: (t[0], t[1]))

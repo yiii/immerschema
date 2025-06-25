@@ -71,8 +71,8 @@
                       "expected":  "invalid"
                   },
                   {
-                      "name":  "large_scene_subscene_numbers",
-                      "description":  "Tests very large scene and subscene numbers (valid)",
+                      "name":  "large_scene_shoot_numbers",
+                      "description":  "Tests very large scene and shoot numbers (valid)",
                       "schema":  "schemas/profiles/draft.schema.json",
                       "data":  {
                                    "id":  "ls01-ss99",

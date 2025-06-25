@@ -4,12 +4,12 @@
 
 | Step                                     | What you do                                                                                                | JSON example                                                                                   |
 | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| **1 Start draft**                        | Create the first beat of a scene.                                                                          | `json { "id": "brainBurst", "scene": 3, "subScene": 1, "action": "Neural fireworks." }`        |
-| **2 Need an insert between 3-1 and 3-2** | Copy the JSON, change **`id`** and give **`subScene` a letter suffix**.                                    | `json { "id": "brainBurstA", "scene": 3, "subScene": "1a", "action": "Extra camera cut." }`    |
-| **3 Another late insert**                | Use the next letter (`1b`, `1c`, …).                                                                       | `json { "id": "brainBurstB", "scene": 3, "subScene": "1b", "action": "Close-up neuron pop." }` |
+| **1 Start draft**                        | Create the first beat of a scene.                                                                          | `json { "id": "brainBurst", "scene": 3, "shoot": 1, "action": "Neural fireworks." }`        |
+| **2 Need an insert between 3-1 and 3-2** | Copy the JSON, change **`id`** and give **`shoot` a letter suffix**.                                    | `json { "id": "brainBurstA", "scene": 3, "shoot": "1a", "action": "Extra camera cut." }`    |
+| **3 Another late insert**                | Use the next letter (`1b`, `1c`, …).                                                                       | `json { "id": "brainBurstB", "scene": 3, "shoot": "1b", "action": "Close-up neuron pop." }` |
 | **4 Re-index**                           | Run `npm run reindex` (or `python tools/reindex.py`) to update the numeric **`index`** of every shot.      | *Tool writes `"index": 12, 13, 14 …"` automatically.*                                          |
 | **5 Freeze IDs after Review**            | Once a shot passes **Review** profile, its `id` **must never change**. All later patches refer to that ID. | —                                                                                              |
-| **6 Optional new scene**                 | If an entire new scene appears, pick the next integer (`scene: 4`) and start `subScene: 1`.                | `json { "id": "newScene1", "scene": 4, "subScene": 1 }`                                        |
+| **6 Optional new scene**                 | If an entire new scene appears, pick the next integer (`scene: 4`) and start `shoot: 1`.                | `json { "id": "newScene1", "scene": 4, "shoot": 1 }`                                        |
 
 ---
 
@@ -17,7 +17,7 @@
 
 1. **`id`** – any slug (`^[A-Za-z0-9._-]+$`). Unique, never renamed after Review.
 2. **`scene`** – whole integer (1, 2, 3 …).
-3. **`subScene`** –
+3. **`shoot`** –
 
    * original beat → integer (`1`, `2`)
    * inserted beat → same integer + one lowercase letter (`1a`, `1b`).

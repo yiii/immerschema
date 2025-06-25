@@ -61,7 +61,7 @@ Draft ─▶ Review ─▶ Plan ─▶ Assign ─▶ Lock
 
 | Slice                         | Root Type | Key(s)                      | Notes                                 |
 | ----------------------------- | --------- | --------------------------- | ------------------------------------- |
-| `id.slice.schema.json`        | object    | id, scene, subScene, index  | Universal                             |
+| `id.slice.schema.json`        | object    | id, scene, shoot, index  | Universal                             |
 | `technique.slice.schema.json` | object    | technique.\*                | primaryTechnique + optional techGroup |
 | `assets.slice.schema.json`    | array     | —                           | Wrapped by assets\_prop\_slice        |
 | `tasks.slice.schema.json`     | array     | —                           | **Enhanced** with lifecycle tracking |

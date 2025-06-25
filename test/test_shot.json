@@ -2,10 +2,10 @@
     "id": "sc-07",
     "schemaVersion": "1.0.0",
     "scene": 2,
-    "subScene": 1,
+    "shoot": 1,
     "index": 7,
     "sceneName": "Neural Emergence",
-    "subSceneName": "Particle Formation",
+    "shootName": "Particle Formation",
   
     "description": "A delicate choreography of particles converges into a neural lattice, evoking the birth of thought.",
   

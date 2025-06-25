@@ -14,7 +14,7 @@
       "default": "1.0.0"
     },
     "scene": { "type": "integer", "minimum": 1 },
-    "subScene": {
+    "shoot": {
       "type": ["integer", "string"],
       "description": "Whole number, optionally one lowercase letter for inserts (e.g. 3a)."
     },

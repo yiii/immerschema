@@ -1013,7 +1013,7 @@
           "type": "integer",
           "minimum": 1
         },
-        "subScene": {
+        "shoot": {
           "type": [
             "integer",
             "string"
@@ -1039,14 +1039,14 @@
           "type": "integer",
           "minimum": 1
         },
-        "subScene": {
+        "shoot": {
           "type": "integer",
           "minimum": 0
         },
         "sceneName": {
           "type": "string"
         },
-        "subSceneName": {
+        "shootName": {
           "type": "string"
         }
       },

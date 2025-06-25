@@ -5,9 +5,9 @@
   "properties": {
     "index":    { "type": "integer", "minimum": 0 },
     "scene":    { "type": "integer", "minimum": 1 },
-    "subScene": { "type": "integer", "minimum": 0 },
+    "shoot": { "type": "integer", "minimum": 0 },
     "sceneName":     { "type": "string" },
-    "subSceneName": { "type": "string" }
+    "shootName": { "type": "string" }
   },
   "additionalProperties": true
 } 
